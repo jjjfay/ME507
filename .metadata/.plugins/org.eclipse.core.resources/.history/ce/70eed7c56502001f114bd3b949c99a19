@@ -1,0 +1,24 @@
+/*
+ * motor_driver.c
+ *
+ *  Created on: Apr 18, 2024
+ *      Author: julia
+ */
+
+
+void set_duty(motor_t* p_mot, int32_t duty)
+{
+    // Print to the console so we can see what's happening
+    printf("Setting Motor Duty Cycle to %d", duty);
+
+    // Assign the duty cycle to a field in the structure
+    p_mot->duty = duty;
+
+
+
+    // The arrow operator is shorthand for
+    // dereferencing and accessing struct fields
+    // p_mot->duty = duty;
+    // is shorthand for
+    // (*p_mot).duty = duty;
+}

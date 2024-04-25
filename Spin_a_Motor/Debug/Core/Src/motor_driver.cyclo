@@ -1,0 +1,3 @@
+../Core/Src/motor_driver.c:11:6:start_PWM	2
+../Core/Src/motor_driver.c:27:6:stop_PWM	2
+../Core/Src/motor_driver.c:39:6:set_duty	22
