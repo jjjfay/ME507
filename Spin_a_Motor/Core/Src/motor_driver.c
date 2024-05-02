@@ -18,9 +18,6 @@ void start_PWM(motor_t* p_mot, uint32_t channel)
 		HAL_TIM_PWM_Start(p_mot->hal_tim, p_mot->channel2);
 	}
 
-	//not sure about the channel reference here
-	//HAL_TIM_PWM_Start(p_mot->hal_tim, channel);
-
 }
 
 //A function to disable one of the motor driver channels
@@ -50,15 +47,23 @@ void set_duty(motor_t* p_mot, int32_t duty)
     // is shorthand for
     // (*p_mot).duty = duty;
 
-    if (duty >= 0) {
+    if (duty > 0) {
 
     	__HAL_TIM_SET_COMPARE(p_mot->hal_tim, p_mot->channel1,duty);
     	__HAL_TIM_SET_COMPARE(p_mot->hal_tim, p_mot->channel2,0);
 
-      } else {
+      }
+    else if(duty == 0){
+
+    	//to turn off put into braking mode by setting both pins high
+    	__HAL_TIM_SET_COMPARE(p_mot->hal_tim, p_mot->channel1,640);
+    	__HAL_TIM_SET_COMPARE(p_mot->hal_tim, p_mot->channel2,640);
+
+    }
+    else {
 
     	__HAL_TIM_SET_COMPARE(p_mot->hal_tim, p_mot->channel1,0);
-    	__HAL_TIM_SET_COMPARE(p_mot->hal_tim, p_mot->channel2,-1*duty);
+    	__HAL_TIM_SET_COMPARE(p_mot->hal_tim, p_mot->channel2,-duty);
       }
 
 

@@ -1,10 +1,10 @@
-12:51:42 **** Incremental Build of configuration Debug for project Spin_a_Motor ****
+18:03:15 **** Incremental Build of configuration Debug for project Spin_a_Motor ****
 make -j8 all 
 arm-none-eabi-size  Spin_a_Motor.elf 
    text	   data	    bss	    dec	    hex	filename
-  15632	    104	   1984	  17720	   4538	Spin_a_Motor.elf
+  32204	    136	   2560	  34900	   8854	Spin_a_Motor.elf
 Finished building: default.size.stdout
  
 
-12:51:43 Build Finished. 0 errors, 0 warnings. (took 576ms)
+18:03:15 Build Finished. 0 errors, 0 warnings. (took 456ms)
 
