@@ -1,0 +1,10 @@
+16:29:13 **** Incremental Build of configuration Debug for project Read_Receiver ****
+make -j8 all 
+arm-none-eabi-size  Read_Receiver.elf 
+   text	   data	    bss	    dec	    hex	filename
+  21556	    104	   2368	  24028	   5ddc	Read_Receiver.elf
+Finished building: default.size.stdout
+ 
+
+16:29:14 Build Finished. 0 errors, 0 warnings. (took 760ms)
+

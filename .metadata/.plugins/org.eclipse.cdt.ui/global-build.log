@@ -1,42 +1,7 @@
-17:33:42 **** Incremental Build of configuration Debug for project Spin_a_Motor ****
+16:29:13 **** Incremental Build of configuration Debug for project Read_Receiver ****
 make -j8 all 
-arm-none-eabi-gcc "../Core/Src/motor_driver.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/motor_driver.d" -MT"Core/Src/motor_driver.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/motor_driver.o"
-arm-none-eabi-gcc -o "Spin_a_Motor.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\julia\Documents\GitHub\ME507\Spin_a_Motor\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Spin_a_Motor.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: Spin_a_Motor.elf
- 
-arm-none-eabi-size  Spin_a_Motor.elf 
-arm-none-eabi-objdump -h -S Spin_a_Motor.elf  > "Spin_a_Motor.list"
+arm-none-eabi-size  Read_Receiver.elf 
    text	   data	    bss	    dec	    hex	filename
-  32204	    136	   2560	  34900	   8854	Spin_a_Motor.elf
-Finished building: default.size.stdout
- 
-Finished building: Spin_a_Motor.list
- 
-17:33:49 **** Incremental Build of configuration Debug for project Spin_a_Motor ****
-make -j8 all 
-arm-none-eabi-size  Spin_a_Motor.elf 
-   text	   data	    bss	    dec	    hex	filename
-  32204	    136	   2560	  34900	   8854	Spin_a_Motor.elf
-Finished building: default.size.stdout
- 
-17:49:17 **** Incremental Build of configuration Debug for project Spin_a_Motor ****
-make -j8 all 
-arm-none-eabi-size  Spin_a_Motor.elf 
-   text	   data	    bss	    dec	    hex	filename
-  32204	    136	   2560	  34900	   8854	Spin_a_Motor.elf
-Finished building: default.size.stdout
- 
-17:59:05 **** Incremental Build of configuration Debug for project Spin_a_Motor ****
-make -j8 all 
-arm-none-eabi-size  Spin_a_Motor.elf 
-   text	   data	    bss	    dec	    hex	filename
-  32204	    136	   2560	  34900	   8854	Spin_a_Motor.elf
-Finished building: default.size.stdout
- 
-18:03:15 **** Incremental Build of configuration Debug for project Spin_a_Motor ****
-make -j8 all 
-arm-none-eabi-size  Spin_a_Motor.elf 
-   text	   data	    bss	    dec	    hex	filename
-  32204	    136	   2560	  34900	   8854	Spin_a_Motor.elf
+  21556	    104	   2368	  24028	   5ddc	Read_Receiver.elf
 Finished building: default.size.stdout
  
