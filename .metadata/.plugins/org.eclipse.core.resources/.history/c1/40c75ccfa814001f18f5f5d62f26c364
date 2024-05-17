@@ -78,29 +78,26 @@ static void MX_TIM2_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
-
-int check_delta(int16_t pulse_width)
+int check_delta(int16_t delta)
 {
-	//if the delta value is invalid, return -50000 as this is outside the range
+	//if the delta value is invalid, return -5000 as this is outside the range
 	//for pwm values and can be checked in an if statement later in the code to
 	//indicate that the signal is invalid
-	if(pulse_width < 950)
+	if(delta < 950)
 	{
 		return -50000;
 	}
-	else if(pulse_width > 2050)
+	else if(delta > 2050)
 	{
 		return -50000;
 	}
 	else
 	{
-			//convert delta into a valid range for pwm generation if the delta value is valid
+			//convert delta into a valid range for pwm generation
 			pwm_sig = ((delta-1500)*4799)/500;
 			return pwm_sig;
 	}
 }
-
 
 /* USER CODE END 0 */
 
@@ -142,8 +139,6 @@ int main(void)
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
 
-  //create motor objects
-
 	motor_t mot1 = {.duty    = 0,
 			.channel1 = TIM_CHANNEL_1,
 			.channel2 = TIM_CHANNEL_2,
@@ -156,7 +151,6 @@ int main(void)
 	};
 
 
-//initialize the motors to be at rest
   start_PWM(&mot1, 1);
   start_PWM(&mot1, 2);
   start_PWM(&mot2, 1);
@@ -164,7 +158,6 @@ int main(void)
   set_duty(&mot1,0);
   set_duty(&mot2,0);
 
-//start the interrupts
   HAL_TIM_IC_Start_IT (&htim1, TIM_CHANNEL_1);
   HAL_TIM_IC_Start_IT (&htim1, TIM_CHANNEL_2);
   HAL_TIM_IC_Start_IT (&htim1, TIM_CHANNEL_3);
@@ -179,8 +172,6 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-
-	  //print statements to keep track of values
 	  n = sprintf(print_buff,"\n\rThe Motor 1 delta is %d",m1_d);
 	  HAL_UART_Transmit(&huart2,print_buff,n,400);
 
@@ -202,8 +193,6 @@ int main(void)
 	  n = sprintf(print_buff,"\n\rThe PWM value is %d",pwm_sig);
 	  HAL_UART_Transmit(&huart2,print_buff,n,400);
 
-	  //check if the signal is valid. If the signal is valid, update the duty cycle
-
 	  if(check_delta(m1_d) != -5000)
 	  {
 		  set_duty(&mot1,check_delta(m1_d));
@@ -213,8 +202,6 @@ int main(void)
 	  		  set_duty(&mot2,check_delta(m2_d));
 	  	  }
   }
-
-
   /* USER CODE END 3 */
 }
 
