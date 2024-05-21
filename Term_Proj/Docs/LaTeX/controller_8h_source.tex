@@ -1,0 +1,31 @@
+\doxysection{controller.\+h}
+\hypertarget{controller_8h_source}{}\label{controller_8h_source}\index{Core/Inc/controller.h@{Core/Inc/controller.h}}
+\mbox{\hyperlink{controller_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#ifndef\ INC\_CONTROLLER\_H\_}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ INC\_CONTROLLER\_H\_}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}motor\_driver.h"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{encoder__reader_8h}{encoder\_reader.h}}"{}}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ motor\_driver\ \mbox{\hyperlink{structcontroller__t_a71e1fdca91f8bb344d4542ca1829d51b}{p\_mot}};\ }
+\DoxyCodeLine{00017\ \ \ \ \ encoder\_reader\ \mbox{\hyperlink{structcontroller__t_a41e5b595cddc5d4a76aed105d0ee1fa4}{p\_enc}};\ }
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{comment}{//These\ are\ all\ the\ things\ specific\ to\ the\ controller\ class}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ int32\_t\ \mbox{\hyperlink{structcontroller__t_a5fcc2da40851e85080d0048ab51f1e88}{gain}};\ }
+\DoxyCodeLine{00022\ \ \ \ \ int32\_t\ \mbox{\hyperlink{structcontroller__t_afad9b2a7de51d07966f868d056ea2fab}{setpoint}};\ }
+\DoxyCodeLine{00025\ \}\ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{structcontroller__t}{controller\_t}};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{keywordtype}{void}\ run();}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{keywordtype}{void}\ set\_setpoint();}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{keywordtype}{void}\ set\_Kp();}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{keywordtype}{void}\ zero();}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ INC\_CONTROLLER\_H\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

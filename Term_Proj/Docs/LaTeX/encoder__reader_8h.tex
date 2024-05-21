@@ -1,0 +1,63 @@
+\doxysection{Core/\+Inc/encoder\+\_\+reader.h File Reference}
+\hypertarget{encoder__reader_8h}{}\label{encoder__reader_8h}\index{Core/Inc/encoder\_reader.h@{Core/Inc/encoder\_reader.h}}
+
+
+Defines the encoder reader struct and its methods. This file is used to read the position of a motor using the attached motor encoder. This is accomplished by creating an Encoder class with several functions defined to aid in the task of reading the encoder including init, read, zero and loop.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include "{}stm32l4xx\+\_\+hal.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structencoder__t}{encoder\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Represents a encoder object that has a timer with two channels, and an encoder count. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{encoder__reader_8h_aa6e65d34f5a90e31cd3e57be6d149d47}{zero}} (\mbox{\hyperlink{structencoder__t}{encoder\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+\_\+enc)
+\begin{DoxyCompactList}\small\item\em A function to zero the encoder count. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{encoder__reader_8h_a827bf59333e711342c8a8f409cb7633b}{read\+\_\+count}} (\mbox{\hyperlink{structencoder__t}{encoder\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+\_\+enc)
+\begin{DoxyCompactList}\small\item\em A function to read and return the encoder count. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Defines the encoder reader struct and its methods. This file is used to read the position of a motor using the attached motor encoder. This is accomplished by creating an Encoder class with several functions defined to aid in the task of reading the encoder including init, read, zero and loop. 
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{encoder__reader_8h_a827bf59333e711342c8a8f409cb7633b}\label{encoder__reader_8h_a827bf59333e711342c8a8f409cb7633b} 
+\index{encoder\_reader.h@{encoder\_reader.h}!read\_count@{read\_count}}
+\index{read\_count@{read\_count}!encoder\_reader.h@{encoder\_reader.h}}
+\doxysubsubsection{\texorpdfstring{read\_count()}{read\_count()}}
+{\footnotesize\ttfamily uint16\+\_\+t read\+\_\+count (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structencoder__t}{encoder\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+\_\+enc }\end{DoxyParamCaption})}
+
+
+
+A function to read and return the encoder count. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+\_\+enc} & The encoder object to perform the function on.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+count The encoder count to be returned. 
+\end{DoxyReturn}
+\Hypertarget{encoder__reader_8h_aa6e65d34f5a90e31cd3e57be6d149d47}\label{encoder__reader_8h_aa6e65d34f5a90e31cd3e57be6d149d47} 
+\index{encoder\_reader.h@{encoder\_reader.h}!zero@{zero}}
+\index{zero@{zero}!encoder\_reader.h@{encoder\_reader.h}}
+\doxysubsubsection{\texorpdfstring{zero()}{zero()}}
+{\footnotesize\ttfamily void zero (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structencoder__t}{encoder\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+\_\+enc }\end{DoxyParamCaption})}
+
+
+
+A function to zero the encoder count. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+\_\+enc} & The encoder object to perform the function on. \\
+\hline
+\end{DoxyParams}
