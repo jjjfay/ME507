@@ -1,28 +1,22 @@
 /*
- * motor_driver.h
+ *@file			  :	 motor_driver.h
+ *
+ *@brief          : This is the motor driver library used to control the PWM signals going to the motors to control direction and speed.
+ *		          	Functions include starting and stopping the PWM timer channels, and updating the duty cycle for the motor.
  *
  *  Created on: Apr 18, 2024
- *      Author: julia
+ *      Author: Julia Fay
  */
 
 #ifndef INC_MOTOR_DRIVER_H_
 #define INC_MOTOR_DRIVER_H_
-
 #include <stdio.h>
 #include <stdint.h>
 #include "stm32l4xx_hal.h"
 
-
-/*To implement your driver you will need to create a new datatype using a C struct and the typedef keyword.
- *  The structure should have fields representing the information pertinent to a specific motor driver channel
- *  - perhaps with information like:
-The handle to the HAL timer object used for PWM generation.
-The pins and ports associated with the pins used by the driver.
-What channels on the timer are associated with the PWM pins.
-Any other information needed inside the three functions mentioned above.*/
-
-// Motor object data structure
-//struct has multiple data types
+/**
+ * @brief Represents a motor objects with two PWM channels in a timer and a duty cycle.
+ */
 struct {
 
 	//These are all the things you have to define when you create a motor object
@@ -46,17 +40,31 @@ struct {
 
 } typedef motor_t;
 
-/*Your driver should, at the minimum, have the following functionality:
-A function to enable one of the motor driver channels
-A function to disable one of the motor driver channels
-A function to set the duty cycle of one of the motor driver channels*/
 
-// Prototype for motor object "method"
+/**
+ * @brief A function to enable one of the motor driver channels.
+ *
+ * @param p_mot The motor object to perform the function on.
+ * @param channel The timer channel to perform the function on.
+ */
 
 void start_PWM(motor_t* p_mot, uint32_t channel);
 
+/**
+ * @brief A function to disable one of the motor driver channels.
+ *
+ * @param p_mot The motor object to perform the function on.
+ * @param channel The timer channel to perform the function on.
+ */
+
 void stop_PWM(motor_t* p_mot, uint32_t channel);
 
+/**
+ * @brief A function to set the duty cycle for the motor.
+ *
+ * @param p_mot The motor object to perform the function on.
+ * @param duty The desired duty cycle for the motor.
+ */
 void set_duty(motor_t* p_mot, int32_t duty);
 
 #endif /* INC_MOTOR_DRIVER_H_ */

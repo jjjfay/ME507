@@ -1,36 +1,25 @@
-/*
- * controller.h
- *
- *  Created on: May 18, 2024
- *      Author: julia
+/**
+ * @file controller.h
+ * @brief Defines the controller struct and its methods.
  */
 
 #ifndef INC_CONTROLLER_H_
 #define INC_CONTROLLER_H_
+#include "motor_driver.h"
+#include "encoder_reader.h"
 
+/**
+ * @brief Represents a controller object that controls a motor based on the encoder reading.
+ */
 struct {
 
-	//These are all the things you have to define when you create a motor object
-	    int32_t  duty;
-
-	    //two channels for each motor
-	    uint32_t channel1;
-	    uint32_t channel2;
-
-	    //The handle to the HAL timer object used for motor PWM generation. Include * so its a pointer to the object
-	    TIM_HandleTypeDef* hal_tim;
-
-	//These are all the things you have to define when you create an encoder object
-
-
-
+	motor_driver p_mot; /**< The motor object to be controlled. */
+	encoder_reader p_enc; /**< The encoder to be read from. */
 
 	//These are all the things specific to the controller class
 
-	    int32_t gain;
-	    int32_t setpoint;
-
-
+	int32_t gain; /**< The desired control loop gain. */
+	int32_t setpoint; /**< The desired set point for the motor. */
 
 
 } typedef controller_t;

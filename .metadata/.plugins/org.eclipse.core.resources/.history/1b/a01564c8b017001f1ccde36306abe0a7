@@ -1,0 +1,29 @@
+/**
+ * @file encoder_reader.h
+ * @brief Defines the encoder reader struct and its methods. This file is used to read the position
+          of a motor using the attached motor encoder. This is accomplished by creating an Encoder class
+          with several functions defined to aid in the task of reading the encoder including init, read, zero
+          and loop.
+ */
+
+#ifndef INC_ENCODER_READER_H_
+#define INC_ENCODER_READER_H_
+
+/**
+ * @brief Represents a encoder object that has a timer and two channels.
+ */
+struct{
+
+	//two channels per encoder
+	    uint32_t channel1; /**< The timer channel for the first encoder output. */
+	    uint32_t channel2; /**< The timer channel for the second encoder output. */
+
+	//The handle to the HAL timer object used for reading the encoder
+	    TIM_HandleTypeDef* hal_tim; /**< The timer object both channels are from. */
+
+} typedef encoder_t;
+
+void zero();
+
+
+#endif /* INC_ENCODER_READER_H_ */
