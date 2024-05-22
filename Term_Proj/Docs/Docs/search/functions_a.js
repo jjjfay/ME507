@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['usagefault_5fhandler_0',['UsageFault_Handler',['../stm32l4xx__it_8c.html#a1d98923de2ed6b7309b66f9ba2971647',1,'UsageFault_Handler(void):&#160;stm32l4xx_it.c'],['../stm32l4xx__it_8h.html#a1d98923de2ed6b7309b66f9ba2971647',1,'UsageFault_Handler(void):&#160;stm32l4xx_it.c']]]
+  ['task1_0',['task1',['../main_8c.html#ab55078d807df0a75af8a2fa8eefdcc41',1,'main.c']]],
+  ['task2_1',['task2',['../main_8c.html#a03bef279de31d91a79b14f31c4530dfc',1,'main.c']]]
 ];

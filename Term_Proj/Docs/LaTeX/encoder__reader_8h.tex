@@ -16,6 +16,10 @@ struct \mbox{\hyperlink{structencoder__t}{encoder\+\_\+t}}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
+void \mbox{\hyperlink{encoder__reader_8h_a688cfbab28ad9031cc9fb1902362b76b}{init\+\_\+channels}} (\mbox{\hyperlink{structencoder__t}{encoder\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+\_\+enc)
+\begin{DoxyCompactList}\small\item\em A function to initialize the channels for reading the encoder signals. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{encoder__reader_8h_a785de517bc8042529478427baf6cf90d}{deinit\+\_\+channels}} (\mbox{\hyperlink{structencoder__t}{encoder\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+\_\+enc)
+\begin{DoxyCompactList}\small\item\em A function to stop the channels from reading the encoder signals. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{encoder__reader_8h_aa6e65d34f5a90e31cd3e57be6d149d47}{zero}} (\mbox{\hyperlink{structencoder__t}{encoder\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+\_\+enc)
 \begin{DoxyCompactList}\small\item\em A function to zero the encoder count. \end{DoxyCompactList}\item 
 uint16\+\_\+t \mbox{\hyperlink{encoder__reader_8h_a827bf59333e711342c8a8f409cb7633b}{read\+\_\+count}} (\mbox{\hyperlink{structencoder__t}{encoder\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+\_\+enc)
@@ -28,6 +32,36 @@ Defines the encoder reader struct and its methods. This file is used to read the
 
 
 \doxysubsection{Function Documentation}
+\Hypertarget{encoder__reader_8h_a785de517bc8042529478427baf6cf90d}\label{encoder__reader_8h_a785de517bc8042529478427baf6cf90d} 
+\index{encoder\_reader.h@{encoder\_reader.h}!deinit\_channels@{deinit\_channels}}
+\index{deinit\_channels@{deinit\_channels}!encoder\_reader.h@{encoder\_reader.h}}
+\doxysubsubsection{\texorpdfstring{deinit\_channels()}{deinit\_channels()}}
+{\footnotesize\ttfamily void deinit\+\_\+channels (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structencoder__t}{encoder\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+\_\+enc }\end{DoxyParamCaption})}
+
+
+
+A function to stop the channels from reading the encoder signals. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+\_\+enc} & The encoder object to perform the function on. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{encoder__reader_8h_a688cfbab28ad9031cc9fb1902362b76b}\label{encoder__reader_8h_a688cfbab28ad9031cc9fb1902362b76b} 
+\index{encoder\_reader.h@{encoder\_reader.h}!init\_channels@{init\_channels}}
+\index{init\_channels@{init\_channels}!encoder\_reader.h@{encoder\_reader.h}}
+\doxysubsubsection{\texorpdfstring{init\_channels()}{init\_channels()}}
+{\footnotesize\ttfamily void init\+\_\+channels (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structencoder__t}{encoder\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+\_\+enc }\end{DoxyParamCaption})}
+
+
+
+A function to initialize the channels for reading the encoder signals. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+\_\+enc} & The encoder object to perform the function on. \\
+\hline
+\end{DoxyParams}
 \Hypertarget{encoder__reader_8h_a827bf59333e711342c8a8f409cb7633b}\label{encoder__reader_8h_a827bf59333e711342c8a8f409cb7633b} 
 \index{encoder\_reader.h@{encoder\_reader.h}!read\_count@{read\_count}}
 \index{read\_count@{read\_count}!encoder\_reader.h@{encoder\_reader.h}}

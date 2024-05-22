@@ -99,6 +99,12 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a688cfbab28ad9031cc9fb1902362b76b" id="r_a688cfbab28ad9031cc9fb1902362b76b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a688cfbab28ad9031cc9fb1902362b76b">init_channels</a> (<a class="el" href="structencoder__t.html">encoder_t</a> *p_enc)</td></tr>
+<tr class="memdesc:a688cfbab28ad9031cc9fb1902362b76b"><td class="mdescLeft">&#160;</td><td class="mdescRight">A function to initialize the channels for reading the encoder signals.  <br /></td></tr>
+<tr class="separator:a688cfbab28ad9031cc9fb1902362b76b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a785de517bc8042529478427baf6cf90d" id="r_a785de517bc8042529478427baf6cf90d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a785de517bc8042529478427baf6cf90d">deinit_channels</a> (<a class="el" href="structencoder__t.html">encoder_t</a> *p_enc)</td></tr>
+<tr class="memdesc:a785de517bc8042529478427baf6cf90d"><td class="mdescLeft">&#160;</td><td class="mdescRight">A function to stop the channels from reading the encoder signals.  <br /></td></tr>
+<tr class="separator:a785de517bc8042529478427baf6cf90d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa6e65d34f5a90e31cd3e57be6d149d47" id="r_aa6e65d34f5a90e31cd3e57be6d149d47"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa6e65d34f5a90e31cd3e57be6d149d47">zero</a> (<a class="el" href="structencoder__t.html">encoder_t</a> *p_enc)</td></tr>
 <tr class="memdesc:aa6e65d34f5a90e31cd3e57be6d149d47"><td class="mdescLeft">&#160;</td><td class="mdescRight">A function to zero the encoder count.  <br /></td></tr>
 <tr class="separator:aa6e65d34f5a90e31cd3e57be6d149d47"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -109,6 +115,56 @@ Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Defines the encoder reader struct and its methods. This file is used to read the position of a motor using the attached motor encoder. This is accomplished by creating an Encoder class with several functions defined to aid in the task of reading the encoder including init, read, zero and loop. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
+<a id="a785de517bc8042529478427baf6cf90d" name="a785de517bc8042529478427baf6cf90d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a785de517bc8042529478427baf6cf90d">&#9670;&#160;</a></span>deinit_channels()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void deinit_channels </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structencoder__t.html">encoder_t</a> *</td>          <td class="paramname"><span class="paramname"><em>p_enc</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>A function to stop the channels from reading the encoder signals. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p_enc</td><td>The encoder object to perform the function on. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a688cfbab28ad9031cc9fb1902362b76b" name="a688cfbab28ad9031cc9fb1902362b76b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a688cfbab28ad9031cc9fb1902362b76b">&#9670;&#160;</a></span>init_channels()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void init_channels </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structencoder__t.html">encoder_t</a> *</td>          <td class="paramname"><span class="paramname"><em>p_enc</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>A function to initialize the channels for reading the encoder signals. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p_enc</td><td>The encoder object to perform the function on. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a827bf59333e711342c8a8f409cb7633b" name="a827bf59333e711342c8a8f409cb7633b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a827bf59333e711342c8a8f409cb7633b">&#9670;&#160;</a></span>read_count()</h2>
 

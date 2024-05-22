@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['zero_0',['zero',['../encoder__reader_8h.html#aa6e65d34f5a90e31cd3e57be6d149d47',1,'encoder_reader.h']]]
+  ['vdd_5fvalue_0',['VDD_VALUE',['../stm32l4xx__hal__conf_8h.html#aae550dad9f96d52cfce5e539adadbbb4',1,'stm32l4xx_hal_conf.h']]]
 ];

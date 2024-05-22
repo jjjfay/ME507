@@ -2,21 +2,27 @@
 \hypertarget{main_8c}{}\label{main_8c}\index{Core/Src/main.c@{Core/Src/main.c}}
 
 
-\+: Main program body  
+\+: Main program body for the ME 507 term project. The main contents of this file is the finite state machine that controls the prosthetic hand operation. This includes the tasks to open and close the hand, spin the hand, and gather an interpret data from the myoelectric and pressure sensors. Lastly, there is a task to check for an emergency stop signal from a radio transmitter device.  
 
 
 {\ttfamily \#include "{}main.\+h"{}}\newline
+{\ttfamily \#include "{}controller.\+h"{}}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{main_8c_a70af21c671abfcc773614a9a4f63d920}{System\+Clock\+\_\+\+Config}} (void)
-\begin{DoxyCompactList}\small\item\em System Clock Configuration. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{main_8c_a336c5acb34a801b2984e602b97ed7b73}{Periph\+Common\+Clock\+\_\+\+Config}} (void)
-\begin{DoxyCompactList}\small\item\em Peripherals Common Clock Configuration. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{main_8c_a840291bc02cba5474a4cb46a9b9566fe}{main}} (void)
-\begin{DoxyCompactList}\small\item\em The application entry point. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{main_8c_a1730ffe1e560465665eb47d9264826f9}{Error\+\_\+\+Handler}} (void)
-\begin{DoxyCompactList}\small\item\em This function is executed in case of error occurrence. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\Hypertarget{main_8c_a70af21c671abfcc773614a9a4f63d920}\label{main_8c_a70af21c671abfcc773614a9a4f63d920} 
+void {\bfseries System\+Clock\+\_\+\+Config} (void)
+\item 
+\Hypertarget{main_8c_a336c5acb34a801b2984e602b97ed7b73}\label{main_8c_a336c5acb34a801b2984e602b97ed7b73} 
+void {\bfseries Periph\+Common\+Clock\+\_\+\+Config} (void)
+\item 
+\Hypertarget{main_8c_ab55078d807df0a75af8a2fa8eefdcc41}\label{main_8c_ab55078d807df0a75af8a2fa8eefdcc41} 
+void {\bfseries task1} (void)
+\begin{DoxyCompactList}\small\item\em Task 1, the hand task, is responsible for moving the prosthetic hand fingers based on the set point determined by the myoelectric sensor and feedback given from the pressure sensor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8c_a03bef279de31d91a79b14f31c4530dfc}{task2}} (void)
+\begin{DoxyCompactList}\small\item\em Task 2, the motor task, is responsible for rotating the prosthetic hand based on the set point determined by the myoelectric sensor alone. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
@@ -44,7 +50,7 @@ TIM\+\_\+\+Handle\+Type\+Def {\bfseries htim4}
 
 
 \doxysubsection{Detailed Description}
-\+: Main program body 
+\+: Main program body for the ME 507 term project. The main contents of this file is the finite state machine that controls the prosthetic hand operation. This includes the tasks to open and close the hand, spin the hand, and gather an interpret data from the myoelectric and pressure sensors. Lastly, there is a task to check for an emergency stop signal from a radio transmitter device. 
 
 \begin{DoxyAttention}{Attention}
 
@@ -54,62 +60,28 @@ Copyright (c) 2024 STMicroelectronics. All rights reserved.
 This software is licensed under terms that can be found in the LICENSE file in the root directory of this software component. If no LICENSE file comes with this software, it is provided AS-\/\+IS. 
 
 \doxysubsection{Function Documentation}
-\Hypertarget{main_8c_a1730ffe1e560465665eb47d9264826f9}\label{main_8c_a1730ffe1e560465665eb47d9264826f9} 
-\index{main.c@{main.c}!Error\_Handler@{Error\_Handler}}
-\index{Error\_Handler@{Error\_Handler}!main.c@{main.c}}
-\doxysubsubsection{\texorpdfstring{Error\_Handler()}{Error\_Handler()}}
-{\footnotesize\ttfamily void Error\+\_\+\+Handler (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+\Hypertarget{main_8c_a03bef279de31d91a79b14f31c4530dfc}\label{main_8c_a03bef279de31d91a79b14f31c4530dfc} 
+\index{main.c@{main.c}!task2@{task2}}
+\index{task2@{task2}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{task2()}{task2()}}
+{\footnotesize\ttfamily void task2 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
 
 
 
-This function is executed in case of error occurrence. 
+Task 2, the motor task, is responsible for rotating the prosthetic hand based on the set point determined by the myoelectric sensor alone. 
 
+Task 6, the wireless emergency stop task, is responsible for monitoring for a change in the PWM signal from a radio transmitter. If a change is detected, this task will end the program.
 
-\begin{DoxyRetVals}{Return values}
-{\em None} & \\
-\hline
-\end{DoxyRetVals}
-\Hypertarget{main_8c_a840291bc02cba5474a4cb46a9b9566fe}\label{main_8c_a840291bc02cba5474a4cb46a9b9566fe} 
-\index{main.c@{main.c}!main@{main}}
-\index{main@{main}!main.c@{main.c}}
-\doxysubsubsection{\texorpdfstring{main()}{main()}}
-{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+Task 5, the reset button task, is responsible for continuously monitoring for a button push. When a button is pushed, this task will reset the MCU.
 
+Task 4, the pressure sensor task, is responsible for gathering, interpreting, and sharing the output of the pressure sensor signals to the hand rotation motor.
 
-
-The application entry point. 
-
-
+Task 3, the myo task, is responsible for gathering, interpreting, and sharing the output of the myoelectric sensor signals to both motors. The application entry point. 
 \begin{DoxyRetVals}{Return values}
 {\em int} & \\
 \hline
 \end{DoxyRetVals}
-\Hypertarget{main_8c_a336c5acb34a801b2984e602b97ed7b73}\label{main_8c_a336c5acb34a801b2984e602b97ed7b73} 
-\index{main.c@{main.c}!PeriphCommonClock\_Config@{PeriphCommonClock\_Config}}
-\index{PeriphCommonClock\_Config@{PeriphCommonClock\_Config}!main.c@{main.c}}
-\doxysubsubsection{\texorpdfstring{PeriphCommonClock\_Config()}{PeriphCommonClock\_Config()}}
-{\footnotesize\ttfamily void Periph\+Common\+Clock\+\_\+\+Config (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
-
-
-
-Peripherals Common Clock Configuration. 
-
-
-\begin{DoxyRetVals}{Return values}
-{\em None} & \\
-\hline
-\end{DoxyRetVals}
-Initializes the peripherals clock\Hypertarget{main_8c_a70af21c671abfcc773614a9a4f63d920}\label{main_8c_a70af21c671abfcc773614a9a4f63d920} 
-\index{main.c@{main.c}!SystemClock\_Config@{SystemClock\_Config}}
-\index{SystemClock\_Config@{SystemClock\_Config}!main.c@{main.c}}
-\doxysubsubsection{\texorpdfstring{SystemClock\_Config()}{SystemClock\_Config()}}
-{\footnotesize\ttfamily void System\+Clock\+\_\+\+Config (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
-
-
-
-System Clock Configuration. 
-
-
+System Clock Configuration 
 \begin{DoxyRetVals}{Return values}
 {\em None} & \\
 \hline
@@ -119,3 +91,110 @@ Configure the main internal regulator output voltage
 Initializes the RCC Oscillators according to the specified parameters in the RCC\+\_\+\+Osc\+Init\+Type\+Def structure.
 
 Initializes the CPU, AHB and APB buses clocks
+
+Peripherals Common Clock Configuration 
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+Initializes the peripherals clock
+
+ADC1 Initialization Function 
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+Common config
+
+Configure the ADC multi-\/mode
+
+Configure Regular Channel
+
+ADC2 Initialization Function 
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+Common config
+
+Configure Regular Channel
+
+ADC3 Initialization Function 
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+Common config
+
+Configure Regular Channel
+
+TIM1 Initialization Function 
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+TIM2 Initialization Function 
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+TIM3 Initialization Function 
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+TIM4 Initialization Function 
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+GPIO Initialization Function 
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+This function is executed in case of error occurrence. 
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
