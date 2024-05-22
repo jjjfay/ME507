@@ -65,7 +65,7 @@ void set_duty(motor_t* p_mot, int32_t pwm_sig)
     printf("Setting Motor Duty Cycle to %ld", pwm_sig);
 
     // Assign the duty cycle to a field in the structure
-    p_mot->duty = pwm_sig;
+    p_mot->duty = duty;
 
     // The arrow operator is shorthand for
     // dereferencing and accessing struct fields

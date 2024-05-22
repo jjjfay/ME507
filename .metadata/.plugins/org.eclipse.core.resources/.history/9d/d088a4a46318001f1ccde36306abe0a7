@@ -80,10 +80,6 @@ static void MX_TIM4_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
-/**
- * @brief Task 1, the hand task, is responsible for moving the prosthetic hand fingers based on the
- * 		  set point determined by the myoelectric sensor and feedback given from the pressure sensor.
- */
 // Task 1 - HAND TASK
 void task1(void) {
 	static int currentState = 0;
@@ -152,10 +148,7 @@ void task1(void) {
 	}
 }
 
-/**
- * @brief Task 2, the motor task, is responsible for rotating the prosthetic hand based
- * 		  on the set point determined by the myoelectric sensor alone.
- */
+
 // Task 2 - MOTOR TASK
 void task2(void) {
 	static int currentState = 0;
@@ -206,11 +199,6 @@ void task2(void) {
 		current state = 1;
 	}
 }
-
-/**
- * @brief Task 3, the myo task, is responsible for gathering, interpreting, and sharing the
- * 		  output of the myoelectric sensor signals to both motors.
- */
 // Task 3 - MYO TASK
 void task2(void) {
 	static int currentState = 0;
@@ -261,11 +249,6 @@ void task2(void) {
 		current state = 1;
 	}
 }
-
-/**
- * @brief Task 4, the pressure sensor task, is responsible for gathering, interpreting, and sharing the
- * 		  output of the pressure sensor signals to the hand rotation motor.
- */
 // Task 4 - PRESSURE SENSOR TASK
 void task2(void) {
 	static int currentState = 0;
@@ -316,11 +299,6 @@ void task2(void) {
 		current state = 1;
 	}
 }
-
-/**
- * @brief Task 5, the reset button task, is responsible for continuously monitoring for a button
- * 		  push. When a button is pushed, this task will reset the MCU.
- */
 // Task 5 - RESET BUTTON
 void task2(void) {
 	static int currentState = 0;
@@ -363,10 +341,6 @@ void task2(void) {
 	}
 }
 
-/**
- * @brief Task 6, the wireless emergency stop task, is responsible for monitoring for a change in the
- * 	      PWM signal from a radio transmitter. If a change is detected, this task will end the program.
- */
 // Task 6 - WIRELESS E STOP TASK
 void task2(void) {
 	static int currentState = 0;

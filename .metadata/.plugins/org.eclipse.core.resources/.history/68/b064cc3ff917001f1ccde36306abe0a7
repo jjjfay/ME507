@@ -80,17 +80,13 @@ static void MX_TIM4_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
-/**
- * @brief Task 1, the hand task, is responsible for moving the prosthetic hand fingers based on the
- * 		  set point determined by the myoelectric sensor and feedback given from the pressure sensor.
- */
 // Task 1 - HAND TASK
 void task1(void) {
 	static int currentState = 0;
 	static char print_buff[150];
 	static int n;
 
-	// State 0 - INIT
+	// Task 0 - INIT
 	if (currentState == 0) {
 
 		n = sprintf(print_buff,"\n\rTask 1, State 0\n");
@@ -100,7 +96,7 @@ void task1(void) {
 
 	}
 
-	//State 1 - INTERPRET MYO
+	//Task 1 - INTERPRET MYO
 	else if (currentState == 1) {
 
 		n = sprintf(print_buff,"\n\rTask 1, State 1\n");
@@ -110,7 +106,7 @@ void task1(void) {
 
 	}
 
-	//State 2 - MOVE MYO
+	//Task 2 - MOVE MYO
 	else if (currentState == 2) {
 
 		n = sprintf(print_buff,"\n\rTask 1, State 2\n");
@@ -120,7 +116,7 @@ void task1(void) {
 
 	}
 
-	//State 3 - INTERPRET PRESSURE SENSOR
+	//Task 3 - INTERPRET PRESSURE SENSOR
 	else if (currentState == 3) {
 
 		n = sprintf(print_buff,"\n\rTask 1, State 3\n");
@@ -128,7 +124,7 @@ void task1(void) {
 
 		currentState = 4;
 	}
-	//State 4 - MOVE PRESSURE SENSOR
+	//Task 4 - MOVE PRESSURE SENSOR
 	else if (currentState == 4) {
 
 		n = sprintf(print_buff,"\n\rTask 1, State 4\n");
@@ -136,7 +132,7 @@ void task1(void) {
 
 		currentState = 5;
 		}
-	//State 4 - MOVE PRESSURE SENSOR
+	//Task 4 - MOVE PRESSURE SENSOR
 	else if (currentState == 5) {
 
 		n = sprintf(print_buff,"\n\rTask 1, State 5\n");
@@ -152,17 +148,14 @@ void task1(void) {
 	}
 }
 
-/**
- * @brief Task 2, the motor task, is responsible for rotating the prosthetic hand based
- * 		  on the set point determined by the myoelectric sensor alone.
- */
+
 // Task 2 - MOTOR TASK
 void task2(void) {
 	static int currentState = 0;
 	static char print_buff[150];
 	static int n;
 
-	// State 0 - INIT
+	// Task 0 - INIT
 	if (currentState == 0) {
 
 		n = sprintf(print_buff,"\n\rTask 2, State 0\n");
@@ -172,7 +165,7 @@ void task2(void) {
 
 	}
 
-	//State 1 - WAIT FOR SIG
+	//Task 1 - INTERPRET MYO
 	else if (currentState == 1) {
 
 		n = sprintf(print_buff,"\n\rTask 2, State 1\n");
@@ -182,7 +175,7 @@ void task2(void) {
 
 	}
 
-	//State 2 - UPDATE SETPOINT
+	//Task 2 - MOVE MYO
 	else if (currentState == 2) {
 
 		n = sprintf(print_buff,"\n\rTask 2, State 2\n");
@@ -191,221 +184,39 @@ void task2(void) {
 		currentState = 3;
 
 	}
-	//State 3 - MOVE
+
+	//Task 3 - INTERPRET PRESSURE SENSOR
 	else if (currentState == 3) {
 
-		n = sprintf(print_buff,"\n\rTask 2, State 3\n");
+		n = sprintf(print_buff,"\n\rTask 1, State 3\n");
+		HAL_UART_Transmit(&huart2,print_buff,n,400);
+
+		currentState = 4;
+	}
+	//Task 4 - MOVE PRESSURE SENSOR
+	else if (currentState == 4) {
+
+		n = sprintf(print_buff,"\n\rTask 1, State 4\n");
+		HAL_UART_Transmit(&huart2,print_buff,n,400);
+
+		currentState = 5;
+		}
+	//Task 4 - MOVE PRESSURE SENSOR
+	else if (currentState == 5) {
+
+		n = sprintf(print_buff,"\n\rTask 1, State 5\n");
 		HAL_UART_Transmit(&huart2,print_buff,n,400);
 
 		currentState = 1;
-
-	}
+			}
 	else {
-		n = sprintf(print_buff,"\n\rTask 2, Invalid State. Reset to State 1\n");
+		n = sprintf(print_buff,"\n\rTask 1, Invalid State. Reset to State 1\n");
 		HAL_UART_Transmit(&huart2,print_buff,n,400);
+
 		current state = 1;
 	}
 }
 
-/**
- * @brief Task 3, the myo task, is responsible for gathering, interpreting, and sharing the
- * 		  output of the myoelectric sensor signals to both motors.
- */
-// Task 3 - MYO TASK
-void task2(void) {
-	static int currentState = 0;
-	static char print_buff[150];
-	static int n;
-
-	// State 0 - INIT
-	if (currentState == 0) {
-
-		n = sprintf(print_buff,"\n\rTask 3, State 0\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
-
-		currentState = 1;
-
-	}
-
-	//State 1 - GET SIGNAL
-	else if (currentState == 1) {
-
-		n = sprintf(print_buff,"\n\rTask 3, State 1\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
-
-		currentState = 2;
-
-	}
-
-	//State 2 - INTERPRET SIGNAL
-	else if (currentState == 2) {
-
-		n = sprintf(print_buff,"\n\rTask 3, State 2\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
-
-		currentState = 3;
-
-	}
-	//State 3 - SEND SIGNAL
-	else if (currentState == 3) {
-
-		n = sprintf(print_buff,"\n\rTask 3, State 3\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
-
-		currentState = 1;
-
-	}
-	else {
-		n = sprintf(print_buff,"\n\rTask 3, Invalid State. Reset to State 1\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
-		current state = 1;
-	}
-}
-
-/**
- * @brief Task 4, the pressure sensor task, is responsible for gathering, interpreting, and sharing the
- * 		  output of the pressure sensor signals to the hand rotation motor.
- */
-// Task 4 - PRESSURE SENSOR TASK
-void task2(void) {
-	static int currentState = 0;
-	static char print_buff[150];
-	static int n;
-
-	// State 0 - INIT
-	if (currentState == 0) {
-
-		n = sprintf(print_buff,"\n\rTask 4, State 0\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
-
-		currentState = 1;
-
-	}
-
-	//State 1 - GET PRESSURE
-	else if (currentState == 1) {
-
-		n = sprintf(print_buff,"\n\rTask 4, State 1\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
-
-		currentState = 2;
-
-	}
-
-	//State 2 - COMPARE PRESSURE
-	else if (currentState == 2) {
-
-		n = sprintf(print_buff,"\n\rTask 4, State 2\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
-
-		currentState = 3;
-
-	}
-	//State 3 - UPDATE HAND SETPOINT
-	else if (currentState == 3) {
-
-		n = sprintf(print_buff,"\n\rTask 4, State 3\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
-
-		currentState = 1;
-
-	}
-	else {
-		n = sprintf(print_buff,"\n\rTask 4, Invalid State. Reset to State 1\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
-		current state = 1;
-	}
-}
-
-/**
- * @brief Task 5, the reset button task, is responsible for continuously monitoring for a button
- * 		  push. When a button is pushed, this task will reset the MCU.
- */
-// Task 5 - RESET BUTTON
-void task2(void) {
-	static int currentState = 0;
-	static char print_buff[150];
-	static int n;
-
-	// State 0 - INIT
-	if (currentState == 0) {
-
-		n = sprintf(print_buff,"\n\rTask 5, State 0\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
-
-		currentState = 1;
-
-	}
-
-	//State 1 - WAIT FOR SIG
-	else if (currentState == 1) {
-
-		n = sprintf(print_buff,"\n\rTask 5, State 1\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
-
-		currentState = 2;
-
-	}
-
-	//State 2 - RESET
-	else if (currentState == 2) {
-
-		n = sprintf(print_buff,"\n\rTask 5, State 2\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
-
-		currentState = 3;
-
-	}
-	else {
-		n = sprintf(print_buff,"\n\rTask 5, Invalid State. Reset to State 1\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
-		current state = 1;
-	}
-}
-
-/**
- * @brief Task 6, the wireless emergency stop task, is responsible for monitoring for a change in the
- * 	      PWM signal from a radio transmitter. If a change is detected, this task will end the program.
- */
-// Task 6 - WIRELESS E STOP TASK
-void task2(void) {
-	static int currentState = 0;
-	static char print_buff[150];
-	static int n;
-
-	// State 0 - INIT
-	if (currentState == 0) {
-
-		n = sprintf(print_buff,"\n\rTask 6, State 0\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
-
-		currentState = 1;
-
-	}
-
-	//State 1 - WAIT FOR SIG
-	else if (currentState == 1) {
-
-		n = sprintf(print_buff,"\n\rTask 6, State 1\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
-
-		currentState = 2;
-
-	}
-
-	//State 2 - STOP
-	else if (currentState == 2) {
-
-		n = sprintf(print_buff,"\n\rTask 6, State 2\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
-
-		currentState = 3;
-
-	}
-	else {
-		n = sprintf(print_buff,"\n\rTask 6, Invalid State. Reset to State 1\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
-		current state = 1;
 
 /* USER CODE END 0 */
 
@@ -456,28 +267,21 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+    /* USER CODE END WHILE */
 	  //Continuously run the FSM
 
-	 	  // Execute task 1
-	 	  task1();
+	  // Execute task 1
+	  task1();
 
-	 	  // Execute task 2
-	 	  task2();
+	  // Execute task 2
+	  task2();
 
-	 	  // Execute task 3
-	 	  task3();
+	  // Execute task 3
+	  task3();
 
-	 	  // Execute task 4
-	 	  task4();
+	  // Execute task 4
+	  task4();
 
-	 	  // Execute task 5
-	 	  task5();
-
-	 	  // Execute task 6
-	 	  task6();
-
-  }
-    /* USER CODE END WHILE */
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

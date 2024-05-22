@@ -52,7 +52,7 @@ void stop_PWM(motor_t* p_mot, uint32_t channel)
 
 }
 
-void set_duty(motor_t* p_mot, int32_t pwm_sig)
+void set_duty(motor_t* p_mot, int32_t duty)
 {
 	/* A function to set the duty cycle for the motor.
 	 *
@@ -62,10 +62,10 @@ void set_duty(motor_t* p_mot, int32_t pwm_sig)
 	 */
 
     // Print to the console so we can see what's happening
-    printf("Setting Motor Duty Cycle to %ld", pwm_sig);
+    printf("Setting Motor Duty Cycle to %ld", duty);
 
     // Assign the duty cycle to a field in the structure
-    p_mot->duty = pwm_sig;
+    p_mot->duty = duty;
 
     // The arrow operator is shorthand for
     // dereferencing and accessing struct fields
@@ -73,14 +73,14 @@ void set_duty(motor_t* p_mot, int32_t pwm_sig)
     // is shorthand for
     // (*p_mot).duty = duty;
 
-    if (pwm_sig > 0) {
+    if (duty > 0) {
 
     	//forwards
-    	__HAL_TIM_SET_COMPARE(p_mot->hal_tim, p_mot->channel1,pwm_sig);
+    	__HAL_TIM_SET_COMPARE(p_mot->hal_tim, p_mot->channel1,duty);
     	__HAL_TIM_SET_COMPARE(p_mot->hal_tim, p_mot->channel2,0);
 
       }
-    else if(pwm_sig == 0){
+    else if(duty == 0){
 
     	//to turn off put into braking mode by setting both pins high
     	__HAL_TIM_SET_COMPARE(p_mot->hal_tim, p_mot->channel1,640);
@@ -91,7 +91,7 @@ void set_duty(motor_t* p_mot, int32_t pwm_sig)
 
     	//backwards
     	__HAL_TIM_SET_COMPARE(p_mot->hal_tim, p_mot->channel1,0);
-    	__HAL_TIM_SET_COMPARE(p_mot->hal_tim, p_mot->channel2,-pwm_sig);
+    	__HAL_TIM_SET_COMPARE(p_mot->hal_tim, p_mot->channel2,-duty);
       }
 
 

@@ -29,20 +29,6 @@ struct{
 } typedef encoder_t;
 
 /**
- * @brief A function to initialize the channels for reading the encoder signals.
- *
- * @param p_enc The encoder object to perform the function on.
- */
-void init_channels(encoder_t* p_enc);
-
-/**
- * @brief A function to stop the channels from reading the encoder signals.
- *
- * @param p_enc The encoder object to perform the function on.
- */
-void deinit_channels(encoder_t* p_enc);
-
-/**
  * @brief A function to zero the encoder count.
  *
  * @param p_enc The encoder object to perform the function on.
