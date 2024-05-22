@@ -15,20 +15,114 @@ struct \mbox{\hyperlink{structcontroller__t}{controller\+\_\+t}}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{controller_8h_a13a43e6d814de94978c515cb084873b1}\label{controller_8h_a13a43e6d814de94978c515cb084873b1} 
-void {\bfseries run} ()
-\item 
-\Hypertarget{controller_8h_a93e3b785ccda8a9cb2d07f34859534ac}\label{controller_8h_a93e3b785ccda8a9cb2d07f34859534ac} 
-void {\bfseries set\+\_\+setpoint} ()
-\item 
-\Hypertarget{controller_8h_a87656581e213471c74b66c5ec307e12d}\label{controller_8h_a87656581e213471c74b66c5ec307e12d} 
-void {\bfseries set\+\_\+\+Kp} ()
-\item 
-\Hypertarget{controller_8h_a0c4493a5d4723940d60164428f11adc3}\label{controller_8h_a0c4493a5d4723940d60164428f11adc3} 
-void {\bfseries zero} ()
-\end{DoxyCompactItemize}
+void \mbox{\hyperlink{controller_8h_aed817e3246b564f3bb4ceb39e895ad8b}{controller\+\_\+init}} (\mbox{\hyperlink{structcontroller__t}{controller\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+\_\+cont)
+\begin{DoxyCompactList}\small\item\em A function to initialize all of the timer channels. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{controller_8h_accf18394da04147c4bbc9e72bca82ffc}{controller\+\_\+deinit}} (\mbox{\hyperlink{structcontroller__t}{controller\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+\_\+cont)
+\begin{DoxyCompactList}\small\item\em A function to de-\/initialize all of the timer channels. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{controller_8h_a64684b662ba85fad26adcc70c0e4469b}{move}} (\mbox{\hyperlink{structcontroller__t}{controller\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+\_\+cont)
+\begin{DoxyCompactList}\small\item\em A function to move the controlled motor to the desired position. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{controller_8h_ac82cfad368eac072dab9f623db422cea}{set\+\_\+setpoint}} (\mbox{\hyperlink{structcontroller__t}{controller\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+\_\+cont, int32\+\_\+t new\+\_\+setpoint)
+\begin{DoxyCompactList}\small\item\em A function to set the new controller set point. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{controller_8h_a8b372be42e6f793749cf779010087c00}{set\+\_\+K}} (\mbox{\hyperlink{structcontroller__t}{controller\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+\_\+cont, int32\+\_\+t new\+\_\+gain)
+\begin{DoxyCompactList}\small\item\em A function to update the control loop gain. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 Defines the controller struct and its methods. 
 
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{controller_8h_accf18394da04147c4bbc9e72bca82ffc}\label{controller_8h_accf18394da04147c4bbc9e72bca82ffc} 
+\index{controller.h@{controller.h}!controller\_deinit@{controller\_deinit}}
+\index{controller\_deinit@{controller\_deinit}!controller.h@{controller.h}}
+\doxysubsubsection{\texorpdfstring{controller\_deinit()}{controller\_deinit()}}
+{\footnotesize\ttfamily void controller\+\_\+deinit (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structcontroller__t}{controller\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+\_\+cont }\end{DoxyParamCaption})}
+
+
+
+A function to de-\/initialize all of the timer channels. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+\_\+cont} & The controller object to perform the function on. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{controller_8h_aed817e3246b564f3bb4ceb39e895ad8b}\label{controller_8h_aed817e3246b564f3bb4ceb39e895ad8b} 
+\index{controller.h@{controller.h}!controller\_init@{controller\_init}}
+\index{controller\_init@{controller\_init}!controller.h@{controller.h}}
+\doxysubsubsection{\texorpdfstring{controller\_init()}{controller\_init()}}
+{\footnotesize\ttfamily void controller\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structcontroller__t}{controller\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+\_\+cont }\end{DoxyParamCaption})}
+
+
+
+A function to initialize all of the timer channels. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+\_\+cont} & The controller object to perform the function on.\\
+\hline
+\end{DoxyParams}
+A function to initialize all of the timer channels.
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+\_\+cont} & The controller object to perform the function on.\\
+\hline
+\end{DoxyParams}
+A function to initialize all of the timer channels.
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+\_\+cont} & The controller object to perform the function on. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{controller_8h_a64684b662ba85fad26adcc70c0e4469b}\label{controller_8h_a64684b662ba85fad26adcc70c0e4469b} 
+\index{controller.h@{controller.h}!move@{move}}
+\index{move@{move}!controller.h@{controller.h}}
+\doxysubsubsection{\texorpdfstring{move()}{move()}}
+{\footnotesize\ttfamily void move (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structcontroller__t}{controller\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+\_\+cont }\end{DoxyParamCaption})}
+
+
+
+A function to move the controlled motor to the desired position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+\_\+cont} & The controller object to perform the function on. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{controller_8h_a8b372be42e6f793749cf779010087c00}\label{controller_8h_a8b372be42e6f793749cf779010087c00} 
+\index{controller.h@{controller.h}!set\_K@{set\_K}}
+\index{set\_K@{set\_K}!controller.h@{controller.h}}
+\doxysubsubsection{\texorpdfstring{set\_K()}{set\_K()}}
+{\footnotesize\ttfamily void set\+\_\+K (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structcontroller__t}{controller\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+\_\+cont,  }\item[{int32\+\_\+t}]{new\+\_\+gain }\end{DoxyParamCaption})}
+
+
+
+A function to update the control loop gain. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+\_\+cont} & The controller object to perform the function on. \\
+\hline
+{\em new\+\_\+gain} & The new set point for the controller object. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{controller_8h_ac82cfad368eac072dab9f623db422cea}\label{controller_8h_ac82cfad368eac072dab9f623db422cea} 
+\index{controller.h@{controller.h}!set\_setpoint@{set\_setpoint}}
+\index{set\_setpoint@{set\_setpoint}!controller.h@{controller.h}}
+\doxysubsubsection{\texorpdfstring{set\_setpoint()}{set\_setpoint()}}
+{\footnotesize\ttfamily void set\+\_\+setpoint (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structcontroller__t}{controller\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+\_\+cont,  }\item[{int32\+\_\+t}]{new\+\_\+setpoint }\end{DoxyParamCaption})}
+
+
+
+A function to set the new controller set point. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+\_\+cont} & The controller object to perform the function on. \\
+\hline
+{\em new\+\_\+setpoint} & The new set point for the controller object. \\
+\hline
+\end{DoxyParams}

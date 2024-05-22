@@ -98,22 +98,175 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a13a43e6d814de94978c515cb084873b1" id="r_a13a43e6d814de94978c515cb084873b1"><td class="memItemLeft" align="right" valign="top"><a id="a13a43e6d814de94978c515cb084873b1" name="a13a43e6d814de94978c515cb084873b1"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>run</b> ()</td></tr>
-<tr class="separator:a13a43e6d814de94978c515cb084873b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a93e3b785ccda8a9cb2d07f34859534ac" id="r_a93e3b785ccda8a9cb2d07f34859534ac"><td class="memItemLeft" align="right" valign="top"><a id="a93e3b785ccda8a9cb2d07f34859534ac" name="a93e3b785ccda8a9cb2d07f34859534ac"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>set_setpoint</b> ()</td></tr>
-<tr class="separator:a93e3b785ccda8a9cb2d07f34859534ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a87656581e213471c74b66c5ec307e12d" id="r_a87656581e213471c74b66c5ec307e12d"><td class="memItemLeft" align="right" valign="top"><a id="a87656581e213471c74b66c5ec307e12d" name="a87656581e213471c74b66c5ec307e12d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>set_Kp</b> ()</td></tr>
-<tr class="separator:a87656581e213471c74b66c5ec307e12d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c4493a5d4723940d60164428f11adc3" id="r_a0c4493a5d4723940d60164428f11adc3"><td class="memItemLeft" align="right" valign="top"><a id="a0c4493a5d4723940d60164428f11adc3" name="a0c4493a5d4723940d60164428f11adc3"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>zero</b> ()</td></tr>
-<tr class="separator:a0c4493a5d4723940d60164428f11adc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed817e3246b564f3bb4ceb39e895ad8b" id="r_aed817e3246b564f3bb4ceb39e895ad8b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aed817e3246b564f3bb4ceb39e895ad8b">controller_init</a> (<a class="el" href="structcontroller__t.html">controller_t</a> *p_cont)</td></tr>
+<tr class="memdesc:aed817e3246b564f3bb4ceb39e895ad8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">A function to initialize all of the timer channels.  <br /></td></tr>
+<tr class="separator:aed817e3246b564f3bb4ceb39e895ad8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accf18394da04147c4bbc9e72bca82ffc" id="r_accf18394da04147c4bbc9e72bca82ffc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#accf18394da04147c4bbc9e72bca82ffc">controller_deinit</a> (<a class="el" href="structcontroller__t.html">controller_t</a> *p_cont)</td></tr>
+<tr class="memdesc:accf18394da04147c4bbc9e72bca82ffc"><td class="mdescLeft">&#160;</td><td class="mdescRight">A function to de-initialize all of the timer channels.  <br /></td></tr>
+<tr class="separator:accf18394da04147c4bbc9e72bca82ffc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64684b662ba85fad26adcc70c0e4469b" id="r_a64684b662ba85fad26adcc70c0e4469b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a64684b662ba85fad26adcc70c0e4469b">move</a> (<a class="el" href="structcontroller__t.html">controller_t</a> *p_cont)</td></tr>
+<tr class="memdesc:a64684b662ba85fad26adcc70c0e4469b"><td class="mdescLeft">&#160;</td><td class="mdescRight">A function to move the controlled motor to the desired position.  <br /></td></tr>
+<tr class="separator:a64684b662ba85fad26adcc70c0e4469b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac82cfad368eac072dab9f623db422cea" id="r_ac82cfad368eac072dab9f623db422cea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac82cfad368eac072dab9f623db422cea">set_setpoint</a> (<a class="el" href="structcontroller__t.html">controller_t</a> *p_cont, int32_t new_setpoint)</td></tr>
+<tr class="memdesc:ac82cfad368eac072dab9f623db422cea"><td class="mdescLeft">&#160;</td><td class="mdescRight">A function to set the new controller set point.  <br /></td></tr>
+<tr class="separator:ac82cfad368eac072dab9f623db422cea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b372be42e6f793749cf779010087c00" id="r_a8b372be42e6f793749cf779010087c00"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8b372be42e6f793749cf779010087c00">set_K</a> (<a class="el" href="structcontroller__t.html">controller_t</a> *p_cont, int32_t new_gain)</td></tr>
+<tr class="memdesc:a8b372be42e6f793749cf779010087c00"><td class="mdescLeft">&#160;</td><td class="mdescRight">A function to update the control loop gain.  <br /></td></tr>
+<tr class="separator:a8b372be42e6f793749cf779010087c00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Defines the controller struct and its methods. </p>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="accf18394da04147c4bbc9e72bca82ffc" name="accf18394da04147c4bbc9e72bca82ffc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#accf18394da04147c4bbc9e72bca82ffc">&#9670;&#160;</a></span>controller_deinit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void controller_deinit </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structcontroller__t.html">controller_t</a> *</td>          <td class="paramname"><span class="paramname"><em>p_cont</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>A function to de-initialize all of the timer channels. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p_cont</td><td>The controller object to perform the function on. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aed817e3246b564f3bb4ceb39e895ad8b" name="aed817e3246b564f3bb4ceb39e895ad8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed817e3246b564f3bb4ceb39e895ad8b">&#9670;&#160;</a></span>controller_init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void controller_init </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structcontroller__t.html">controller_t</a> *</td>          <td class="paramname"><span class="paramname"><em>p_cont</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>A function to initialize all of the timer channels. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p_cont</td><td>The controller object to perform the function on.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>A function to initialize all of the timer channels.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p_cont</td><td>The controller object to perform the function on.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>A function to initialize all of the timer channels.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p_cont</td><td>The controller object to perform the function on. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a64684b662ba85fad26adcc70c0e4469b" name="a64684b662ba85fad26adcc70c0e4469b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64684b662ba85fad26adcc70c0e4469b">&#9670;&#160;</a></span>move()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void move </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structcontroller__t.html">controller_t</a> *</td>          <td class="paramname"><span class="paramname"><em>p_cont</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>A function to move the controlled motor to the desired position. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p_cont</td><td>The controller object to perform the function on. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a8b372be42e6f793749cf779010087c00" name="a8b372be42e6f793749cf779010087c00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b372be42e6f793749cf779010087c00">&#9670;&#160;</a></span>set_K()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void set_K </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structcontroller__t.html">controller_t</a> *</td>          <td class="paramname"><span class="paramname"><em>p_cont</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int32_t</td>          <td class="paramname"><span class="paramname"><em>new_gain</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>A function to update the control loop gain. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p_cont</td><td>The controller object to perform the function on. </td></tr>
+    <tr><td class="paramname">new_gain</td><td>The new set point for the controller object. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac82cfad368eac072dab9f623db422cea" name="ac82cfad368eac072dab9f623db422cea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac82cfad368eac072dab9f623db422cea">&#9670;&#160;</a></span>set_setpoint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void set_setpoint </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structcontroller__t.html">controller_t</a> *</td>          <td class="paramname"><span class="paramname"><em>p_cont</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int32_t</td>          <td class="paramname"><span class="paramname"><em>new_setpoint</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>A function to set the new controller set point. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p_cont</td><td>The controller object to perform the function on. </td></tr>
+    <tr><td class="paramname">new_setpoint</td><td>The new set point for the controller object. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0

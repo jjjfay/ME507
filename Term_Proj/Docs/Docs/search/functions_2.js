@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['debugmon_5fhandler_0',['DebugMon_Handler',['../stm32l4xx__it_8c.html#adbdfb05858cc36fc520974df37ec3cb0',1,'DebugMon_Handler(void):&#160;stm32l4xx_it.c'],['../stm32l4xx__it_8h.html#adbdfb05858cc36fc520974df37ec3cb0',1,'DebugMon_Handler(void):&#160;stm32l4xx_it.c']]],
-  ['deinit_5fchannels_1',['deinit_channels',['../encoder__reader_8h.html#a785de517bc8042529478427baf6cf90d',1,'encoder_reader.c']]]
+  ['controller_5fdeinit_0',['controller_deinit',['../controller_8h.html#accf18394da04147c4bbc9e72bca82ffc',1,'controller.c']]],
+  ['controller_5finit_1',['controller_init',['../controller_8h.html#aed817e3246b564f3bb4ceb39e895ad8b',1,'controller.c']]]
 ];

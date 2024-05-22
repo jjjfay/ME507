@@ -8,7 +8,7 @@
 #ifndef SRC_MAINPAGE_H_
 #define SRC_MAINPAGE_H_
 
-/**
+/*
  * @mainpage Prosthetic Hand Control through Myoelectric and Pressure Sensors
  *
  * @authors Julia Fay & Jack Foxcroft

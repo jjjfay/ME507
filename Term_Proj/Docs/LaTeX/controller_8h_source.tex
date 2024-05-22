@@ -18,14 +18,17 @@
 \DoxyCodeLine{00022\ \ \ \ \ int32\_t\ \mbox{\hyperlink{structcontroller__t_afad9b2a7de51d07966f868d056ea2fab}{setpoint}};\ }
 \DoxyCodeLine{00025\ \}\ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{structcontroller__t}{controller\_t}};}
 \DoxyCodeLine{00026\ }
-\DoxyCodeLine{00027\ \textcolor{keywordtype}{void}\ run();}
-\DoxyCodeLine{00028\ }
-\DoxyCodeLine{00029\ \textcolor{keywordtype}{void}\ set\_setpoint();}
-\DoxyCodeLine{00030\ }
-\DoxyCodeLine{00031\ \textcolor{keywordtype}{void}\ set\_Kp();}
-\DoxyCodeLine{00032\ }
-\DoxyCodeLine{00033\ \textcolor{keywordtype}{void}\ zero();}
-\DoxyCodeLine{00034\ }
-\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ INC\_CONTROLLER\_H\_\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00032\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{controller_8h_aed817e3246b564f3bb4ceb39e895ad8b}{controller\_init}}(\mbox{\hyperlink{structcontroller__t}{controller\_t}}*\ p\_cont);}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00039\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{controller_8h_accf18394da04147c4bbc9e72bca82ffc}{controller\_deinit}}(\mbox{\hyperlink{structcontroller__t}{controller\_t}}*\ p\_cont);}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00046\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{controller_8h_a64684b662ba85fad26adcc70c0e4469b}{move}}(\mbox{\hyperlink{structcontroller__t}{controller\_t}}*\ p\_cont);}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00054\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{controller_8h_ac82cfad368eac072dab9f623db422cea}{set\_setpoint}}(\mbox{\hyperlink{structcontroller__t}{controller\_t}}*\ p\_cont,\ int32\_t\ new\_setpoint);}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00062\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{controller_8h_a8b372be42e6f793749cf779010087c00}{set\_K}}(\mbox{\hyperlink{structcontroller__t}{controller\_t}}*\ p\_cont,\ int32\_t\ new\_gain\ );}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ INC\_CONTROLLER\_H\_\ */}\textcolor{preprocessor}{}}
 
 \end{DoxyCode}
