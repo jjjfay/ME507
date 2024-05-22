@@ -6,7 +6,8 @@ var indexSectionsWithContent =
   3: "_bcdhimnprstuz",
   4: "cghps",
   5: "aehlmtuv",
-  6: "cs"
+  6: "cs",
+  7: "achmpst"
 };
 
 var indexSectionNames =
@@ -17,7 +18,8 @@ var indexSectionNames =
   3: "functions",
   4: "variables",
   5: "defines",
-  6: "groups"
+  6: "groups",
+  7: "pages"
 };
 
 var indexSectionLabels =
@@ -28,6 +30,7 @@ var indexSectionLabels =
   3: "Functions",
   4: "Variables",
   5: "Macros",
-  6: "Modules"
+  6: "Modules",
+  7: "Pages"
 };
 

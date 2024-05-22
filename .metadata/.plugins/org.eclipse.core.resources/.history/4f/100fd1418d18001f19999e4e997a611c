@@ -13,7 +13,7 @@
  *
  * @authors Julia Fay & Jack Foxcroft
  *
- * @section Project Description Project Description
+ * @section Project Description
  *
  * For our project, we will be controlling a robotic gripping device with a pressure sensor
  * and myoelectric sensors. The robotic hand will be able to rotate about its central axis,

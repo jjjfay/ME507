@@ -14,5 +14,7 @@ var searchData=
   ['pllsai2_5fp_20na_11',['PLLSAI2_P                              | NA',['../system__stm32l4xx_8c.html#autotoc_md15',1,'']]],
   ['pllsai2_5fq_20na_12',['PLLSAI2_Q                              | NA',['../system__stm32l4xx_8c.html#autotoc_md16',1,'']]],
   ['pllsai2_5fr_20na_13',['PLLSAI2_R                              | NA',['../system__stm32l4xx_8c.html#autotoc_md17',1,'']]],
-  ['prescaler_201_14',['Prescaler 1',['../system__stm32l4xx_8c.html#autotoc_md4',1,'AHB Prescaler                          | 1'],['../system__stm32l4xx_8c.html#autotoc_md5',1,'APB1 Prescaler                         | 1'],['../system__stm32l4xx_8c.html#autotoc_md6',1,'APB2 Prescaler                         | 1']]]
+  ['prescaler_201_14',['Prescaler 1',['../system__stm32l4xx_8c.html#autotoc_md4',1,'AHB Prescaler                          | 1'],['../system__stm32l4xx_8c.html#autotoc_md5',1,'APB1 Prescaler                         | 1'],['../system__stm32l4xx_8c.html#autotoc_md6',1,'APB2 Prescaler                         | 1']]],
+  ['pressure_20sensors_15',['Prosthetic Hand Control through Myoelectric and Pressure Sensors',['../index.html',1,'']]],
+  ['prosthetic_20hand_20control_20through_20myoelectric_20and_20pressure_20sensors_16',['Prosthetic Hand Control through Myoelectric and Pressure Sensors',['../index.html',1,'']]]
 ];
