@@ -1,7 +1,14 @@
-16:29:13 **** Incremental Build of configuration Debug for project Read_Receiver ****
+17:55:03 **** Incremental Build of configuration Debug for project test_term_proj ****
 make -j8 all 
-arm-none-eabi-size  Read_Receiver.elf 
+arm-none-eabi-size  test_term_proj.elf 
    text	   data	    bss	    dec	    hex	filename
-  21556	    104	   2368	  24028	   5ddc	Read_Receiver.elf
+  21720	     92	   2300	  24112	   5e30	test_term_proj.elf
+Finished building: default.size.stdout
+ 
+17:55:09 **** Incremental Build of configuration Debug for project test_term_proj ****
+make -j8 all 
+arm-none-eabi-size  test_term_proj.elf 
+   text	   data	    bss	    dec	    hex	filename
+  21720	     92	   2300	  24112	   5e30	test_term_proj.elf
 Finished building: default.size.stdout
  

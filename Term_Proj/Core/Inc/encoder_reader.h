@@ -22,7 +22,10 @@ struct{
 
 	    TIM_HandleTypeDef* hal_tim; /**< The timer object both channels are from. */
 
-	    uint16_t count; /**< The encoder count. */
+	    int16_t mot_pos; /**< The encoder count. */
+	    int16_t curr_count; /**< The encoder count. */
+	    int16_t prev_count; /**< The encoder count. */
+	    int16_t delta; /**< The encoder count. */
 
 
 
@@ -33,14 +36,14 @@ struct{
  *
  * @param p_enc The encoder object to perform the function on.
  */
-void init_channels(encoder_t* p_enc);
+void init_channels(encoder_t *p_enc);
 
 /**
  * @brief A function to stop the channels from reading the encoder signals.
  *
  * @param p_enc The encoder object to perform the function on.
  */
-void deinit_channels(encoder_t* p_enc);
+void deinit_channels(encoder_t *p_enc);
 
 /**
  * @brief A function to zero the encoder count.
@@ -58,6 +61,6 @@ void zero(encoder_t* p_enc);
  * @return count The encoder count to be returned.
  */
 
-uint16_t read_count(encoder_t* p_enc);
+uint16_t read_count(encoder_t *p_enc);
 
 #endif /* INC_ENCODER_READER_H_ */

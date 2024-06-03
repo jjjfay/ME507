@@ -13,8 +13,8 @@
  */
 struct {
 
-	motor_driver p_mot; /**< The motor object to be controlled. */
-	encoder_reader p_enc; /**< The encoder to be read from. */
+	motor_t* p_mot; /**< The motor object to be controlled. */
+	encoder_t* p_enc; /**< The encoder to be read from. */
 
 	//These are all the things specific to the controller class
 
@@ -43,7 +43,7 @@ void controller_deinit(controller_t* p_cont);
  *
  * @param p_cont The controller object to perform the function on.
  */
-void move(controller_t* p_cont);
+int32_t move(controller_t* p_cont);
 
 /**
  * @brief A function to set the new controller set point.

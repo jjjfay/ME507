@@ -81,16 +81,20 @@ void Error_Handler(void);
 #define BIN1_GPIO_Port GPIOC
 #define BIN2_Pin GPIO_PIN_0
 #define BIN2_GPIO_Port GPIOB
-#define MOTOR_ENC_Pin GPIO_PIN_6
-#define MOTOR_ENC_GPIO_Port GPIOC
-#define RADIO_Pin GPIO_PIN_8
+#define HAND_ENC_A_Pin GPIO_PIN_8
+#define HAND_ENC_A_GPIO_Port GPIOA
+#define HAND_ENC_B_Pin GPIO_PIN_9
+#define HAND_ENC_B_GPIO_Port GPIOA
+#define RADIO_Pin GPIO_PIN_10
 #define RADIO_GPIO_Port GPIOA
-#define HAND_ENC_Pin GPIO_PIN_10
-#define HAND_ENC_GPIO_Port GPIOA
 #define GPIO_1_Pin GPIO_PIN_15
 #define GPIO_1_GPIO_Port GPIOA
 #define GPIO_2_Pin GPIO_PIN_11
 #define GPIO_2_GPIO_Port GPIOC
+#define MOTOR_ENC_A_Pin GPIO_PIN_6
+#define MOTOR_ENC_A_GPIO_Port GPIOB
+#define MOTOR_ENC_B_Pin GPIO_PIN_7
+#define MOTOR_ENC_B_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 

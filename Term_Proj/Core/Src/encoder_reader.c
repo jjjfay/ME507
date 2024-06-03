@@ -15,6 +15,8 @@
 void init_channels(encoder_t* p_enc){
 
 	//probably some sort of HAL thing
+	HAL_TIM_Encoder_Start(p_enc->hal_tim,  TIM_CHANNEL_ALL);
+	//HAL_TIM_Encoder_Start(p_enc->hal_tim,  p_enc->channel2);
 }
 
 /**
@@ -25,6 +27,8 @@ void init_channels(encoder_t* p_enc){
 void deinit_channels(encoder_t* p_enc){
 
 	//probably some sort of HAL thing
+	HAL_TIM_Encoder_Stop(p_enc->hal_tim,  TIM_CHANNEL_ALL);
+	//HAL_TIM_Encoder_Stop(p_enc->hal_tim,  p_enc->channel2);
 }
 
 /**
@@ -33,7 +37,7 @@ void deinit_channels(encoder_t* p_enc){
 
 void zero(encoder_t* p_enc){
 
-	p_enc->count = 0;
+	p_enc->mot_pos = 0;
 
 }
 
@@ -45,8 +49,25 @@ void zero(encoder_t* p_enc){
  * @return count The encoder count to be returned.
  */
 
-uint16_t read_count(encoder_t* p_enc){
+uint16_t get_pos(encoder_t* p_enc){
 
-	//not sure exactly how to write this one yet
-	return p_enc->count;
+	p_enc->prev_count = p_enc->curr_count;
+	p_enc->curr_count = __HAL_TIM_GET_COUNTER(p_enc->hal_tim);
+
+	p_enc->delta = p_enc->curr_count - p_enc->prev_count;
+
+	//address overflow issues
+	if(p_enc->delta >= 32768){
+
+		p_enc->delta -= 65536;
+	}
+	else if(p_enc->delta <= -32768){
+
+		p_enc->delta += 65536;
+	}
+
+	p_enc->mot_pos += p_enc->delta;
+
+
+	return p_enc->mot_pos;
 }

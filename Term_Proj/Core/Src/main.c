@@ -26,8 +26,15 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "controller.h"
-#include <stdint.h>
+#include "radio.h"
+#include "myo.h"
+#include "encoder_reader.h"
 #include <stdio.h>
+#include "stm32l4xx_hal.h"
+#include <stdint.h>
+#include <string.h>
+#include <ctype.h>
+#include <stdlib.h>
 
 /* USER CODE END Includes */
 
@@ -53,12 +60,94 @@ ADC_HandleTypeDef hadc3;
 
 TIM_HandleTypeDef htim1;
 TIM_HandleTypeDef htim2;
-TIM_HandleTypeDef htim3;
 TIM_HandleTypeDef htim4;
+
+UART_HandleTypeDef huart4;
 
 /* USER CODE BEGIN PV */
 
 //initialize all objects
+
+//create motor objects
+
+motor_t hand_mot = {.pwm_val    = 0,
+			.pwm_channel = TIM_CHANNEL_1,
+			.hal_tim = &htim2,
+			.in_pin_1 = AIN1_Pin,
+			.in_pin_2 = AIN2_Pin,
+			.stby_pin = STBY_Pin,
+			.port_in_1 = GPIOA,
+			.port_in_2 = GPIOC,
+			.port_stby_pin = GPIOA};
+
+motor_t spin_mot = {.pwm_val    = 0,
+				.pwm_channel = TIM_CHANNEL_3,
+				.hal_tim = &htim2,
+				.in_pin_1 = BIN1_Pin,
+				.in_pin_2 = BIN2_Pin,
+				.stby_pin = STBY_Pin,
+				.port_in_1 = GPIOC,
+				.port_in_2 = BIN2_GPIO_Port,
+				.port_stby_pin = GPIOA};
+
+//create encoder objects
+
+encoder_t hand_enc = {.channel1 = TIM_CHANNEL_1,
+					  .channel2 = TIM_CHANNEL_2,
+					  .hal_tim = &htim1,
+					  .mot_pos = 0,
+					  .curr_count = 0,
+					  .prev_count = 0,
+					  .delta = 0};
+
+encoder_t spin_enc = {.channel1 = TIM_CHANNEL_1,
+					  .channel2 = TIM_CHANNEL_2,
+					  .hal_tim = &htim4,
+				      .mot_pos = 0,
+					  .curr_count = 0,
+					  .prev_count = 0,
+					  .delta = 0};
+
+//create controller objects
+
+controller_t hand_cont = {.p_mot = &hand_mot,
+						  .p_enc = &hand_enc,
+						  .gain = 1,
+						  .setpoint = 0};
+
+controller_t spin_cont = {.p_mot = &spin_mot,
+		  	  	  	  	  .p_enc = &spin_enc,
+						  .gain = 1,
+						  .setpoint = 0};
+
+//create myo electric sensor objects
+myo_t hmyo = {.hal_adc = &hadc1,
+	  	  	  .prev_value = 0,
+			  .current_value = 0};
+
+myo_t smyo = {.hal_adc = &hadc2,
+	  	  	  .prev_value = 0,
+			  .current_value = 0};
+
+//initialize variables
+
+uint16_t ch1_val;
+uint16_t ch2_val;
+uint16_t ch1_p;
+uint16_t ch2_p;
+uint16_t radio_pulse;
+uint16_t m2_d;
+int16_t hand_mot_pos = 0;
+int16_t spin_mot_pos = 0;
+uint16_t hmyo_curr = 0;
+uint16_t hmyo_prev = 0;
+uint16_t smyo_curr = 0;
+uint16_t smyo_prev = 0;
+uint16_t hmyo_delta = 0;
+uint16_t smyo_delta = 0;
+char tst_buff[150];
+int m;
+
 
 /* USER CODE END PV */
 
@@ -71,8 +160,8 @@ static void MX_ADC2_Init(void);
 static void MX_ADC3_Init(void);
 static void MX_TIM2_Init(void);
 static void MX_TIM1_Init(void);
-static void MX_TIM3_Init(void);
 static void MX_TIM4_Init(void);
+static void MX_UART4_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -82,7 +171,7 @@ static void MX_TIM4_Init(void);
 
 /**
  * @brief Task 1, the hand task, is responsible for moving the prosthetic hand fingers based on the
- * 		  set point determined by the myoelectric sensor and feedback given from the pressure sensor.
+ * 		  set point determined by the myoelectric sensor.
  */
 // Task 1 - HAND TASK
 void task1(void) {
@@ -94,19 +183,33 @@ void task1(void) {
 	if (currentState == 0) {
 
 		n = sprintf(print_buff,"\n\rTask 1, State 0\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
+		//change back to huart4
+		HAL_UART_Transmit(&huart4,print_buff,n,400);
 
-		currentState = 1;
+		//init the motor driver PWM channel and the
+		//the encoder channels
+		controller_init(&hand_cont);
 
-	}
+		//initialize the motor to be at rest
+		set_duty(&hand_mot,0);
+
+		currentState = 1;}
 
 	//State 1 - INTERPRET MYO
 	else if (currentState == 1) {
 
 		n = sprintf(print_buff,"\n\rTask 1, State 1\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
+		//HAL_UART_Transmit(&huart4,print_buff,n,400);
 
-		currentState = 2;
+
+		hmyo_prev = hmyo_curr;
+		hmyo_curr = read_current(&hmyo);
+		hmyo_delta = hmyo_curr - mhyo_prev;
+
+		if(abs(hmyo_delta) > 50){
+
+			currentState = 2;
+		}
 
 	}
 
@@ -114,49 +217,44 @@ void task1(void) {
 	else if (currentState == 2) {
 
 		n = sprintf(print_buff,"\n\rTask 1, State 2\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
+		//HAL_UART_Transmit(&huart4,print_buff,n,400);
 
-		currentState = 3;
+		hand_mot_pos += hmyo_delta; //probably need some sort of scaling factor here
 
-	}
-
-	//State 3 - INTERPRET PRESSURE SENSOR
-	else if (currentState == 3) {
-
-		n = sprintf(print_buff,"\n\rTask 1, State 3\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
-
-		currentState = 4;
-	}
-	//State 4 - MOVE PRESSURE SENSOR
-	else if (currentState == 4) {
-
-		n = sprintf(print_buff,"\n\rTask 1, State 4\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
-
-		currentState = 5;
+		//make sure the position value does not exceed the desired limits
+		if(hand_mot_pos > 300)//set max value for the motor position here
+		{
+			hand_mot_pos = 300;
 		}
-	//State 4 - MOVE PRESSURE SENSOR
-	else if (currentState == 5) {
+		else if (hand_mot_pos < 0)
+		{
+			hand_mot_pos = 0;
+		}
 
-		n = sprintf(print_buff,"\n\rTask 1, State 5\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
+		set_setpoint(&hand_cont, hand_mot_pos);
 
-		currentState = 1;
-			}
+		move(&hand_cont);
+
+		//need to tune this pwm value (5 may be too small)
+
+		if(move(&hand_cont < 5)){
+
+			currentState = 1;
+		}
+		}
+
 	else {
 		n = sprintf(print_buff,"\n\rTask 1, Invalid State. Reset to State 1\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
+		//HAL_UART_Transmit(&huart4,print_buff,n,400);
 
-		current state = 1;
-	}
+		currentState = 1;}
 }
 
 /**
- * @brief Task 2, the motor task, is responsible for rotating the prosthetic hand based
+ * @brief Task 2, the spin motor task, is responsible for rotating the prosthetic hand based
  * 		  on the set point determined by the myoelectric sensor alone.
  */
-// Task 2 - MOTOR TASK
+// Task 2 - SPIN MOTOR TASK
 void task2(void) {
 	static int currentState = 0;
 	static char print_buff[150];
@@ -166,53 +264,78 @@ void task2(void) {
 	if (currentState == 0) {
 
 		n = sprintf(print_buff,"\n\rTask 2, State 0\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
+		//change back to huart4
+		HAL_UART_Transmit(&huart4,print_buff,n,400);
 
-		currentState = 1;
+		//initiaize the motor driver PWM channel and the
+		//the encoder channels
+		controller_init(&spin_cont);
 
-	}
+		//initialize the motor to be at rest
+		set_duty(&spin_mot,0);
 
-	//State 1 - WAIT FOR SIG
+		currentState = 1;}
+
+	//State 1 - INTERPRET MYO
 	else if (currentState == 1) {
 
 		n = sprintf(print_buff,"\n\rTask 2, State 1\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
+		//HAL_UART_Transmit(&huart4,print_buff,n,400);
 
-		currentState = 2;
+		//get the muscle sensor delta
 
-	}
+		smyo_prev = smyo_curr;
+		smyo_curr = read_current(&smyo);
+		smyo_delta = smyo_curr - shyo_prev;
 
-	//State 2 - UPDATE SETPOINT
+		//tune this delta value
+			if(abs(smyo_delta) > 50){
+
+					currentState = 2;
+				}
+		}
+
+	//State 2 - MOVE
 	else if (currentState == 2) {
 
 		n = sprintf(print_buff,"\n\rTask 2, State 2\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
+		//HAL_UART_Transmit(&huart4,print_buff,n,400);
 
-		currentState = 3;
+		spin_mot_pos += smyo_delta; //probably need some sort of scaling factor here
 
+		//make sure the position value does not exceed the desired limits
+		if(spin_mot_pos > 300)//set max value for the motor position here
+				{
+					spin_mot_pos = 300;
+				}
+	    else if (spin_mot_pos < 0)
+				{
+					spin_mot_pos = 0; //this should be the at rest position of the device
+				}
+
+		set_setpoint(&spin_cont, spin_mot_pos);
+
+		move(&spin_cont);
+
+		//need to tune this pwm value (5 may be too small)
+		if(move(&spin_cont < 5)){
+
+					currentState = 1;
+				}
 	}
-	//State 3 - MOVE
-	else if (currentState == 3) {
 
-		n = sprintf(print_buff,"\n\rTask 2, State 3\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
-
-		currentState = 1;
-
-	}
 	else {
 		n = sprintf(print_buff,"\n\rTask 2, Invalid State. Reset to State 1\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
-		current state = 1;
-	}
+		//HAL_UART_Transmit(&huart4,print_buff,n,400);
+		currentState = 1;}
 }
 
 /**
- * @brief Task 3, the myo task, is responsible for gathering, interpreting, and sharing the
- * 		  output of the myoelectric sensor signals to both motors.
+ * @brief Task 3, the wireless emergency stop task, is responsible for monitoring for a change in the
+ * 	      PWM signal from a radio transmitter. If a change is detected, this task will end the program.
  */
-// Task 3 - MYO TASK
-void task2(void) {
+// Task 3 - WIRELESS E STOP TASK
+void task3(void) {
 	static int currentState = 0;
 	static char print_buff[150];
 	static int n;
@@ -221,191 +344,46 @@ void task2(void) {
 	if (currentState == 0) {
 
 		n = sprintf(print_buff,"\n\rTask 3, State 0\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
+		HAL_UART_Transmit(&huart4,print_buff,n,400);
 
-		currentState = 1;
+		HAL_TIM_IC_Start_IT (&htim1, TIM_CHANNEL_3);
+		HAL_TIM_IC_Start_IT (&htim1, TIM_CHANNEL_4);
 
-	}
 
-	//State 1 - GET SIGNAL
+		currentState = 1;}
+
+	//State 1 - WAIT FOR SIG
 	else if (currentState == 1) {
 
 		n = sprintf(print_buff,"\n\rTask 3, State 1\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
+		//HAL_UART_Transmit(&huart4,print_buff,n,400);
 
-		currentState = 2;
-
-	}
-
-	//State 2 - INTERPRET SIGNAL
-	else if (currentState == 2) {
-
-		n = sprintf(print_buff,"\n\rTask 3, State 2\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
-
-		currentState = 3;
-
-	}
-	//State 3 - SEND SIGNAL
-	else if (currentState == 3) {
-
-		n = sprintf(print_buff,"\n\rTask 3, State 3\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
-
-		currentState = 1;
-
-	}
-	else {
-		n = sprintf(print_buff,"\n\rTask 3, Invalid State. Reset to State 1\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
-		current state = 1;
-	}
+		if(check_delta(radio_pulse) == 1)
+			  {
+				currentState = 2;
+			  }
 }
-
-/**
- * @brief Task 4, the pressure sensor task, is responsible for gathering, interpreting, and sharing the
- * 		  output of the pressure sensor signals to the hand rotation motor.
- */
-// Task 4 - PRESSURE SENSOR TASK
-void task2(void) {
-	static int currentState = 0;
-	static char print_buff[150];
-	static int n;
-
-	// State 0 - INIT
-	if (currentState == 0) {
-
-		n = sprintf(print_buff,"\n\rTask 4, State 0\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
-
-		currentState = 1;
-
-	}
-
-	//State 1 - GET PRESSURE
-	else if (currentState == 1) {
-
-		n = sprintf(print_buff,"\n\rTask 4, State 1\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
-
-		currentState = 2;
-
-	}
-
-	//State 2 - COMPARE PRESSURE
-	else if (currentState == 2) {
-
-		n = sprintf(print_buff,"\n\rTask 4, State 2\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
-
-		currentState = 3;
-
-	}
-	//State 3 - UPDATE HAND SETPOINT
-	else if (currentState == 3) {
-
-		n = sprintf(print_buff,"\n\rTask 4, State 3\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
-
-		currentState = 1;
-
-	}
-	else {
-		n = sprintf(print_buff,"\n\rTask 4, Invalid State. Reset to State 1\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
-		current state = 1;
-	}
-}
-
-/**
- * @brief Task 5, the reset button task, is responsible for continuously monitoring for a button
- * 		  push. When a button is pushed, this task will reset the MCU.
- */
-// Task 5 - RESET BUTTON
-void task2(void) {
-	static int currentState = 0;
-	static char print_buff[150];
-	static int n;
-
-	// State 0 - INIT
-	if (currentState == 0) {
-
-		n = sprintf(print_buff,"\n\rTask 5, State 0\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
-
-		currentState = 1;
-
-	}
-
-	//State 1 - WAIT FOR SIG
-	else if (currentState == 1) {
-
-		n = sprintf(print_buff,"\n\rTask 5, State 1\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
-
-		currentState = 2;
-
-	}
-
-	//State 2 - RESET
-	else if (currentState == 2) {
-
-		n = sprintf(print_buff,"\n\rTask 5, State 2\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
-
-		currentState = 3;
-
-	}
-	else {
-		n = sprintf(print_buff,"\n\rTask 5, Invalid State. Reset to State 1\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
-		current state = 1;
-	}
-}
-
-/**
- * @brief Task 6, the wireless emergency stop task, is responsible for monitoring for a change in the
- * 	      PWM signal from a radio transmitter. If a change is detected, this task will end the program.
- */
-// Task 6 - WIRELESS E STOP TASK
-void task2(void) {
-	static int currentState = 0;
-	static char print_buff[150];
-	static int n;
-
-	// State 0 - INIT
-	if (currentState == 0) {
-
-		n = sprintf(print_buff,"\n\rTask 6, State 0\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
-
-		currentState = 1;
-
-	}
-
-	//State 1 - WAIT FOR SIG
-	else if (currentState == 1) {
-
-		n = sprintf(print_buff,"\n\rTask 6, State 1\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
-
-		currentState = 2;
-
-	}
 
 	//State 2 - STOP
 	else if (currentState == 2) {
 
-		n = sprintf(print_buff,"\n\rTask 6, State 2\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
+		n = sprintf(print_buff,"\n\rTask 3, State 2 EMERGENCY STOP\n");
+		//HAL_UART_Transmit(&huart4,print_buff,n,400);
 
-		currentState = 3;
+		//call deinit commands
+		controller_deinit(&hand_cont);
+		controller_deinit(&spin_cont);
+		set_stby(&hand_mot,0);
+		set_stby(&spin_mot,0);
 
-	}
+		}
+
 	else {
-		n = sprintf(print_buff,"\n\rTask 6, Invalid State. Reset to State 1\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
-		current state = 1;
+		n = sprintf(print_buff,"\n\rTask 3, Invalid State. Reset to State 1\n");
+		//HAL_UART_Transmit(&huart4,print_buff,n,400);
+		currentState = 1;
+	}
+}
 
 /* USER CODE END 0 */
 
@@ -446,9 +424,16 @@ int main(void)
   MX_ADC3_Init();
   MX_TIM2_Init();
   MX_TIM1_Init();
-  MX_TIM3_Init();
   MX_TIM4_Init();
+  MX_UART4_Init();
   /* USER CODE BEGIN 2 */
+
+
+  //init_channels(&spin_enc);
+
+  //Init motors and set duty
+  //start_PWM(&spin_mot);
+  //set_duty(&spin_mot,7000);
 
   /* USER CODE END 2 */
 
@@ -467,19 +452,27 @@ int main(void)
 	 	  // Execute task 3
 	 	  task3();
 
-	 	  // Execute task 4
-	 	  task4();
+	 	  //test encoder
+	 	  //note: not sure if I need to do the get pos thing or not. the get counter thing
+	 	  //works pretty well already
 
-	 	  // Execute task 5
-	 	  task5();
+	 	  //spin_mot_count = __HAL_TIM_GET_COUNTER(&htim4);
+	 	  //spin_mot_count = get_pos(&spin_enc);
+	 	  //m = sprintf(tst_buff,"\n\rThe encoder count is %d\n",spin_mot_count);
+	 	  //HAL_UART_Transmit(&huart4,tst_buff,m,400);
 
-	 	  // Execute task 6
-	 	  task6();
+	 	  //test muscle sensor
+	 	  //myo_val = read_current(&myo1);
+	 	  //m = sprintf(tst_buff,"\n\rThe myo output is %d\n",myo_val);
+	 	 //HAL_UART_Transmit(&huart4,tst_buff,m,400);
+
+	 	  //HAL_Delay(1000);
 
   }
     /* USER CODE END WHILE */
+
     /* USER CODE BEGIN 3 */
-  }
+
   /* USER CODE END 3 */
 }
 
@@ -502,14 +495,12 @@ void SystemClock_Config(void)
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_MSI;
-  RCC_OscInitStruct.MSIState = RCC_MSI_ON;
-  RCC_OscInitStruct.MSICalibrationValue = 0;
-  RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_6;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+  RCC_OscInitStruct.HSEState = RCC_HSE_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
-  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_MSI;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
   RCC_OscInitStruct.PLL.PLLM = 1;
-  RCC_OscInitStruct.PLL.PLLN = 25;
+  RCC_OscInitStruct.PLL.PLLN = 20;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV7;
   RCC_OscInitStruct.PLL.PLLQ = RCC_PLLQ_DIV2;
   RCC_OscInitStruct.PLL.PLLR = RCC_PLLR_DIV2;
@@ -523,11 +514,11 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
-  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV2;
+  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1) != HAL_OK)
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_4) != HAL_OK)
   {
     Error_Handler();
   }
@@ -545,9 +536,9 @@ void PeriphCommonClock_Config(void)
   */
   PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_ADC;
   PeriphClkInit.AdcClockSelection = RCC_ADCCLKSOURCE_PLLSAI1;
-  PeriphClkInit.PLLSAI1.PLLSAI1Source = RCC_PLLSOURCE_MSI;
+  PeriphClkInit.PLLSAI1.PLLSAI1Source = RCC_PLLSOURCE_HSE;
   PeriphClkInit.PLLSAI1.PLLSAI1M = 1;
-  PeriphClkInit.PLLSAI1.PLLSAI1N = 16;
+  PeriphClkInit.PLLSAI1.PLLSAI1N = 8;
   PeriphClkInit.PLLSAI1.PLLSAI1P = RCC_PLLP_DIV7;
   PeriphClkInit.PLLSAI1.PLLSAI1Q = RCC_PLLQ_DIV2;
   PeriphClkInit.PLLSAI1.PLLSAI1R = RCC_PLLR_DIV2;
@@ -753,7 +744,7 @@ static void MX_TIM1_Init(void)
 
   /* USER CODE END TIM1_Init 0 */
 
-  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_Encoder_InitTypeDef sConfig = {0};
   TIM_MasterConfigTypeDef sMasterConfig = {0};
   TIM_IC_InitTypeDef sConfigIC = {0};
 
@@ -761,22 +752,26 @@ static void MX_TIM1_Init(void)
 
   /* USER CODE END TIM1_Init 1 */
   htim1.Instance = TIM1;
-  htim1.Init.Prescaler = 0;
+  htim1.Init.Prescaler = 79;
   htim1.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim1.Init.Period = 65535;
   htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim1.Init.RepetitionCounter = 0;
   htim1.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
-  if (HAL_TIM_Base_Init(&htim1) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
-  if (HAL_TIM_ConfigClockSource(&htim1, &sClockSourceConfig) != HAL_OK)
-  {
-    Error_Handler();
-  }
   if (HAL_TIM_IC_Init(&htim1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sConfig.EncoderMode = TIM_ENCODERMODE_TI1;
+  sConfig.IC1Polarity = TIM_ICPOLARITY_RISING;
+  sConfig.IC1Selection = TIM_ICSELECTION_DIRECTTI;
+  sConfig.IC1Prescaler = TIM_ICPSC_DIV1;
+  sConfig.IC1Filter = 0;
+  sConfig.IC2Polarity = TIM_ICPOLARITY_RISING;
+  sConfig.IC2Selection = TIM_ICSELECTION_DIRECTTI;
+  sConfig.IC2Prescaler = TIM_ICPSC_DIV1;
+  sConfig.IC2Filter = 0;
+  if (HAL_TIM_Encoder_Init(&htim1, &sConfig) != HAL_OK)
   {
     Error_Handler();
   }
@@ -791,20 +786,11 @@ static void MX_TIM1_Init(void)
   sConfigIC.ICSelection = TIM_ICSELECTION_DIRECTTI;
   sConfigIC.ICPrescaler = TIM_ICPSC_DIV1;
   sConfigIC.ICFilter = 0;
-  if (HAL_TIM_IC_ConfigChannel(&htim1, &sConfigIC, TIM_CHANNEL_1) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  sConfigIC.ICSelection = TIM_ICSELECTION_INDIRECTTI;
-  if (HAL_TIM_IC_ConfigChannel(&htim1, &sConfigIC, TIM_CHANNEL_2) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  sConfigIC.ICSelection = TIM_ICSELECTION_DIRECTTI;
   if (HAL_TIM_IC_ConfigChannel(&htim1, &sConfigIC, TIM_CHANNEL_3) != HAL_OK)
   {
     Error_Handler();
   }
+  sConfigIC.ICPolarity = TIM_INPUTCHANNELPOLARITY_FALLING;
   sConfigIC.ICSelection = TIM_ICSELECTION_INDIRECTTI;
   if (HAL_TIM_IC_ConfigChannel(&htim1, &sConfigIC, TIM_CHANNEL_4) != HAL_OK)
   {
@@ -828,7 +814,6 @@ static void MX_TIM2_Init(void)
 
   /* USER CODE END TIM2_Init 0 */
 
-  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
   TIM_MasterConfigTypeDef sMasterConfig = {0};
   TIM_OC_InitTypeDef sConfigOC = {0};
 
@@ -838,18 +823,9 @@ static void MX_TIM2_Init(void)
   htim2.Instance = TIM2;
   htim2.Init.Prescaler = 0;
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim2.Init.Period = 4294967295;
+  htim2.Init.Period = 799999;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
-  if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
-  if (HAL_TIM_ConfigClockSource(&htim2, &sClockSourceConfig) != HAL_OK)
-  {
-    Error_Handler();
-  }
   if (HAL_TIM_PWM_Init(&htim2) != HAL_OK)
   {
     Error_Handler();
@@ -880,59 +856,6 @@ static void MX_TIM2_Init(void)
 }
 
 /**
-  * @brief TIM3 Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_TIM3_Init(void)
-{
-
-  /* USER CODE BEGIN TIM3_Init 0 */
-
-  /* USER CODE END TIM3_Init 0 */
-
-  TIM_MasterConfigTypeDef sMasterConfig = {0};
-  TIM_IC_InitTypeDef sConfigIC = {0};
-
-  /* USER CODE BEGIN TIM3_Init 1 */
-
-  /* USER CODE END TIM3_Init 1 */
-  htim3.Instance = TIM3;
-  htim3.Init.Prescaler = 0;
-  htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim3.Init.Period = 65535;
-  htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-  htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
-  if (HAL_TIM_IC_Init(&htim3) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
-  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
-  if (HAL_TIMEx_MasterConfigSynchronization(&htim3, &sMasterConfig) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  sConfigIC.ICPolarity = TIM_INPUTCHANNELPOLARITY_RISING;
-  sConfigIC.ICSelection = TIM_ICSELECTION_DIRECTTI;
-  sConfigIC.ICPrescaler = TIM_ICPSC_DIV1;
-  sConfigIC.ICFilter = 0;
-  if (HAL_TIM_IC_ConfigChannel(&htim3, &sConfigIC, TIM_CHANNEL_1) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  sConfigIC.ICSelection = TIM_ICSELECTION_INDIRECTTI;
-  if (HAL_TIM_IC_ConfigChannel(&htim3, &sConfigIC, TIM_CHANNEL_2) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN TIM3_Init 2 */
-
-  /* USER CODE END TIM3_Init 2 */
-
-}
-
-/**
   * @brief TIM4 Initialization Function
   * @param None
   * @retval None
@@ -944,8 +867,8 @@ static void MX_TIM4_Init(void)
 
   /* USER CODE END TIM4_Init 0 */
 
+  TIM_Encoder_InitTypeDef sConfig = {0};
   TIM_MasterConfigTypeDef sMasterConfig = {0};
-  TIM_OC_InitTypeDef sConfigOC = {0};
 
   /* USER CODE BEGIN TIM4_Init 1 */
 
@@ -956,7 +879,16 @@ static void MX_TIM4_Init(void)
   htim4.Init.Period = 65535;
   htim4.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim4.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
-  if (HAL_TIM_PWM_Init(&htim4) != HAL_OK)
+  sConfig.EncoderMode = TIM_ENCODERMODE_TI1;
+  sConfig.IC1Polarity = TIM_ICPOLARITY_RISING;
+  sConfig.IC1Selection = TIM_ICSELECTION_DIRECTTI;
+  sConfig.IC1Prescaler = TIM_ICPSC_DIV1;
+  sConfig.IC1Filter = 0;
+  sConfig.IC2Polarity = TIM_ICPOLARITY_RISING;
+  sConfig.IC2Selection = TIM_ICSELECTION_DIRECTTI;
+  sConfig.IC2Prescaler = TIM_ICPSC_DIV1;
+  sConfig.IC2Filter = 0;
+  if (HAL_TIM_Encoder_Init(&htim4, &sConfig) != HAL_OK)
   {
     Error_Handler();
   }
@@ -966,30 +898,44 @@ static void MX_TIM4_Init(void)
   {
     Error_Handler();
   }
-  sConfigOC.OCMode = TIM_OCMODE_PWM1;
-  sConfigOC.Pulse = 0;
-  sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
-  sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
-  if (HAL_TIM_PWM_ConfigChannel(&htim4, &sConfigOC, TIM_CHANNEL_1) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  if (HAL_TIM_PWM_ConfigChannel(&htim4, &sConfigOC, TIM_CHANNEL_2) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  if (HAL_TIM_PWM_ConfigChannel(&htim4, &sConfigOC, TIM_CHANNEL_3) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  if (HAL_TIM_PWM_ConfigChannel(&htim4, &sConfigOC, TIM_CHANNEL_4) != HAL_OK)
-  {
-    Error_Handler();
-  }
   /* USER CODE BEGIN TIM4_Init 2 */
 
   /* USER CODE END TIM4_Init 2 */
-  HAL_TIM_MspPostInit(&htim4);
+
+}
+
+/**
+  * @brief UART4 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_UART4_Init(void)
+{
+
+  /* USER CODE BEGIN UART4_Init 0 */
+
+  /* USER CODE END UART4_Init 0 */
+
+  /* USER CODE BEGIN UART4_Init 1 */
+
+  /* USER CODE END UART4_Init 1 */
+  huart4.Instance = UART4;
+  huart4.Init.BaudRate = 115200;
+  huart4.Init.WordLength = UART_WORDLENGTH_8B;
+  huart4.Init.StopBits = UART_STOPBITS_1;
+  huart4.Init.Parity = UART_PARITY_NONE;
+  huart4.Init.Mode = UART_MODE_TX_RX;
+  huart4.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart4.Init.OverSampling = UART_OVERSAMPLING_16;
+  huart4.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
+  huart4.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
+  if (HAL_UART_Init(&huart4) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN UART4_Init 2 */
+
+  /* USER CODE END UART4_Init 2 */
 
 }
 
@@ -1019,14 +965,6 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(BIN2_GPIO_Port, BIN2_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : PA0 PA1 */
-  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1;
-  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-  GPIO_InitStruct.Alternate = GPIO_AF8_UART4;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
   /*Configure GPIO pins : STBY_Pin AIN1_Pin GPIO_1_Pin */
   GPIO_InitStruct.Pin = STBY_Pin|AIN1_Pin|GPIO_1_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
@@ -1053,6 +991,40 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+/**
+  * @brief  Input Capture callback in non-blocking mode
+  * @param  htim TIM IC handle
+  * @retval None
+  */
+void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
+{
+  /* Prevent unused argument(s) compilation warning */
+  UNUSED(htim);
+
+  /* NOTE : This function should not be modified, when the callback is needed,
+   *
+            the HAL_TIM_IC_CaptureCallback could be implemented in the user file
+   */
+  //if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_2) {
+          //store the previous value and read the captured value from the input capture register
+	  	  //ch1_p = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_1);
+	      //ch1_val = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_2);
+
+	      //calculate the width of the pwm pulse generated by the radio transmitter
+	     // radio_pulse = ch1_val - ch1_p;
+  //}
+  if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_4) {
+	      //store the previous value and read the captured value from the input capture register
+	  	  ch2_p = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_3);
+	      ch2_val = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_4);
+
+	      //calculate the width of the pwm pulse generated by the radio transmitter
+	     radio_pulse = ch2_val - ch2_p;
+  }
+
+}
+
 
 /* USER CODE END 4 */
 

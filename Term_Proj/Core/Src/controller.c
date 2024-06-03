@@ -30,11 +30,10 @@
 void controller_init(controller_t* p_cont){
 
 	//initialize the motor driver channels
-	start_PWM(&p_cont->p_mot,&p_cont->p_mot.channel1);
-	start_PWM(&p_cont->p_mot,&p_cont->p_mot.channel2);
+	start_PWM(p_cont->p_mot);
 
 	//initialize the encoder reader channels
-	init_channels(&p_cont->p_enc);
+	init_channels(p_cont->p_enc);
 }
 
 /**
@@ -45,11 +44,10 @@ void controller_init(controller_t* p_cont){
 void controller_deinit(controller_t* p_cont){
 
 	//de-initialize the motor driver channels
-	stop_PWM(&p_cont->p_mot,&p_cont->p_mot.channel1);
-	stop_PWM(&p_cont->p_mot,&p_cont->p_mot.channel2);
+	stop_PWM(p_cont->p_mot);
 
 	//de-initialize the encoder reader channels
-	deinit_channels(&p_cont->p_enc);
+	deinit_channels(p_cont->p_enc);
 }
 
 /**
@@ -57,13 +55,32 @@ void controller_deinit(controller_t* p_cont){
  *
  * @param p_cont The controller object to perform the function on.
  */
-void move(controller_t* p_cont){
+int32_t move(controller_t* p_cont){
 
 
-	int32_t calc = 100;
+	//The pwm value should range from 0 to 799,999
 
-	p_cont->p_mot.duty = calc;
-	set_duty(&p_cont->p_mot, &p_cont->p_mot.duty);
+	//calculate the desired PWM value using the gain and setpoint.
+	p_cont->p_mot->pwm_val = p_cont->gain*(p_cont->setpoint);
+
+	//saturation
+	if(p_cont->p_mot->pwm_val > 799999)
+	{
+		p_cont->p_mot->pwm_val = 799999;
+	}
+	else if(p_cont->p_mot->pwm_val < -799999){
+
+		p_cont->p_mot->pwm_val = -799999;
+	}
+
+	//might also want to add in some sort of sensitivity like if its below a certain
+	//threshold we make it zero
+
+	//set the duty cycle of the motor
+	set_duty(p_cont->p_mot, p_cont->p_mot->pwm_val);
+
+	//return the pwm_val for monitoring
+	return p_cont->p_mot->pwm_val;
 
 }
 
@@ -85,7 +102,7 @@ void set_setpoint(controller_t* p_cont, int32_t new_setpoint){
  * @param p_cont The controller object to perform the function on.
  * @param new_gain The new set point for the controller object.
  */
-void set_K(controller_t* p_cont){
+void set_K(controller_t* p_cont, int32_t new_gain){
 
 	p_cont->gain = new_gain;
 }

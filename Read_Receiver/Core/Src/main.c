@@ -26,7 +26,6 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
-#include "controller.h"
 #include <stdint.h>
 #include <stdio.h>
 

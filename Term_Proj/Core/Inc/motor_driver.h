@@ -20,23 +20,27 @@
 struct {
 
 	//These are all the things you have to define when you create a motor object
-    int32_t  duty;
+    int32_t  pwm_val;
 
-    //two channels for each motor
-    uint32_t channel1;
-    uint32_t channel2;
+    //one channels for each motor
+    uint32_t pwm_channel;
 
     //The handle to the HAL timer object used for PWM generation. Include * so its a pointer to the object
     TIM_HandleTypeDef* hal_tim;
 
     //pin data typ is int32_t
-    //int32_t pwm_pin_1;
-	//int32_t pwm_pin_2;
+
+    uint32_t in_pin_1;
+	uint32_t in_pin_2;
+	uint32_t stby_pin;
 
     //port data type is GPIO_TypeDef. Include * so its a pointer to the object.
 	//don't really see why I need this right now
 	//port stores the pin behavior information
-	//GPIO_TypeDef* port
+
+	GPIO_TypeDef* port_in_1;
+	GPIO_TypeDef* port_in_2;
+	GPIO_TypeDef* port_stby_pin;
 
 } typedef motor_t;
 
@@ -48,7 +52,7 @@ struct {
  * @param channel The timer channel to perform the function on.
  */
 
-void start_PWM(motor_t* p_mot, uint32_t channel);
+void start_PWM(motor_t* p_mot);
 
 /**
  * @brief A function to disable one of the motor driver channels.
@@ -57,7 +61,7 @@ void start_PWM(motor_t* p_mot, uint32_t channel);
  * @param channel The timer channel to perform the function on.
  */
 
-void stop_PWM(motor_t* p_mot, uint32_t channel);
+void stop_PWM(motor_t* p_mot);
 
 /**
  * @brief A function to set the duty cycle for the motor.
@@ -66,5 +70,13 @@ void stop_PWM(motor_t* p_mot, uint32_t channel);
  * @param duty The desired duty cycle for the motor.
  */
 void set_duty(motor_t* p_mot, int32_t duty);
+
+/**
+ * @brief A function to set the standby pin for the motor.
+ *
+ * @param p_mot The motor object to perform the function on.
+ * @param stby The desired stby pin value of 0 or 1.
+ */
+void set_stby(motor_t* p_mot, int32_t stby_val);
 
 #endif /* INC_MOTOR_DRIVER_H_ */

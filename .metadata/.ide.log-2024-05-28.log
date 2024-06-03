@@ -1,0 +1,80 @@
+2024-05-28 12:53:53,847 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 780797912 Bytes (1073741824)
+2024-05-28 12:53:57,327 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 755906456 Bytes (1073741824)
+2024-05-28 12:53:57,650 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: TIM1_8L4
+2024-05-28 12:53:57,650 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: TIM1_8L4
+2024-05-28 12:53:57,650 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: TIM1_8L4
+2024-05-28 12:53:57,650 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: ADC
+2024-05-28 12:53:57,650 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: SYS
+2024-05-28 12:53:57,650 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: ADC
+2024-05-28 12:53:57,650 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: ADC
+2024-05-28 12:53:57,650 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: RCC
+2024-05-28 12:53:57,650 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: NVIC
+2024-05-28 12:53:57,650 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: UART
+2024-05-28 12:53:57,651 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: GPIO
+2024-05-28 12:53:57,652 [INFO] CodeGenerator:807 - code generatio: config db path: C:\ST\STM32CubeIDE_1.15.0\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.11.0.202403141607\\db\
+2024-05-28 12:53:58,082 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\julia\Documents\GitHub\ME507\Term_Proj\MXTmpFiles\license.tmp_save
+2024-05-28 12:53:58,266 [INFO] CodeEngine:279 - Generated code: C:\Users\julia\Documents\GitHub\ME507\Term_Proj\MXTmpFiles\license.tmp
+2024-05-28 12:53:58,457 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\julia\Documents\GitHub\ME507\Term_Proj\MXTmpFiles\gpio.tmp_save
+2024-05-28 12:53:58,715 [INFO] CodeEngine:279 - Generated code: C:\Users\julia\Documents\GitHub\ME507\Term_Proj\MXTmpFiles\gpio.tmp
+2024-05-28 12:54:00,397 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\julia\Documents\GitHub\ME507\Term_Proj\Core\Src\stm32l4xx_it.c_save
+2024-05-28 12:54:00,860 [INFO] CodeEngine:279 - Generated code: C:\Users\julia\Documents\GitHub\ME507\Term_Proj\Core\Src\stm32l4xx_it.c
+2024-05-28 12:54:00,901 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\julia\Documents\GitHub\ME507\Term_Proj\Core\Inc\stm32l4xx_it.h_save
+2024-05-28 12:54:01,068 [INFO] CodeEngine:279 - Generated code: C:\Users\julia\Documents\GitHub\ME507\Term_Proj\Core\Inc\stm32l4xx_it.h
+2024-05-28 12:54:01,136 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\julia\Documents\GitHub\ME507\Term_Proj\Core\Src\stm32l4xx_hal_msp.c_save
+2024-05-28 12:54:01,376 [INFO] CodeEngine:279 - Generated code: C:\Users\julia\Documents\GitHub\ME507\Term_Proj\Core\Src\stm32l4xx_hal_msp.c
+2024-05-28 12:54:01,396 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\julia\Documents\GitHub\ME507\Term_Proj\MXTmpFiles\system.tmp_save
+2024-05-28 12:54:01,564 [INFO] CodeEngine:279 - Generated code: C:\Users\julia\Documents\GitHub\ME507\Term_Proj\MXTmpFiles\system.tmp
+2024-05-28 12:54:01,628 [INFO] CodeEngine:311 - oldGeneratedFile, C:\Users\julia\Documents\GitHub\ME507\Term_Proj\Core\Inc\stm32l4xx_hal_conf.h_save
+2024-05-28 12:54:01,905 [INFO] CodeEngine:335 - Generated code: C:\Users\julia\Documents\GitHub\ME507\Term_Proj\Core\Inc\stm32l4xx_hal_conf.h
+2024-05-28 12:54:01,990 [WARN] IPConfigManager:3513 - IP not found : TIM
+2024-05-28 12:54:01,998 [WARN] CodeGenerator:3951 - IP not found : null
+2024-05-28 12:54:02,050 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\julia\Documents\GitHub\ME507\Term_Proj\Core\Inc\main.h_save
+2024-05-28 12:54:02,244 [INFO] CodeEngine:279 - Generated code: C:\Users\julia\Documents\GitHub\ME507\Term_Proj\Core\Inc\main.h
+2024-05-28 12:54:02,306 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\julia\Documents\GitHub\ME507\Term_Proj\Core\Src\main.c_save
+2024-05-28 12:54:02,768 [INFO] CodeEngine:279 - Generated code: C:\Users\julia\Documents\GitHub\ME507\Term_Proj\Core\Src\main.c
+2024-05-28 12:54:03,607 [INFO] ProjectBuilder:3163 - Time for Copy HAL[1] : 455mS.
+2024-05-28 12:54:03,614 [INFO] ProjectBuilder:4736 - Project Generator version: 4.3.0-B58
+2024-05-28 12:54:03,792 [INFO] ConfigFileManager:1503 - The Die is : DIE415
+2024-05-28 12:54:05,492 [INFO] ProjectBuilder:5002 - Time for Generating toolchain IDE Files: 1878mS.
+2024-05-28 12:54:05,494 [INFO] ProjectBuilder:3034 - Time for Copy CMSIS : 2mS.
+2024-05-28 12:54:05,501 [INFO] ProjectBuilder:3034 - Time for Copy CMSIS : 0mS.
+2024-05-28 15:50:15,090 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 782167056 Bytes (1073741824)
+2024-05-28 15:50:16,440 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 775358064 Bytes (1073741824)
+2024-05-28 15:50:16,737 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: TIM1_8L4
+2024-05-28 15:50:16,739 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: TIM1_8L4
+2024-05-28 15:50:16,739 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: TIM1_8L4
+2024-05-28 15:50:16,739 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: ADC
+2024-05-28 15:50:16,739 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: SYS
+2024-05-28 15:50:16,739 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: ADC
+2024-05-28 15:50:16,739 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: ADC
+2024-05-28 15:50:16,739 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: RCC
+2024-05-28 15:50:16,739 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: NVIC
+2024-05-28 15:50:16,739 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: UART
+2024-05-28 15:50:16,740 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: GPIO
+2024-05-28 15:50:16,741 [INFO] CodeGenerator:807 - code generatio: config db path: C:\ST\STM32CubeIDE_1.15.0\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.11.0.202403141607\\db\
+2024-05-28 15:50:17,165 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\julia\Documents\GitHub\ME507\Term_Proj\MXTmpFiles\license.tmp_save
+2024-05-28 15:50:17,392 [INFO] CodeEngine:279 - Generated code: C:\Users\julia\Documents\GitHub\ME507\Term_Proj\MXTmpFiles\license.tmp
+2024-05-28 15:50:17,602 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\julia\Documents\GitHub\ME507\Term_Proj\MXTmpFiles\gpio.tmp_save
+2024-05-28 15:50:17,854 [INFO] CodeEngine:279 - Generated code: C:\Users\julia\Documents\GitHub\ME507\Term_Proj\MXTmpFiles\gpio.tmp
+2024-05-28 15:50:19,148 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\julia\Documents\GitHub\ME507\Term_Proj\Core\Src\stm32l4xx_it.c_save
+2024-05-28 15:50:19,478 [INFO] CodeEngine:279 - Generated code: C:\Users\julia\Documents\GitHub\ME507\Term_Proj\Core\Src\stm32l4xx_it.c
+2024-05-28 15:50:19,526 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\julia\Documents\GitHub\ME507\Term_Proj\Core\Inc\stm32l4xx_it.h_save
+2024-05-28 15:50:19,710 [INFO] CodeEngine:279 - Generated code: C:\Users\julia\Documents\GitHub\ME507\Term_Proj\Core\Inc\stm32l4xx_it.h
+2024-05-28 15:50:19,787 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\julia\Documents\GitHub\ME507\Term_Proj\Core\Src\stm32l4xx_hal_msp.c_save
+2024-05-28 15:50:20,072 [INFO] CodeEngine:279 - Generated code: C:\Users\julia\Documents\GitHub\ME507\Term_Proj\Core\Src\stm32l4xx_hal_msp.c
+2024-05-28 15:50:20,091 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\julia\Documents\GitHub\ME507\Term_Proj\MXTmpFiles\system.tmp_save
+2024-05-28 15:50:20,279 [INFO] CodeEngine:279 - Generated code: C:\Users\julia\Documents\GitHub\ME507\Term_Proj\MXTmpFiles\system.tmp
+2024-05-28 15:50:20,383 [INFO] CodeEngine:311 - oldGeneratedFile, C:\Users\julia\Documents\GitHub\ME507\Term_Proj\Core\Inc\stm32l4xx_hal_conf.h_save
+2024-05-28 15:50:20,890 [INFO] CodeEngine:335 - Generated code: C:\Users\julia\Documents\GitHub\ME507\Term_Proj\Core\Inc\stm32l4xx_hal_conf.h
+2024-05-28 15:50:20,976 [WARN] IPConfigManager:3513 - IP not found : TIM
+2024-05-28 15:50:20,979 [WARN] CodeGenerator:3951 - IP not found : null
+2024-05-28 15:50:21,159 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\julia\Documents\GitHub\ME507\Term_Proj\Core\Inc\main.h_save
+2024-05-28 15:50:21,673 [INFO] CodeEngine:279 - Generated code: C:\Users\julia\Documents\GitHub\ME507\Term_Proj\Core\Inc\main.h
+2024-05-28 15:50:21,738 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\julia\Documents\GitHub\ME507\Term_Proj\Core\Src\main.c_save
+2024-05-28 15:50:22,117 [INFO] CodeEngine:279 - Generated code: C:\Users\julia\Documents\GitHub\ME507\Term_Proj\Core\Src\main.c
+2024-05-28 15:50:23,058 [INFO] ProjectBuilder:3163 - Time for Copy HAL[1] : 474mS.
+2024-05-28 15:50:23,066 [INFO] ProjectBuilder:4736 - Project Generator version: 4.3.0-B58
+2024-05-28 15:50:23,264 [INFO] ConfigFileManager:1503 - The Die is : DIE415
+2024-05-28 15:50:25,127 [INFO] ProjectBuilder:5002 - Time for Generating toolchain IDE Files: 2061mS.
+2024-05-28 15:50:25,128 [INFO] ProjectBuilder:3034 - Time for Copy CMSIS : 1mS.
+2024-05-28 15:50:25,135 [INFO] ProjectBuilder:3034 - Time for Copy CMSIS : 0mS.
