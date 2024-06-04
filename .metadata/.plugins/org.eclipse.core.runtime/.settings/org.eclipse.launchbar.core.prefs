@@ -1,7 +1,7 @@
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/arch=x86_64
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/name=Local
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/os=win32
-configDescList=org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Read_Receiver Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Spin_a_Motor Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Term_Proj Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:test_term_proj Debug
+configDescList=org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Read_Receiver Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Spin_a_Motor Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Term_Proj Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:test_term_proj Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Term_Proj_Test Debug
 eclipse.preferences.version=1
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Read_Receiver\ Debug/activeLaunchMode=run
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Read_Receiver\ Debug/activeLaunchTarget=null\:---
