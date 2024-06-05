@@ -1,10 +1,57 @@
-15:33:03 **** Incremental Build of configuration Debug for project Term_Proj ****
+16:28:59 **** Incremental Build of configuration Debug for project Term_Proj ****
 make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'task1':
+../Core/Src/main.c:187:43: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  187 |                 HAL_UART_Transmit(&huart4,print_buff,n,400);
+      |                                           ^~~~~~~~~~
+      |                                           |
+      |                                           char *
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:450,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:24:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1697:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1697 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c: In function 'task2':
+../Core/Src/main.c:268:43: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  268 |                 HAL_UART_Transmit(&huart4,print_buff,n,400);
+      |                                           ^~~~~~~~~~
+      |                                           |
+      |                                           char *
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1697:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1697 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c: In function 'task3':
+../Core/Src/main.c:347:43: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  347 |                 HAL_UART_Transmit(&huart4,print_buff,n,400);
+      |                                           ^~~~~~~~~~
+      |                                           |
+      |                                           char *
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1697:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1697 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:467:44: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  467 |                  HAL_UART_Transmit(&huart4,tst_buff,m,400);
+      |                                            ^~~~~~~~
+      |                                            |
+      |                                            char *
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1697:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1697 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+arm-none-eabi-gcc -o "Term_Proj.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\julia\Documents\GitHub\ME507\Term_Proj\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Term_Proj.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Term_Proj.elf
+ 
 arm-none-eabi-size  Term_Proj.elf 
+arm-none-eabi-objdump -h -S Term_Proj.elf  > "Term_Proj.list"
    text	   data	    bss	    dec	    hex	filename
-  35660	    264	   3080	  39004	   985c	Term_Proj.elf
+  35760	    264	   3232	  39256	   9958	Term_Proj.elf
 Finished building: default.size.stdout
  
+Finished building: Term_Proj.list
+ 
 
-15:33:04 Build Finished. 0 errors, 0 warnings. (took 646ms)
+16:29:02 Build Finished. 0 errors, 4 warnings. (took 3s.13ms)
 

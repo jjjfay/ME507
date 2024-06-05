@@ -462,8 +462,8 @@ int main(void)
 	 	  //HAL_UART_Transmit(&huart4,tst_buff,m,400);
 
 	 	  //test muscle sensor
-	 	 myo_val = read_current(&myo1);
-	 	 m = sprintf(tst_buff,"\n\rThe myo output is %d\n",myo_val);
+	 	 hmyo_curr = read_current(&hmyo);
+	 	 m = sprintf(tst_buff,"\n\rThe myo output is %d\n",hmyo_curr);
 	 	 HAL_UART_Transmit(&huart4,tst_buff,m,400);
 
 	 	  //HAL_Delay(1000);
