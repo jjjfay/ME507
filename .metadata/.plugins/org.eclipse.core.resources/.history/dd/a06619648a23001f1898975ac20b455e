@@ -237,7 +237,7 @@ void task1(void) {
 
 		//need to tune this pwm value (5 may be too small)
 
-		if(move(&hand_cont) < 5){
+		if(move(&hand_cont < 5)){
 
 			currentState = 1;
 		}
@@ -318,7 +318,7 @@ void task2(void) {
 		move(&spin_cont);
 
 		//need to tune this pwm value (5 may be too small)
-		if(move(&spin_cont) < 5){
+		if(move(&spin_cont < 5)){
 
 					currentState = 1;
 				}
@@ -462,9 +462,9 @@ int main(void)
 	 	  //HAL_UART_Transmit(&huart4,tst_buff,m,400);
 
 	 	  //test muscle sensor
-	 	 myo_val = read_current(&myo1);
-	 	 m = sprintf(tst_buff,"\n\rThe myo output is %d\n",myo_val);
-	 	 HAL_UART_Transmit(&huart4,tst_buff,m,400);
+	 	  //myo_val = read_current(&myo1);
+	 	  //m = sprintf(tst_buff,"\n\rThe myo output is %d\n",myo_val);
+	 	 //HAL_UART_Transmit(&huart4,tst_buff,m,400);
 
 	 	  //HAL_Delay(1000);
 
