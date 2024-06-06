@@ -21,7 +21,10 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "controller.h"
+#include "radio.h"
 #include "myo.h"
+#include "encoder_reader.h"
 #include <stdio.h>
 #include "stm32l4xx_hal.h"
 #include <stdint.h>
@@ -58,7 +61,76 @@ UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
 
-uint16_t myo_val = 0;
+//create motor objects
+
+motor_t hand_mot = {.pwm_val = 0,
+			.channel1 = TIM_CHANNEL_1,
+			.channel2 = TIM_CHANNEL_2,
+			.hal_tim = &htim2
+			};
+
+motor_t spin_mot = {.pwm_val    = 0,
+				.channel1 = TIM_CHANNEL_3,
+				.channel2 = TIM_CHANNEL_4,
+				.hal_tim = &htim2
+				};
+
+//create encoder objects
+
+encoder_t hand_enc = {.channel1 = TIM_CHANNEL_1,
+					  .channel2 = TIM_CHANNEL_2,
+					  .hal_tim = &htim1,
+					  .mot_pos = 0,
+					  .curr_count = 0,
+					  .prev_count = 0,
+					  .delta = 0};
+
+encoder_t spin_enc = {.channel1 = TIM_CHANNEL_1,
+					  .channel2 = TIM_CHANNEL_2,
+					  .hal_tim = &htim4,
+				      .mot_pos = 0,
+					  .curr_count = 0,
+					  .prev_count = 0,
+					  .delta = 0};
+
+//create controller objects
+
+controller_t hand_cont = {.p_mot = &hand_mot,
+						  .p_enc = &hand_enc,
+						  .gain = 1,
+						  .setpoint = 0};
+
+controller_t spin_cont = {.p_mot = &spin_mot,
+		  	  	  	  	  .p_enc = &spin_enc,
+						  .gain = 1,
+						  .setpoint = 0};
+
+//create myo electric sensor objects
+myo_t hmyo = {.hal_adc = &hadc1,
+	  	  	  .prev_value = 0,
+			  .current_value = 0};
+
+myo_t smyo = {.hal_adc = &hadc2,
+	  	  	  .prev_value = 0,
+			  .current_value = 0};
+
+//initialize variables
+
+uint16_t ch1_val;
+uint16_t ch2_val;
+uint16_t ch1_p;
+uint16_t ch2_p;
+uint16_t radio_pulse;
+uint16_t m2_d;
+int16_t hand_mot_pos = 0;
+int16_t spin_mot_pos = 0;
+uint16_t hmyo_curr = 0;
+uint16_t hmyo_prev = 0;
+uint16_t smyo_curr = 0;
+uint16_t smyo_prev = 0;
+uint16_t hmyo_delta = 0;
+uint16_t smyo_delta = 0;
+
 char tst_buff[150];
 int m;
 
@@ -81,6 +153,220 @@ static void MX_TIM4_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
+/**
+ * @brief Task 1, the hand task, is responsible for moving the prosthetic hand fingers based on the
+ * 		  set point determined by the myoelectric sensor.
+ */
+// Task 1 - HAND TASK
+void task1(void) {
+	static int currentState = 0;
+	static char print_buff[150];
+	static int n;
+
+	// State 0 - INIT
+	if (currentState == 0) {
+
+		n = sprintf(print_buff,"\n\rTask 1, State 0\n");
+		//change back to huart4
+		HAL_UART_Transmit(&huart2,print_buff,n,400);
+
+		//init the motor driver PWM channel and the
+		//the encoder channels
+		controller_init(&hand_cont);
+
+		//initialize the motor to be at rest
+		set_duty(&hand_mot,0);
+
+		currentState = 1;}
+
+	//State 1 - INTERPRET MYO
+	else if (currentState == 1) {
+
+		n = sprintf(print_buff,"\n\rTask 1, State 1\n");
+		//HAL_UART_Transmit(&huart4,print_buff,n,400);
+
+
+		hmyo_prev = hmyo_curr;
+		hmyo_curr = read_current(&hmyo);
+		hmyo_delta = hmyo_curr - hmyo_prev;
+
+		if(abs(hmyo_delta) > 50){
+
+			currentState = 2;
+		}
+
+	}
+
+	//State 2 - MOVE MYO
+	else if (currentState == 2) {
+
+		n = sprintf(print_buff,"\n\rTask 1, State 2\n");
+		//HAL_UART_Transmit(&huart4,print_buff,n,400);
+
+		hand_mot_pos += hmyo_delta; //probably need some sort of scaling factor here
+
+		//make sure the position value does not exceed the desired limits
+		if(hand_mot_pos > 300)//set max value for the motor position here
+		{
+			hand_mot_pos = 300;
+		}
+		else if (hand_mot_pos < 0)
+		{
+			hand_mot_pos = 0;
+		}
+
+		set_setpoint(&hand_cont, hand_mot_pos);
+
+		move(&hand_cont);
+
+		//need to tune this pwm value (5 may be too small)
+
+		if(move(&hand_cont) < 5){
+
+			currentState = 1;
+		}
+		}
+
+	else {
+		n = sprintf(print_buff,"\n\rTask 1, Invalid State. Reset to State 1\n");
+		//HAL_UART_Transmit(&huart4,print_buff,n,400);
+
+		currentState = 1;}
+}
+
+/**
+ * @brief Task 2, the spin motor task, is responsible for rotating the prosthetic hand based
+ * 		  on the set point determined by the myoelectric sensor alone.
+ */
+// Task 2 - SPIN MOTOR TASK
+void task2(void) {
+	static int currentState = 0;
+	static char print_buff[150];
+	static int n;
+
+	// State 0 - INIT
+	if (currentState == 0) {
+
+		n = sprintf(print_buff,"\n\rTask 2, State 0\n");
+		//change back to huart4
+		HAL_UART_Transmit(&huart2,print_buff,n,400);
+
+		//initiaize the motor driver PWM channel and the
+		//the encoder channels
+		controller_init(&spin_cont);
+
+		//initialize the motor to be at rest
+		set_duty(&spin_mot,0);
+
+		currentState = 1;}
+
+	//State 1 - INTERPRET MYO
+	else if (currentState == 1) {
+
+		n = sprintf(print_buff,"\n\rTask 2, State 1\n");
+		//HAL_UART_Transmit(&huart4,print_buff,n,400);
+
+		//get the muscle sensor delta
+
+		smyo_prev = smyo_curr;
+		smyo_curr = read_current(&smyo);
+		smyo_delta = smyo_curr - smyo_prev;
+
+		//tune this delta value
+			if(abs(smyo_delta) > 50){
+
+					currentState = 2;
+				}
+		}
+
+	//State 2 - MOVE
+	else if (currentState == 2) {
+
+		n = sprintf(print_buff,"\n\rTask 2, State 2\n");
+		//HAL_UART_Transmit(&huart4,print_buff,n,400);
+
+		spin_mot_pos += smyo_delta; //probably need some sort of scaling factor here
+
+		//make sure the position value does not exceed the desired limits
+		if(spin_mot_pos > 300)//set max value for the motor position here
+				{
+					spin_mot_pos = 300;
+				}
+	    else if (spin_mot_pos < 0)
+				{
+					spin_mot_pos = 0; //this should be the at rest position of the device
+				}
+
+		set_setpoint(&spin_cont, spin_mot_pos);
+
+		move(&spin_cont);
+
+		//need to tune this pwm value (5 may be too small)
+		if(move(&spin_cont) < 5){
+
+					currentState = 1;
+				}
+	}
+
+	else {
+		n = sprintf(print_buff,"\n\rTask 2, Invalid State. Reset to State 1\n");
+		//HAL_UART_Transmit(&huart4,print_buff,n,400);
+		currentState = 1;}
+}
+
+/**
+ * @brief Task 3, the wireless emergency stop task, is responsible for monitoring for a change in the
+ * 	      PWM signal from a radio transmitter. If a change is detected, this task will end the program.
+ */
+// Task 3 - WIRELESS E STOP TASK
+void task3(void) {
+	static int currentState = 0;
+	static char print_buff[150];
+	static int n;
+
+	// State 0 - INIT
+	if (currentState == 0) {
+
+		n = sprintf(print_buff,"\n\rTask 3, State 0\n");
+		HAL_UART_Transmit(&huart2,print_buff,n,400);
+
+		HAL_TIM_IC_Start_IT (&htim1, TIM_CHANNEL_3);
+		HAL_TIM_IC_Start_IT (&htim1, TIM_CHANNEL_4);
+
+
+		currentState = 1;}
+
+	//State 1 - WAIT FOR SIG
+	else if (currentState == 1) {
+
+		n = sprintf(print_buff,"\n\rTask 3, State 1\n");
+		//HAL_UART_Transmit(&huart4,print_buff,n,400);
+
+		if(check_delta(radio_pulse) == 1)
+			  {
+				currentState = 2;
+			  }
+}
+
+	//State 2 - STOP
+	else if (currentState == 2) {
+
+		n = sprintf(print_buff,"\n\rTask 3, State 2 EMERGENCY STOP\n");
+		//HAL_UART_Transmit(&huart4,print_buff,n,400);
+
+		//call deinit commands
+		controller_deinit(&hand_cont);
+		controller_deinit(&spin_cont);
+
+		}
+
+	else {
+		n = sprintf(print_buff,"\n\rTask 3, Invalid State. Reset to State 1\n");
+		//HAL_UART_Transmit(&huart4,print_buff,n,400);
+		currentState = 1;
+	}
+}
+
 /* USER CODE END 0 */
 
 /**
@@ -91,12 +377,6 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-
-	//create myo electric sensor objects
-	myo_t myo1 = {.hal_adc = &hadc1,
-		  	  	  .prev_value = 0,
-				  .current_value = 0};
-
 
   /* USER CODE END 1 */
 
@@ -136,12 +416,14 @@ int main(void)
   while (1)
   {
 
-	  //test muscle sensor
-	  	 	  myo_val = read_current(&myo1);
-	  	 	  m = sprintf(tst_buff,"\n\rThe myo output is %d\n",myo_val);
-	  	 	  HAL_UART_Transmit(&huart2,tst_buff,m,400);
+	  // Execute task 1
+	 	 	  task1();
 
-	  	 	  HAL_Delay(1000);
+	 	 	  // Execute task 2
+	 	 	  task2();
+
+	 	 	  // Execute task 3
+	 	 	  task3();
 
 
     /* USER CODE END WHILE */
@@ -466,6 +748,14 @@ static void MX_TIM2_Init(void)
   {
     Error_Handler();
   }
+  if (HAL_TIM_PWM_ConfigChannel(&htim2, &sConfigOC, TIM_CHANNEL_3) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_TIM_PWM_ConfigChannel(&htim2, &sConfigOC, TIM_CHANNEL_4) != HAL_OK)
+  {
+    Error_Handler();
+  }
   /* USER CODE BEGIN TIM2_Init 2 */
 
   /* USER CODE END TIM2_Init 2 */
@@ -564,7 +854,6 @@ static void MX_USART2_UART_Init(void)
   */
 static void MX_GPIO_Init(void)
 {
-  GPIO_InitTypeDef GPIO_InitStruct = {0};
 /* USER CODE BEGIN MX_GPIO_Init_1 */
 /* USER CODE END MX_GPIO_Init_1 */
 
@@ -573,41 +862,47 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
-  /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, STBY_Pin|AIN1_Pin, GPIO_PIN_RESET);
-
-  /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOC, AIN2_Pin|BIN1_Pin, GPIO_PIN_RESET);
-
-  /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(BIN2_GPIO_Port, BIN2_Pin, GPIO_PIN_RESET);
-
-  /*Configure GPIO pins : STBY_Pin AIN1_Pin */
-  GPIO_InitStruct.Pin = STBY_Pin|AIN1_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : AIN2_Pin BIN1_Pin */
-  GPIO_InitStruct.Pin = AIN2_Pin|BIN1_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : BIN2_Pin */
-  GPIO_InitStruct.Pin = BIN2_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(BIN2_GPIO_Port, &GPIO_InitStruct);
-
 /* USER CODE BEGIN MX_GPIO_Init_2 */
 /* USER CODE END MX_GPIO_Init_2 */
 }
 
 /* USER CODE BEGIN 4 */
+
+/**
+  * @brief  Input Capture callback in non-blocking mode
+  * @param  htim TIM IC handle
+  * @retval None
+  */
+void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
+{
+  /* Prevent unused argument(s) compilation warning */
+  UNUSED(htim);
+
+  /* NOTE : This function should not be modified, when the callback is needed,
+   *
+            the HAL_TIM_IC_CaptureCallback could be implemented in the user file
+   */
+  //if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_2) {
+          //store the previous value and read the captured value from the input capture register
+	  	  //ch1_p = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_1);
+	      //ch1_val = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_2);
+
+	      //calculate the width of the pwm pulse generated by the radio transmitter
+	     // radio_pulse = ch1_val - ch1_p;
+  //}
+  if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_4) {
+	      //store the previous value and read the captured value from the input capture register
+	  	  ch2_p = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_3);
+	      ch2_val = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_4);
+
+	      //calculate the width of the pwm pulse generated by the radio transmitter
+	     radio_pulse = ch2_val - ch2_p;
+  }
+
+}
+
+
+
 
 /* USER CODE END 4 */
 
