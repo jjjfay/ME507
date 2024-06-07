@@ -1,9 +1,9 @@
-17:39:54 **** Incremental Build of configuration Debug for project test_term_proj ****
+19:17:00 **** Incremental Build of configuration Debug for project Starting_Over ****
 make -j8 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
 ../Core/Src/main.c: In function 'task1':
-../Core/Src/main.c:171:43: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
-  171 |                 HAL_UART_Transmit(&huart2,print_buff,n,400);
+../Core/Src/main.c:128:43: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  128 |                 HAL_UART_Transmit(&huart2,print_buff,n,400);
       |                                           ^~~~~~~~~~
       |                                           |
       |                                           char *
@@ -14,98 +14,86 @@ In file included from ../Core/Inc/stm32l4xx_hal_conf.h:450,
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1697:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
  1697 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
       |                                                                ~~~~~~~~~~~~~~~^~~~~
-../Core/Src/main.c: In function 'task2':
-../Core/Src/main.c:252:43: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
-  252 |                 HAL_UART_Transmit(&huart2,print_buff,n,400);
+../Core/Src/main.c:143:43: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  143 |                 HAL_UART_Transmit(&huart2,print_buff,n,400);
       |                                           ^~~~~~~~~~
       |                                           |
       |                                           char *
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1697:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
  1697 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
       |                                                                ~~~~~~~~~~~~~~~^~~~~
-../Core/Src/main.c: In function 'task3':
-../Core/Src/main.c:331:43: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
-  331 |                 HAL_UART_Transmit(&huart2,print_buff,n,400);
+../Core/Src/main.c:151:43: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  151 |                 HAL_UART_Transmit(&huart2,print_buff,n,400);
       |                                           ^~~~~~~~~~
       |                                           |
       |                                           char *
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1697:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
  1697 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
       |                                                                ~~~~~~~~~~~~~~~^~~~~
-arm-none-eabi-gcc -o "test_term_proj.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\julia\Documents\GitHub\ME507\test_term_proj\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="test_term_proj.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: test_term_proj.elf
+../Core/Src/main.c:164:43: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  164 |                 HAL_UART_Transmit(&huart2,print_buff,n,400);
+      |                                           ^~~~~~~~~~
+      |                                           |
+      |                                           char *
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1697:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1697 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:183:43: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  183 |                 HAL_UART_Transmit(&huart2,print_buff,n,400);
+      |                                           ^~~~~~~~~~
+      |                                           |
+      |                                           char *
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1697:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1697 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:196:43: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  196 |                 HAL_UART_Transmit(&huart2,print_buff,n,400);
+      |                                           ^~~~~~~~~~
+      |                                           |
+      |                                           char *
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1697:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1697 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:262:37: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  262 |           HAL_UART_Transmit(&huart2,tst_buff,m,400);
+      |                                     ^~~~~~~~
+      |                                     |
+      |                                     char *
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1697:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1697 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:267:37: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  267 |           HAL_UART_Transmit(&huart2,tst_buff,m,400);
+      |                                     ^~~~~~~~
+      |                                     |
+      |                                     char *
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1697:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1697 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:272:37: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  272 |           HAL_UART_Transmit(&huart2,tst_buff,m,400);
+      |                                     ^~~~~~~~
+      |                                     |
+      |                                     char *
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1697:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1697 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+arm-none-eabi-gcc -o "Starting_Over.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\julia\Documents\GitHub\ME507\Starting_Over\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Starting_Over.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Starting_Over.elf
  
-arm-none-eabi-size  test_term_proj.elf 
-arm-none-eabi-objdump -h -S test_term_proj.elf  > "test_term_proj.list"
+arm-none-eabi-size  Starting_Over.elf 
+arm-none-eabi-objdump -h -S Starting_Over.elf  > "Starting_Over.list"
    text	   data	    bss	    dec	    hex	filename
-  35732	    224	   2976	  38932	   9814	test_term_proj.elf
+  30144	    148	   2460	  32752	   7ff0	Starting_Over.elf
 Finished building: default.size.stdout
  
-Finished building: test_term_proj.list
+Finished building: Starting_Over.list
  
-17:41:53 **** Incremental Build of configuration Debug for project test_term_proj ****
+19:17:45 **** Incremental Build of configuration Debug for project Starting_Over ****
 make -j8 all 
-arm-none-eabi-size  test_term_proj.elf 
+arm-none-eabi-size  Starting_Over.elf 
    text	   data	    bss	    dec	    hex	filename
-  35732	    224	   2976	  38932	   9814	test_term_proj.elf
-Finished building: default.size.stdout
- 
-17:45:40 **** Incremental Build of configuration Debug for project test_term_proj ****
-make -j8 all 
-arm-none-eabi-size  test_term_proj.elf 
-   text	   data	    bss	    dec	    hex	filename
-  35732	    224	   2976	  38932	   9814	test_term_proj.elf
-Finished building: default.size.stdout
- 
-17:50:38 **** Incremental Build of configuration Debug for project test_term_proj ****
-make -j8 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-../Core/Src/main.c: In function 'task1':
-../Core/Src/main.c:171:43: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
-  171 |                 HAL_UART_Transmit(&huart2,print_buff,n,400);
-      |                                           ^~~~~~~~~~
-      |                                           |
-      |                                           char *
-In file included from ../Core/Inc/stm32l4xx_hal_conf.h:450,
-                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:29,
-                 from ../Core/Inc/main.h:30,
-                 from ../Core/Src/main.c:20:
-../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1697:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
- 1697 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
-      |                                                                ~~~~~~~~~~~~~~~^~~~~
-../Core/Src/main.c: In function 'task2':
-../Core/Src/main.c:252:43: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
-  252 |                 HAL_UART_Transmit(&huart2,print_buff,n,400);
-      |                                           ^~~~~~~~~~
-      |                                           |
-      |                                           char *
-../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1697:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
- 1697 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
-      |                                                                ~~~~~~~~~~~~~~~^~~~~
-../Core/Src/main.c: In function 'task3':
-../Core/Src/main.c:331:43: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
-  331 |                 HAL_UART_Transmit(&huart2,print_buff,n,400);
-      |                                           ^~~~~~~~~~
-      |                                           |
-      |                                           char *
-../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1697:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
- 1697 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
-      |                                                                ~~~~~~~~~~~~~~~^~~~~
-arm-none-eabi-gcc -o "test_term_proj.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\julia\Documents\GitHub\ME507\test_term_proj\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="test_term_proj.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: test_term_proj.elf
- 
-arm-none-eabi-size  test_term_proj.elf 
-arm-none-eabi-objdump -h -S test_term_proj.elf  > "test_term_proj.list"
-   text	   data	    bss	    dec	    hex	filename
-  35732	    224	   2976	  38932	   9814	test_term_proj.elf
-Finished building: default.size.stdout
- 
-Finished building: test_term_proj.list
- 
-17:51:46 **** Incremental Build of configuration Debug for project test_term_proj ****
-make -j8 all 
-arm-none-eabi-size  test_term_proj.elf 
-   text	   data	    bss	    dec	    hex	filename
-  35732	    224	   2976	  38932	   9814	test_term_proj.elf
+  30144	    148	   2460	  32752	   7ff0	Starting_Over.elf
 Finished building: default.size.stdout
  

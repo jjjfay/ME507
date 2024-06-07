@@ -1,0 +1,5 @@
+../Core/Src/controller.c:30:6:controller_init	1
+../Core/Src/controller.c:46:6:controller_deinit	1
+../Core/Src/controller.c:60:9:move	3
+../Core/Src/controller.c:97:6:set_setpoint	1
+../Core/Src/controller.c:109:6:set_K	1

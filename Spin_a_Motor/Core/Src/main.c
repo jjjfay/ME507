@@ -61,12 +61,12 @@ int pos = 0;
 int wait_flag = 0;
 
 // Initialize motor objects
-motor_t mot1 = {.duty    = 0,
+motor_t mot1 = {.pwm_val    = 0,
 		.channel1 = TIM_CHANNEL_1,
 		.channel2 = TIM_CHANNEL_2,
 		.hal_tim = &htim2
 };
-motor_t mot2 = {.duty    = 0,
+motor_t mot2 = {.pwm_val    = 0,
 		.channel1 = TIM_CHANNEL_1,
 		.channel2 = TIM_CHANNEL_2,
 		.hal_tim = &htim3
@@ -182,10 +182,8 @@ void task2(void) {
 		printf("Task 2, State 0\n");
 
 		//start PWM generation for both motors
-		start_PWM(&mot1, 1);
-		start_PWM(&mot1, 2);
-		start_PWM(&mot2, 1);
-		start_PWM(&mot2, 2);
+		start_PWM(&mot1);
+		start_PWM(&mot2);
 		set_duty(&mot1,0);
 		set_duty(&mot2,0);
 		printf("Task 2, State 1\n");

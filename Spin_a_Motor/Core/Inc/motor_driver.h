@@ -26,7 +26,7 @@ Any other information needed inside the three functions mentioned above.*/
 struct {
 
 	//These are all the things you have to define when you create a motor object
-    int32_t  duty;
+    int32_t  pwm_val;
 
     //two channels for each motor
     uint32_t channel1;
@@ -53,9 +53,9 @@ A function to set the duty cycle of one of the motor driver channels*/
 
 // Prototype for motor object "method"
 
-void start_PWM(motor_t* p_mot, uint32_t channel);
+void start_PWM(motor_t* p_mot);
 
-void stop_PWM(motor_t* p_mot, uint32_t channel);
+void stop_PWM(motor_t* p_mot);
 
 void set_duty(motor_t* p_mot, int32_t duty);
 

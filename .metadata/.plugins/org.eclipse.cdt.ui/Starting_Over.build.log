@@ -1,0 +1,10 @@
+19:17:45 **** Incremental Build of configuration Debug for project Starting_Over ****
+make -j8 all 
+arm-none-eabi-size  Starting_Over.elf 
+   text	   data	    bss	    dec	    hex	filename
+  30144	    148	   2460	  32752	   7ff0	Starting_Over.elf
+Finished building: default.size.stdout
+ 
+
+19:17:46 Build Finished. 0 errors, 0 warnings. (took 739ms)
+
