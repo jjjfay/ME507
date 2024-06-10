@@ -35,6 +35,9 @@ void controller_init(controller_t* p_cont){
 	//initialize the encoder reader channels
 	init_channels(p_cont->p_enc);
 
+	//zero the encoder
+	zero(p_cont->p_enc);
+
 
 }
 
@@ -65,7 +68,7 @@ int32_t move(controller_t* p_cont){
 
 	int curr_pos = get_pos(p_cont->p_enc);
 
-	p_cont->p_mot->pwm_val = p_cont->gain*(p_cont->setpoint - curr_pos);
+	p_cont->p_mot->pwm_val = (p_cont->gain)*(p_cont->setpoint - curr_pos);
 
 	//saturation
 	if(p_cont->p_mot->pwm_val > 799999)

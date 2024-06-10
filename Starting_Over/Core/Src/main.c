@@ -80,7 +80,7 @@ UART_HandleTypeDef huart2;
 	//create controller object
 	controller_t hand_cont = {.p_mot = &hand_mot,
 							  .p_enc = &hand_enc,
-							  .gain = 1,
+							  .gain = 300,
 							  .setpoint = 0};
 
 	//create myo object
@@ -89,12 +89,15 @@ UART_HandleTypeDef huart2;
 				  .current_value = 0};
 
 
-uint16_t hand_pos = 0;
-uint16_t hmyo_curr = 0;
-uint16_t hmyo_prev = 0;
-int16_t hmyo_delta = 0;
-int16_t hand_mot_pos = 0;
-int16_t hand_pwm = 0;
+//uint16_t hand_pos = 0;
+//uint16_t hmyo_curr = 0;
+//uint16_t hmyo_prev = 0;
+//uint16_t hmyo_count = 0;
+//int16_t hmyo_delta = 0;
+//int16_t hand_mot_pos = 0;
+//int16_t hand_pwm = 0;
+
+	int16_t hmyo_av = 0;
 
 char tst_buff[150];
 int m;
@@ -116,79 +119,149 @@ static void MX_ADC1_Init(void);
 /* USER CODE BEGIN 0 */
 
 // Task 1 - HAND TASK
-void task1(void) {
+void task1(int average) {
 	static int currentState = 0;
 	static char print_buff[150];
 	static int n;
 
-	// State 0 - INIT
+	static int16_t hmyo_curr = 0;
+	static int16_t hmyo_prev = 0;
+	static int16_t hmyo_count = 0;
+	static int16_t hmyo_dir = 0;
+	static int16_t hmyo_delta = 0;
+	static int16_t hand_sp = 0;
+	static int16_t hand_pos = 0;
+	static int16_t hand_pwm = 0;
+
+	// State 0 - INIT_________________________________________________________________________________________
 	if (currentState == 0) {
 
 		n = sprintf(print_buff,"\n\rTask 1, State 0\n");
 		HAL_UART_Transmit(&huart2,print_buff,n,400);
 
+		hand_pos = 0;
+
 		//init the motor driver PWM channel and the
-		//the encoder channels
+		//the encoder channels. Zero the encoder value
 		controller_init(&hand_cont);
 
 		//initialize the motor to be at rest
-		set_duty(&hand_mot,700000);
+		set_duty(&hand_mot,0);
 
 		currentState = 1;}
 
-	//State 1 - INTERPRET MYO
+	//State 1 - INTERPRET MYO ________________________________________________________________________________
 	else if (currentState == 1) {
 
 		n = sprintf(print_buff,"\n\rTask 1, State 1\n");
 		HAL_UART_Transmit(&huart2,print_buff,n,400);
 
 
-		hmyo_prev = hmyo_curr;
-		hmyo_curr = read_current(&hmyo);
-		hmyo_delta = hmyo_curr - hmyo_prev;
+//		hmyo_curr = read_current(&hmyo);
+//		hmyo_delta = hmyo_curr - hmyo_prev;
 
-		n = sprintf(tst_buff,"\n\rThe myo delta is: %d\n",hmyo_delta);
+
+		//n = sprintf(tst_buff,"\n\r The myo delta is: %d\n",hmyo_delta);
+		//HAL_UART_Transmit(&huart2,print_buff,n,400);
+
+//		if(abs(hmyo_delta) < 100){
+//
+//			hmyo_count = hmyo_count + 1;
+//		}
+//
+//		if(hmyo_count >= 5 && hmyo_curr > 1000){
+//
+//			hmyo_dir = 1;
+//			currentState = 2;
+//			hmyo_count = 0;
+//		}
+//		else if(hmyo_count >= 5 && hmyo_curr < 950)
+//		{
+//			hmyo_dir = 0;
+//			currentState = 2;
+//			hmyo_count = 0;
+//		}
+//
+//		hmyo_prev = hmyo_curr;
+
+		hmyo_curr = read_current(&hmyo);
+
+		n = sprintf(tst_buff,"\n\r The myo value is: %d\n",hmyo_curr);
 		HAL_UART_Transmit(&huart2,print_buff,n,400);
 
-		if(abs(hmyo_delta) > 50){
+		if(hmyo_curr > average-200){
 
+			hmyo_dir = 1;
 			currentState = 2;
+
 		}
+		else if(hmyo_curr < average){
+
+			hmyo_dir = 0;
+			currentState = 2;
+
+		}
+
 
 	}
 
-	//State 2 - MOVE MYO
+	//State 2 - MOVE MYO__________________________________________________________________________________________
 	else if (currentState == 2) {
 
 		n = sprintf(print_buff,"\n\rTask 1, State 2\n");
 		HAL_UART_Transmit(&huart2,print_buff,n,400);
 
-		hand_mot_pos += hmyo_delta; //probably need some sort of scaling factor here
+		hand_pos = get_pos(&hand_enc);
 
-		//make sure the position value does not exceed the desired limits
-		if(hand_mot_pos > 1000)//set max value for the motor position here
-		{
-			hand_mot_pos = 1000;
-		}
-		else if (hand_mot_pos < 0)
-		{
-			hand_mot_pos = 0;
-		}
-
-		set_setpoint(&hand_cont, hand_mot_pos);
-
-		hand_pwm = move(&hand_cont);
-
-		n = sprintf(print_buff,"\n\rThe hand pwm value is: %d\n",hand_pwm);
+		n = sprintf(print_buff,"\n\rThe hand position is: %d\n",hand_pos);
 		HAL_UART_Transmit(&huart2,print_buff,n,400);
 
+		if(hmyo_dir == 1){
 
-		//need to tune this pwm value (5 may be too small)
+			hand_sp = 465;
+			n = sprintf(print_buff,"\n\rThe hand setpoint is: %d\n",hand_sp);
+			HAL_UART_Transmit(&huart2,print_buff,n,400);
 
-		if(hand_pwm < 5){
+			//n = sprintf(print_buff,"\n\rThe delta is: %d\n",abs(hand_pos-hand_sp));
+			//HAL_UART_Transmit(&huart2,print_buff,n,400);
 
-			currentState = 1;
+			if(abs(hand_pos-hand_sp)<100){
+
+				currentState = 1;
+				set_duty(&hand_mot,0);
+				hand_pos = 465;
+			}
+			else{
+				 set_setpoint(&hand_cont, hand_sp);
+				 hand_pwm = move(&hand_cont);
+
+				}
 		}
+		else{
+
+			hand_sp = 0;
+
+			if(abs(hand_pos-hand_sp)<100){
+				currentState = 1;
+				set_duty(&hand_mot,0);
+				hand_pos = 0;
+			}
+			else{
+				set_setpoint(&hand_cont, hand_sp);
+				hand_pwm = move(&hand_cont);
+			}
+		}
+
+//		n = sprintf(print_buff,"\n\rThe hand pwm value is: %d\n",hand_pwm);
+//		HAL_UART_Transmit(&huart2,print_buff,n,400);
+
+
+//		if(abs(get_pos(&hand_enc) - hand_mot_pos) < 5){
+//
+//			currentState = 1;
+//			set_duty(&hand_mot,0);
+//		}
+
 		}
 
 	else {
@@ -196,6 +269,7 @@ void task1(void) {
 		HAL_UART_Transmit(&huart2,print_buff,n,400);
 
 		currentState = 1;}
+	//_____________________________________________________________________________________________________________
 }
 
 /* USER CODE END 0 */
@@ -235,18 +309,21 @@ int main(void)
   MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
 
-  //initialize the controller
+int32_t t = 1000000;
+int32_t sum = 0;
 
-  controller_init(&hand_cont);
+for(int i = 0 ; i<t; i++){
 
-  //hand_mot_pos = 300;
+	sum = sum + read_current(&hmyo);
 
-  //set_setpoint(&hand_cont,hand_mot_pos);
+}
 
-  //set_K(&hand_cont,10000);
+	hmyo_av = sum/t;
 
-  set_duty(&hand_mot,799999);
-
+	  m = sprintf(tst_buff,"\n\rThe myo average is: %d\n",hmyo_av);
+	  HAL_UART_Transmit(&huart2,tst_buff,m,400);
+//
+//	  HAL_Delay(2000);
 
   /* USER CODE END 2 */
 
@@ -255,20 +332,13 @@ int main(void)
   while (1)
   {
 
-	  //m = sprintf(tst_buff,"\n\rThe encoder position value is: %d\n",get_pos(&hand_enc));
-	  //HAL_UART_Transmit(&huart2,tst_buff,m,400);
+	 task1(hmyo_av);
 
-	  m = sprintf(tst_buff,"\r");
+	 m = sprintf(tst_buff,"\n\rThe myo average is: %d\n",hmyo_av);
+	 HAL_UART_Transmit(&huart2,tst_buff,m,400);
+
+	  m = sprintf(tst_buff,"\n\rThe myo value is: %d\n",read_current(&hmyo));
 	  HAL_UART_Transmit(&huart2,tst_buff,m,400);
-
-	  m = sprintf(tst_buff,"\033[1G");
-	  HAL_UART_Transmit(&huart2,tst_buff,m,400);
-
-	  m = sprintf(tst_buff,"\rThe myo value is: %d",read_current(&hmyo));
-	  HAL_UART_Transmit(&huart2,tst_buff,m,400);
-
-	  HAL_Delay(1000);
-
 
 
     /* USER CODE END WHILE */

@@ -22,10 +22,10 @@ struct{
 
 	    TIM_HandleTypeDef* hal_tim; /**< The timer object both channels are from. */
 
-	    int16_t mot_pos; /**< The encoder count. */
-	    int16_t curr_count; /**< The encoder count. */
-	    int16_t prev_count; /**< The encoder count. */
-	    int16_t delta; /**< The encoder count. */
+	    int16_t mot_pos; /**< The motor position. */
+	    int16_t curr_count; /**< The current encoder count. */
+	    int16_t prev_count; /**< The previous encoder count. */
+	    int16_t delta; /**< The difference between the previous and current encoder count. */
 
 
 
@@ -61,6 +61,6 @@ void zero(encoder_t* p_enc);
  * @return count The encoder count to be returned.
  */
 
-uint16_t read_count(encoder_t *p_enc);
+uint16_t get_pos(encoder_t *p_enc);
 
 #endif /* INC_ENCODER_READER_H_ */

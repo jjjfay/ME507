@@ -59,10 +59,6 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define HMYO_Pin GPIO_PIN_0
-#define HMYO_GPIO_Port GPIOC
-#define SMYO_Pin GPIO_PIN_1
-#define SMYO_GPIO_Port GPIOC
 #define PWMA_Pin GPIO_PIN_2
 #define PWMA_GPIO_Port GPIOA
 #define PWMB_Pin GPIO_PIN_5
