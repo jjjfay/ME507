@@ -34,6 +34,9 @@ void controller_init(controller_t* p_cont){
 
 	//initialize the encoder reader channels
 	init_channels(p_cont->p_enc);
+	
+	//zero the encoder count 
+	zero(p_cont->p_enc);
 
 
 }

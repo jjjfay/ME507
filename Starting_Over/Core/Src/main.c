@@ -235,18 +235,18 @@ int main(void)
   MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
 
-  //START ENCODER PWM CHANNELS
+  //initialize the controller
 
-  init_channels(&hand_enc);
+  controller_init(&hand_cont);
 
-  //START MOTOR PWM CHANNELS
+  //hand_mot_pos = 300;
 
-  //HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
-  //HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_2);
+  //set_setpoint(&hand_cont,hand_mot_pos);
 
-  start_PWM(&hand_mot);
-  set_duty(&hand_mot,-700000);
-  //set_duty(&hand_mot,0);
+  //set_K(&hand_cont,10000);
+
+  set_duty(&hand_mot,799999);
+
 
   /* USER CODE END 2 */
 
@@ -254,51 +254,22 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  //task1();
 
-	  hmyo_prev = hmyo_curr;
+	  //m = sprintf(tst_buff,"\n\rThe encoder position value is: %d\n",get_pos(&hand_enc));
+	  //HAL_UART_Transmit(&huart2,tst_buff,m,400);
 
-	  m = sprintf(tst_buff,"\n\rThe previous encoder value is: %d\n",hmyo_curr);
+	  m = sprintf(tst_buff,"\r");
 	  HAL_UART_Transmit(&huart2,tst_buff,m,400);
 
-	  hmyo_curr = read_current(&hmyo);
-
-	  m = sprintf(tst_buff,"\n\rThe current encoder value is: %d\n",hmyo_prev);
+	  m = sprintf(tst_buff,"\033[1G");
 	  HAL_UART_Transmit(&huart2,tst_buff,m,400);
 
-	  hmyo_delta = hmyo_curr - hmyo_prev;
-
-	  m = sprintf(tst_buff,"\n\rThe encoder value is: %d\n",hmyo_delta);
+	  m = sprintf(tst_buff,"\rThe myo value is: %d",read_current(&hmyo));
 	  HAL_UART_Transmit(&huart2,tst_buff,m,400);
 
-	  //hand_mot_pos += hmyo_delta; //probably need some sort of scaling factor here
-
-	  		//make sure the position value does not exceed the desired limits
-	  		//if(hand_mot_pos > 300)//set max value for the motor position here
-	  		//{
-	  		//	hand_mot_pos = 300;
-	  		//}
-	  		//else if (hand_mot_pos < 0)
-	  		//{
-	  		//	hand_mot_pos = 0;
-	  		//}
-	  		//m = sprintf(tst_buff,"\n\rThe encoder value is: %d\n",hand_mot_pos);
-	  		//HAL_UART_Transmit(&huart2,tst_buff,m,400);
-
-	  		//set_setpoint(&hand_cont, hand_mot_pos);
-
-	  		//move(&hand_cont);
-
-	 //hand_pos = get_pos(&hand_enc);
-	 //m = sprintf(tst_buff,"\n\rThe encoder value is: %d\n",hand_pos);
-	 //HAL_UART_Transmit(&huart2,tst_buff,m,400);
-
-	 // = read_current(&hmyo);
-	 //m = sprintf(tst_buff,"\n\rThe myo value is: %d\n",hmyo_curr);
-	 //HAL_UART_Transmit(&huart2,tst_buff,m,400);
+	  HAL_Delay(1000);
 
 
-	  		HAL_Delay(1000);
 
     /* USER CODE END WHILE */
 

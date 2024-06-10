@@ -1,0 +1,10 @@
+19:37:35 **** Incremental Build of configuration Debug for project Purple_Project ****
+make -j8 all 
+arm-none-eabi-size  Purple_Project.elf 
+   text	   data	    bss	    dec	    hex	filename
+  23296	     12	   2212	  25520	   63b0	Purple_Project.elf
+Finished building: default.size.stdout
+ 
+
+19:37:36 Build Finished. 0 errors, 0 warnings. (took 761ms)
+

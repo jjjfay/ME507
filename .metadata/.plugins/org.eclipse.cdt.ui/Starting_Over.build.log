@@ -1,95 +1,10 @@
-20:17:35 **** Incremental Build of configuration Debug for project Starting_Over ****
+18:56:46 **** Incremental Build of configuration Debug for project Starting_Over ****
 make -j8 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-../Core/Src/main.c: In function 'task1':
-../Core/Src/main.c:128:43: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
-  128 |                 HAL_UART_Transmit(&huart2,print_buff,n,400);
-      |                                           ^~~~~~~~~~
-      |                                           |
-      |                                           char *
-In file included from ../Core/Inc/stm32l4xx_hal_conf.h:450,
-                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:29,
-                 from ../Core/Inc/main.h:30,
-                 from ../Core/Src/main.c:20:
-../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1697:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
- 1697 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
-      |                                                                ~~~~~~~~~~~~~~~^~~~~
-../Core/Src/main.c:143:43: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
-  143 |                 HAL_UART_Transmit(&huart2,print_buff,n,400);
-      |                                           ^~~~~~~~~~
-      |                                           |
-      |                                           char *
-../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1697:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
- 1697 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
-      |                                                                ~~~~~~~~~~~~~~~^~~~~
-../Core/Src/main.c:151:43: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
-  151 |                 HAL_UART_Transmit(&huart2,print_buff,n,400);
-      |                                           ^~~~~~~~~~
-      |                                           |
-      |                                           char *
-../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1697:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
- 1697 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
-      |                                                                ~~~~~~~~~~~~~~~^~~~~
-../Core/Src/main.c:164:43: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
-  164 |                 HAL_UART_Transmit(&huart2,print_buff,n,400);
-      |                                           ^~~~~~~~~~
-      |                                           |
-      |                                           char *
-../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1697:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
- 1697 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
-      |                                                                ~~~~~~~~~~~~~~~^~~~~
-../Core/Src/main.c:183:43: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
-  183 |                 HAL_UART_Transmit(&huart2,print_buff,n,400);
-      |                                           ^~~~~~~~~~
-      |                                           |
-      |                                           char *
-../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1697:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
- 1697 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
-      |                                                                ~~~~~~~~~~~~~~~^~~~~
-../Core/Src/main.c:196:43: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
-  196 |                 HAL_UART_Transmit(&huart2,print_buff,n,400);
-      |                                           ^~~~~~~~~~
-      |                                           |
-      |                                           char *
-../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1697:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
- 1697 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
-      |                                                                ~~~~~~~~~~~~~~~^~~~~
-../Core/Src/main.c: In function 'main':
-../Core/Src/main.c:262:37: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
-  262 |           HAL_UART_Transmit(&huart2,tst_buff,m,400);
-      |                                     ^~~~~~~~
-      |                                     |
-      |                                     char *
-../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1697:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
- 1697 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
-      |                                                                ~~~~~~~~~~~~~~~^~~~~
-../Core/Src/main.c:267:37: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
-  267 |           HAL_UART_Transmit(&huart2,tst_buff,m,400);
-      |                                     ^~~~~~~~
-      |                                     |
-      |                                     char *
-../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1697:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
- 1697 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
-      |                                                                ~~~~~~~~~~~~~~~^~~~~
-../Core/Src/main.c:272:37: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
-  272 |           HAL_UART_Transmit(&huart2,tst_buff,m,400);
-      |                                     ^~~~~~~~
-      |                                     |
-      |                                     char *
-../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1697:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
- 1697 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
-      |                                                                ~~~~~~~~~~~~~~~^~~~~
-arm-none-eabi-gcc -o "Starting_Over.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\julia\Documents\GitHub\ME507\Starting_Over\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Starting_Over.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: Starting_Over.elf
- 
 arm-none-eabi-size  Starting_Over.elf 
-arm-none-eabi-objdump -h -S Starting_Over.elf  > "Starting_Over.list"
    text	   data	    bss	    dec	    hex	filename
-  30136	    148	   2460	  32744	   7fe8	Starting_Over.elf
+  30036	    164	   2452	  32652	   7f8c	Starting_Over.elf
 Finished building: default.size.stdout
  
-Finished building: Starting_Over.list
- 
 
-20:17:38 Build Finished. 0 errors, 9 warnings. (took 2s.671ms)
+18:56:47 Build Finished. 0 errors, 0 warnings. (took 794ms)
 

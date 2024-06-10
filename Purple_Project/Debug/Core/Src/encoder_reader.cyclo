@@ -1,0 +1,4 @@
+../Core/Src/encoder_reader.c:15:6:init_channels	1
+../Core/Src/encoder_reader.c:26:6:deinit_channels	1
+../Core/Src/encoder_reader.c:38:6:zero	1
+../Core/Src/encoder_reader.c:52:10:get_pos	2
