@@ -26,6 +26,7 @@
 #include "controller.h"
 #include "myo.h"
 #include "calibrate.h"
+#include "radio.h"
 #include <stdio.h>
 #include "stm32l4xx_hal.h"
 #include <stdint.h>
@@ -55,6 +56,8 @@ ADC_HandleTypeDef hadc1;
 
 TIM_HandleTypeDef htim1;
 TIM_HandleTypeDef htim2;
+TIM_HandleTypeDef htim3;
+TIM_HandleTypeDef htim4;
 
 UART_HandleTypeDef huart2;
 
@@ -64,7 +67,7 @@ UART_HandleTypeDef huart2;
 
 	encoder_t spin_enc = {.channel1 = TIM_CHANNEL_1,
 						  .channel2 = TIM_CHANNEL_2,
-						  .hal_tim = &htim1,
+						  .hal_tim = &htim3,
 						  .mot_pos = 0,
 						  .curr_count = 0,
 						  .prev_count = 0,
@@ -98,6 +101,11 @@ UART_HandleTypeDef huart2;
 //initialize variables
 uint32_t smyo_av = 0;
 uint32_t smyo_med = 0;
+uint16_t ch1_val;
+uint16_t ch2_val;
+uint16_t ch1_p;
+uint16_t ch2_p;
+uint16_t radio_pulse = 1500;
 
 char tst_buff[150];
 int m;
@@ -111,6 +119,8 @@ static void MX_TIM1_Init(void);
 static void MX_TIM2_Init(void);
 static void MX_USART2_UART_Init(void);
 static void MX_ADC1_Init(void);
+static void MX_TIM3_Init(void);
+static void MX_TIM4_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -125,16 +135,11 @@ void task1(void) {
 	static int n;
 
 	static int16_t smyo_curr = 0;
-	static int16_t smyo_prev = 0;
-	static int16_t smyo_count = 0;
 	static int16_t smyo_dir = 0;
-	static int16_t smyo_delta = 0;
 	static int16_t spin_sp = 0;
 	static int16_t spin_pos = 0;
-	static double mot_pos = 0.0;
 	static int16_t spin_pwm = 0;
-
-	int average = 2050;
+	static uint32_t smyo_av = 0;
 
 	// State 0 - INIT_________________________________________________________________________________________
 	if (currentState == 0) {
@@ -149,6 +154,10 @@ void task1(void) {
 		//initialize the motor to be at rest
 		set_duty(&spin_mot,0);
 
+		//calibrate the myo sensor by finding average value to use later as
+		//threshold
+		smyo_av = find_average(&scali);
+
 		currentState = 1;}
 
 	//State 1 - INTERPRET MYO ________________________________________________________________________________
@@ -156,8 +165,6 @@ void task1(void) {
 
 		n = sprintf(print_buff,"\n\rTask 1, State 1\n");
 		HAL_UART_Transmit(&huart2,print_buff,n,400);
-
-		//the myo gain values range from about 500 to 4095
 
 		smyo_curr = read_current(&smyo);
 
@@ -175,20 +182,6 @@ void task1(void) {
 
 		}
 
-//		if(smyo_curr != smyo_prev){
-//
-//					mot_pos = smyo_curr*0.13 - 64.5;
-//
-//					spin_sp = (int32_t)mot_pos;
-//
-//					n = sprintf(print_buff,"\n\rThe spin setpoint is: %d",spin_sp);
-//					HAL_UART_Transmit(&huart2,print_buff,n,400);
-//
-//					currentState = 2;
-//		}
-//
-//		smyo_prev = smyo_curr;
-
 	}
 
 	//State 2 - MOVE MYO__________________________________________________________________________________________
@@ -201,15 +194,6 @@ void task1(void) {
 
 		n = sprintf(print_buff,"\n\rThe motor position is: %d\n", spin_pos);
 		HAL_UART_Transmit(&huart2,print_buff,n,400);
-
-//		if(abs(spin_pos-spin_sp)<50){
-//						currentState = 1;
-//						set_duty(&spin_mot,0);
-//					}
-//		else{
-//				set_setpoint(&spin_cont, spin_sp);
-//				spin_pwm = move(&spin_cont);
-//			}
 
 
 		if(smyo_dir == 1){
@@ -245,12 +229,69 @@ void task1(void) {
 	}
 
 	else {
-		//n = sprintf(print_buff,"\n\rTask 1, Invalid State. Reset to State 1\n");
-		//HAL_UART_Transmit(&huart2,print_buff,n,400);
+
+		n = sprintf(print_buff,"\n\rTask 1, Invalid State. Reset to State 1\n");
+		HAL_UART_Transmit(&huart2,print_buff,n,400);
 
 		currentState = 1;}
 	//_____________________________________________________________________________________________________________
 }
+
+
+// Task 3 - WIRELESS E STOP TASK___________________________________________________________________________________
+void task3(void) {
+	static int currentState = 0;
+	static char print_buff[150];
+	static int n;
+
+	// State 0 - INIT__________________________________________________________________
+	if (currentState == 0) {
+
+		n = sprintf(print_buff,"\n\rTask 3, State 0\n");
+		HAL_UART_Transmit(&huart2,print_buff,n,400);
+
+		HAL_TIM_IC_Start_IT (&htim1, TIM_CHANNEL_1);
+		HAL_TIM_IC_Start_IT (&htim1, TIM_CHANNEL_2);
+
+
+		currentState = 1;}
+
+	//State 1 - WAIT FOR SIG_________________________________________________________
+	else if (currentState == 1) {
+
+		n = sprintf(print_buff,"\n\rTask 3, State 1\n");
+		HAL_UART_Transmit(&huart2,print_buff,n,400);
+
+		n = sprintf(print_buff,"\n\rThe radio pulse is: %d\n",radio_pulse);
+		HAL_UART_Transmit(&huart2,print_buff,n,400);
+
+		if(check_delta(radio_pulse) == 1)
+			  {
+				currentState = 2;
+			  }
+}
+
+	//State 2 - STOP_________________________________________________________________
+	else if (currentState == 2) {
+
+		n = sprintf(print_buff,"\n\rTask 3, State 2 EMERGENCY STOP\n");
+		HAL_UART_Transmit(&huart2,print_buff,n,400);
+
+		//call deinit commands
+		//controller_deinit(&hand_cont);
+		set_duty(&spin_mot,0);
+		controller_deinit(&spin_cont);
+
+
+		}
+
+	else {
+		n = sprintf(print_buff,"\n\rTask 3, Invalid State. Reset to State 1\n");
+		//HAL_UART_Transmit(&huart4,print_buff,n,400);
+		currentState = 1;
+	}
+}
+
 
 /* USER CODE END 0 */
 
@@ -287,11 +328,14 @@ int main(void)
   MX_TIM2_Init();
   MX_USART2_UART_Init();
   MX_ADC1_Init();
+  MX_TIM3_Init();
+  MX_TIM4_Init();
   /* USER CODE BEGIN 2 */
 
-  //hmyo_av = find_average(&hcali);
+  start_PWM(&spin_mot);
 
-  //hmyo_med = find_median(&hcali);
+  set_duty(&spin_mot,799999);
+
 
   /* USER CODE END 2 */
 
@@ -300,19 +344,8 @@ int main(void)
   while (1)
   {
 
-	 task1();
-
-	 //m = sprintf(tst_buff,"\n\rThe myo average is: %d\n",hmyo_av);
-	 //HAL_UART_Transmit(&huart2,tst_buff,m,400);
-
-	 //m = sprintf(tst_buff,"\n\rThe myo median is: %d\n",hmyo_med);
-	 //HAL_UART_Transmit(&huart2,tst_buff,m,400);
-
-	 //m = sprintf(tst_buff,"\n\rThe myo value is: %d\n",read_current(&hmyo));
-	 //HAL_UART_Transmit(&huart2,tst_buff,m,400);
-
-	 //HAL_Delay(500);
-
+	 //task1();
+	  task3();
 
     /* USER CODE END WHILE */
 
@@ -449,29 +482,20 @@ static void MX_TIM1_Init(void)
 
   /* USER CODE END TIM1_Init 0 */
 
-  TIM_Encoder_InitTypeDef sConfig = {0};
   TIM_MasterConfigTypeDef sMasterConfig = {0};
+  TIM_IC_InitTypeDef sConfigIC = {0};
 
   /* USER CODE BEGIN TIM1_Init 1 */
 
   /* USER CODE END TIM1_Init 1 */
   htim1.Instance = TIM1;
-  htim1.Init.Prescaler = 0;
+  htim1.Init.Prescaler = 79;
   htim1.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim1.Init.Period = 65535;
   htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim1.Init.RepetitionCounter = 0;
   htim1.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
-  sConfig.EncoderMode = TIM_ENCODERMODE_TI12;
-  sConfig.IC1Polarity = TIM_ICPOLARITY_RISING;
-  sConfig.IC1Selection = TIM_ICSELECTION_DIRECTTI;
-  sConfig.IC1Prescaler = TIM_ICPSC_DIV1;
-  sConfig.IC1Filter = 0;
-  sConfig.IC2Polarity = TIM_ICPOLARITY_RISING;
-  sConfig.IC2Selection = TIM_ICSELECTION_DIRECTTI;
-  sConfig.IC2Prescaler = TIM_ICPSC_DIV1;
-  sConfig.IC2Filter = 0;
-  if (HAL_TIM_Encoder_Init(&htim1, &sConfig) != HAL_OK)
+  if (HAL_TIM_IC_Init(&htim1) != HAL_OK)
   {
     Error_Handler();
   }
@@ -479,6 +503,20 @@ static void MX_TIM1_Init(void)
   sMasterConfig.MasterOutputTrigger2 = TIM_TRGO2_RESET;
   sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
   if (HAL_TIMEx_MasterConfigSynchronization(&htim1, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sConfigIC.ICPolarity = TIM_INPUTCHANNELPOLARITY_RISING;
+  sConfigIC.ICSelection = TIM_ICSELECTION_DIRECTTI;
+  sConfigIC.ICPrescaler = TIM_ICPSC_DIV1;
+  sConfigIC.ICFilter = 0;
+  if (HAL_TIM_IC_ConfigChannel(&htim1, &sConfigIC, TIM_CHANNEL_1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sConfigIC.ICPolarity = TIM_INPUTCHANNELPOLARITY_FALLING;
+  sConfigIC.ICSelection = TIM_ICSELECTION_INDIRECTTI;
+  if (HAL_TIM_IC_ConfigChannel(&htim1, &sConfigIC, TIM_CHANNEL_2) != HAL_OK)
   {
     Error_Handler();
   }
@@ -550,6 +588,104 @@ static void MX_TIM2_Init(void)
 }
 
 /**
+  * @brief TIM3 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM3_Init(void)
+{
+
+  /* USER CODE BEGIN TIM3_Init 0 */
+
+  /* USER CODE END TIM3_Init 0 */
+
+  TIM_Encoder_InitTypeDef sConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+
+  /* USER CODE BEGIN TIM3_Init 1 */
+
+  /* USER CODE END TIM3_Init 1 */
+  htim3.Instance = TIM3;
+  htim3.Init.Prescaler = 0;
+  htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim3.Init.Period = 65535;
+  htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  sConfig.EncoderMode = TIM_ENCODERMODE_TI12;
+  sConfig.IC1Polarity = TIM_ICPOLARITY_RISING;
+  sConfig.IC1Selection = TIM_ICSELECTION_DIRECTTI;
+  sConfig.IC1Prescaler = TIM_ICPSC_DIV1;
+  sConfig.IC1Filter = 0;
+  sConfig.IC2Polarity = TIM_ICPOLARITY_RISING;
+  sConfig.IC2Selection = TIM_ICSELECTION_DIRECTTI;
+  sConfig.IC2Prescaler = TIM_ICPSC_DIV1;
+  sConfig.IC2Filter = 0;
+  if (HAL_TIM_Encoder_Init(&htim3, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim3, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM3_Init 2 */
+
+  /* USER CODE END TIM3_Init 2 */
+
+}
+
+/**
+  * @brief TIM4 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM4_Init(void)
+{
+
+  /* USER CODE BEGIN TIM4_Init 0 */
+
+  /* USER CODE END TIM4_Init 0 */
+
+  TIM_Encoder_InitTypeDef sConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+
+  /* USER CODE BEGIN TIM4_Init 1 */
+
+  /* USER CODE END TIM4_Init 1 */
+  htim4.Instance = TIM4;
+  htim4.Init.Prescaler = 0;
+  htim4.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim4.Init.Period = 65535;
+  htim4.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim4.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  sConfig.EncoderMode = TIM_ENCODERMODE_TI12;
+  sConfig.IC1Polarity = TIM_ICPOLARITY_RISING;
+  sConfig.IC1Selection = TIM_ICSELECTION_DIRECTTI;
+  sConfig.IC1Prescaler = TIM_ICPSC_DIV1;
+  sConfig.IC1Filter = 0;
+  sConfig.IC2Polarity = TIM_ICPOLARITY_RISING;
+  sConfig.IC2Selection = TIM_ICSELECTION_DIRECTTI;
+  sConfig.IC2Prescaler = TIM_ICPSC_DIV1;
+  sConfig.IC2Filter = 0;
+  if (HAL_TIM_Encoder_Init(&htim4, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim4, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM4_Init 2 */
+
+  /* USER CODE END TIM4_Init 2 */
+
+}
+
+/**
   * @brief USART2 Initialization Function
   * @param None
   * @retval None
@@ -605,6 +741,32 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+/**
+  * @brief  Input Capture callback in non-blocking mode
+  * @param  htim TIM IC handle
+  * @retval None
+  */
+void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
+{
+  /* Prevent unused argument(s) compilation warning */
+  UNUSED(htim);
+
+  /* NOTE : This function should not be modified, when the callback is needed,
+   *
+            the HAL_TIM_IC_CaptureCallback could be implemented in the user file
+   */
+  if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_2) {
+          //store the previous value and read the captured value from the input capture register
+	  	  ch1_p = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_1);
+	      ch1_val = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_2);
+
+
+	      //calculate the width of the pwm pulse generated by the radio transmitter
+	      radio_pulse = ch1_val - ch1_p;
+  }
+
+}
 
 /* USER CODE END 4 */
 

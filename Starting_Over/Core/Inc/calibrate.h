@@ -37,23 +37,5 @@ struct{
 uint32_t find_average(calibrate_t*p_cali);
 
 
-/**
- * @brief A function to be used by qsort in the find_median function to sort the
- * numbers from smallest to largest.
- *
- * @param a The first number for the comparison.
- *
- * @param b The second number for the comparison.
- */
-uint32_t compare(const void *a, const void *b);
-
-/**
- * @brief A function to find the median myoelectric sensor value from an array of myo values.
- *
- * @param p_cali The calibration object to perform the function on.
- */
-uint32_t find_median(calibrate_t*p_cali);
-
-
 
 #endif /* SRC_CALIBRATE_H_ */

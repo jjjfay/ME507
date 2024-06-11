@@ -61,14 +61,24 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define HMYO_Pin GPIO_PIN_0
 #define HMYO_GPIO_Port GPIOC
-#define HAND_PWMA_Pin GPIO_PIN_0
-#define HAND_PWMA_GPIO_Port GPIOA
-#define HAND_PWMB_Pin GPIO_PIN_1
-#define HAND_PWMB_GPIO_Port GPIOA
-#define HAND_ENCB_Pin GPIO_PIN_8
-#define HAND_ENCB_GPIO_Port GPIOA
-#define HAND_ENCA_Pin GPIO_PIN_9
-#define HAND_ENCA_GPIO_Port GPIOA
+#define SPIN_PWMA_Pin GPIO_PIN_0
+#define SPIN_PWMA_GPIO_Port GPIOA
+#define SPIN_PWMB_Pin GPIO_PIN_1
+#define SPIN_PWMB_GPIO_Port GPIOA
+#define SPIN_ENCA_Pin GPIO_PIN_6
+#define SPIN_ENCA_GPIO_Port GPIOA
+#define SPIN_ENCB_Pin GPIO_PIN_7
+#define SPIN_ENCB_GPIO_Port GPIOA
+#define HAND_PWMA_Pin GPIO_PIN_10
+#define HAND_PWMA_GPIO_Port GPIOB
+#define HAND_PWMB_Pin GPIO_PIN_11
+#define HAND_PWMB_GPIO_Port GPIOB
+#define RADIO_Pin GPIO_PIN_8
+#define RADIO_GPIO_Port GPIOA
+#define HAND_ENCA_Pin GPIO_PIN_6
+#define HAND_ENCA_GPIO_Port GPIOB
+#define HAND_ENCB_Pin GPIO_PIN_7
+#define HAND_ENCB_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 
