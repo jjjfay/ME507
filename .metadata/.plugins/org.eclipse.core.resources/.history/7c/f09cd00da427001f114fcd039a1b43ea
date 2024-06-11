@@ -1,0 +1,65 @@
+/*
+ * cailbrate.c
+ *
+ *  Created on: Jun 10, 2024
+ *      Author: julia
+ */
+
+#include "calibrate.h"
+
+uint32_t find_average(calibrate_t*p_cali){
+
+	//initialize the sum to be zero
+	uint32_t sum = 0;
+	uint32_t n = p_cali->length;
+
+	//collect the data
+	for(int i = 0 ; i<n; i++){
+
+		int curr = read_current(p_cali->p_myo);
+		sum = sum + curr;
+
+	}
+
+	//return the average
+	return (sum/n);
+}
+
+
+// Function to compare two integers (for qsort)
+uint32_t compare(const void *a, const void *b) {
+    return (*(uint32_t *)a - *(uint32_t *)b);
+}
+
+
+uint32_t find_median(calibrate_t*p_cali){
+
+		//initialize the array for data collection
+
+	    uint32_t n = p_cali->length;
+
+		uint32_t myo_arr[n] = {0};
+
+		//collect the data
+		for(int i = 0 ; i < n; i++){
+
+			int curr = read_current(p_cali->p_myo);
+
+			myo_arr[i] = curr;}
+
+		// Sort the array
+
+		qsort(myo_arr, n, sizeof(uint32_t), compare);
+
+		    // Calculate median
+		    if (n % 2 == 0) {
+
+		    	// If even, return the average of the middle two values
+		        return (arr[n/2 - 1] + arr[n/2]) / 2.0;
+
+		    } else {
+		        // If odd, return the middle value
+		        return arr[n/2];
+		    }
+
+}

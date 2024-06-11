@@ -1,3 +1,4 @@
+"./Core/Src/cailbrate.o"
 "./Core/Src/controller.o"
 "./Core/Src/encoder_reader.o"
 "./Core/Src/main.o"
