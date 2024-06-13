@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;Starting_Over/Core/Src/cailbrate.c&apos; to &apos;calibrate.c&apos;" description="Rename resource &apos;cailbrate.c&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Core/Src/cailbrate.c" name="calibrate.c" stamp="1718312964304" updateReferences="true"/>
+</session>

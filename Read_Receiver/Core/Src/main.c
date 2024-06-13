@@ -3,9 +3,10 @@
   ******************************************************************************
   * @file           : main.c
   * @brief          : Main program body for the ME 507 term project. The main contents of this file is the finite state machine that
-  * 				  controls the prosthetic hand operation. This includes the tasks to open and close the hand, spin the hand, and
-  * 				  gather an interpret data from the myoelectric and pressure sensors. Lastly, there is a task to check for an
-  * 				  emergency stop signal from a radio transmitter device.
+  * 				  controls the prosthetic hand operation. This includes the tasks to open and close the hand and spin the hand
+  * 				  from left to right. Lastly, there is a task to check for an emergency stop signal from a radio transmitter device.
+  *
+  * @authors		: Julia Fay & Jack Foxcroft
   *
   ******************************************************************************
   * @attention

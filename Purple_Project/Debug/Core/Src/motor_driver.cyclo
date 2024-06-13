@@ -1,4 +1,0 @@
-../Core/Src/motor_driver.c:14:6:start_PWM	1
-../Core/Src/motor_driver.c:28:6:stop_PWM	1
-../Core/Src/motor_driver.c:42:6:set_duty	13
-../Core/Src/motor_driver.c:104:6:set_stby	2

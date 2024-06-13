@@ -1,4 +1,0 @@
-../Core/Src/encoder_reader.c:15:6:init_channels	16	static
-../Core/Src/encoder_reader.c:27:6:deinit_channels	16	static
-../Core/Src/encoder_reader.c:38:6:zero	16	static
-../Core/Src/encoder_reader.c:52:10:get_pos	16	static
