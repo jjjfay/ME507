@@ -1,0 +1,57 @@
+\doxysection{controller\+\_\+t Struct Reference}
+\hypertarget{structcontroller__t}{}\label{structcontroller__t}\index{controller\_t@{controller\_t}}
+
+
+Represents a controller object that controls a motor based on the encoder reading.  
+
+
+
+
+{\ttfamily \#include $<$controller.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structmotor__t}{motor\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structcontroller__t_a41eeb59b62f224a5b1f687a65897e0c3}{p\+\_\+mot}}
+\item 
+\mbox{\hyperlink{structencoder__t}{encoder\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structcontroller__t_a2108f385ba7b132cd09e79d74df77a66}{p\+\_\+enc}}
+\item 
+int32\+\_\+t \mbox{\hyperlink{structcontroller__t_a5fcc2da40851e85080d0048ab51f1e88}{gain}}
+\item 
+int32\+\_\+t \mbox{\hyperlink{structcontroller__t_afad9b2a7de51d07966f868d056ea2fab}{setpoint}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a controller object that controls a motor based on the encoder reading. 
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structcontroller__t_a5fcc2da40851e85080d0048ab51f1e88}\label{structcontroller__t_a5fcc2da40851e85080d0048ab51f1e88} 
+\index{controller\_t@{controller\_t}!gain@{gain}}
+\index{gain@{gain}!controller\_t@{controller\_t}}
+\doxysubsubsection{\texorpdfstring{gain}{gain}}
+{\footnotesize\ttfamily int32\+\_\+t controller\+\_\+t\+::gain}
+
+The desired control loop gain. \Hypertarget{structcontroller__t_a2108f385ba7b132cd09e79d74df77a66}\label{structcontroller__t_a2108f385ba7b132cd09e79d74df77a66} 
+\index{controller\_t@{controller\_t}!p\_enc@{p\_enc}}
+\index{p\_enc@{p\_enc}!controller\_t@{controller\_t}}
+\doxysubsubsection{\texorpdfstring{p\_enc}{p\_enc}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structencoder__t}{encoder\+\_\+t}}\texorpdfstring{$\ast$}{*} controller\+\_\+t\+::p\+\_\+enc}
+
+The encoder to be read from. \Hypertarget{structcontroller__t_a41eeb59b62f224a5b1f687a65897e0c3}\label{structcontroller__t_a41eeb59b62f224a5b1f687a65897e0c3} 
+\index{controller\_t@{controller\_t}!p\_mot@{p\_mot}}
+\index{p\_mot@{p\_mot}!controller\_t@{controller\_t}}
+\doxysubsubsection{\texorpdfstring{p\_mot}{p\_mot}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structmotor__t}{motor\+\_\+t}}\texorpdfstring{$\ast$}{*} controller\+\_\+t\+::p\+\_\+mot}
+
+The motor object to be controlled. \Hypertarget{structcontroller__t_afad9b2a7de51d07966f868d056ea2fab}\label{structcontroller__t_afad9b2a7de51d07966f868d056ea2fab} 
+\index{controller\_t@{controller\_t}!setpoint@{setpoint}}
+\index{setpoint@{setpoint}!controller\_t@{controller\_t}}
+\doxysubsubsection{\texorpdfstring{setpoint}{setpoint}}
+{\footnotesize\ttfamily int32\+\_\+t controller\+\_\+t\+::setpoint}
+
+The desired set point for the motor. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Core/\+Inc/\mbox{\hyperlink{controller_8h}{controller.\+h}}\end{DoxyCompactItemize}

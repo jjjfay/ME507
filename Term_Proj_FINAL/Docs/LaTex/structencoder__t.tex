@@ -1,0 +1,81 @@
+\doxysection{encoder\+\_\+t Struct Reference}
+\hypertarget{structencoder__t}{}\label{structencoder__t}\index{encoder\_t@{encoder\_t}}
+
+
+Represents a encoder object that has a timer with two channels, and an encoder count.  
+
+
+
+
+{\ttfamily \#include $<$encoder\+\_\+reader.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{structencoder__t_ad4abc97ed65346a0a1f828738381fd78}{channel1}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{structencoder__t_ac6dd8e3f0da72855803135938579a78d}{channel2}}
+\item 
+TIM\+\_\+\+Handle\+Type\+Def \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structencoder__t_ad1e2e0a8a96eaf41b52503f31f91f5bd}{hal\+\_\+tim}}
+\item 
+int32\+\_\+t \mbox{\hyperlink{structencoder__t_a2701bac254b84dcbeb4128273b924554}{mot\+\_\+pos}}
+\item 
+int32\+\_\+t \mbox{\hyperlink{structencoder__t_aabd6773a68bf2558fb18f5798909f54c}{curr\+\_\+count}}
+\item 
+int32\+\_\+t \mbox{\hyperlink{structencoder__t_a80437b8ca180c9d92733d46bd57a850b}{prev\+\_\+count}}
+\item 
+int32\+\_\+t \mbox{\hyperlink{structencoder__t_a37a06f353c448694f29b00ce0126d4fb}{delta}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a encoder object that has a timer with two channels, and an encoder count. 
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structencoder__t_ad4abc97ed65346a0a1f828738381fd78}\label{structencoder__t_ad4abc97ed65346a0a1f828738381fd78} 
+\index{encoder\_t@{encoder\_t}!channel1@{channel1}}
+\index{channel1@{channel1}!encoder\_t@{encoder\_t}}
+\doxysubsubsection{\texorpdfstring{channel1}{channel1}}
+{\footnotesize\ttfamily uint32\+\_\+t encoder\+\_\+t\+::channel1}
+
+The timer channel for the first encoder output. \Hypertarget{structencoder__t_ac6dd8e3f0da72855803135938579a78d}\label{structencoder__t_ac6dd8e3f0da72855803135938579a78d} 
+\index{encoder\_t@{encoder\_t}!channel2@{channel2}}
+\index{channel2@{channel2}!encoder\_t@{encoder\_t}}
+\doxysubsubsection{\texorpdfstring{channel2}{channel2}}
+{\footnotesize\ttfamily uint32\+\_\+t encoder\+\_\+t\+::channel2}
+
+The timer channel for the second encoder output. \Hypertarget{structencoder__t_aabd6773a68bf2558fb18f5798909f54c}\label{structencoder__t_aabd6773a68bf2558fb18f5798909f54c} 
+\index{encoder\_t@{encoder\_t}!curr\_count@{curr\_count}}
+\index{curr\_count@{curr\_count}!encoder\_t@{encoder\_t}}
+\doxysubsubsection{\texorpdfstring{curr\_count}{curr\_count}}
+{\footnotesize\ttfamily int32\+\_\+t encoder\+\_\+t\+::curr\+\_\+count}
+
+The current encoder count. \Hypertarget{structencoder__t_a37a06f353c448694f29b00ce0126d4fb}\label{structencoder__t_a37a06f353c448694f29b00ce0126d4fb} 
+\index{encoder\_t@{encoder\_t}!delta@{delta}}
+\index{delta@{delta}!encoder\_t@{encoder\_t}}
+\doxysubsubsection{\texorpdfstring{delta}{delta}}
+{\footnotesize\ttfamily int32\+\_\+t encoder\+\_\+t\+::delta}
+
+The difference between the previous and current encoder count. \Hypertarget{structencoder__t_ad1e2e0a8a96eaf41b52503f31f91f5bd}\label{structencoder__t_ad1e2e0a8a96eaf41b52503f31f91f5bd} 
+\index{encoder\_t@{encoder\_t}!hal\_tim@{hal\_tim}}
+\index{hal\_tim@{hal\_tim}!encoder\_t@{encoder\_t}}
+\doxysubsubsection{\texorpdfstring{hal\_tim}{hal\_tim}}
+{\footnotesize\ttfamily TIM\+\_\+\+Handle\+Type\+Def\texorpdfstring{$\ast$}{*} encoder\+\_\+t\+::hal\+\_\+tim}
+
+The timer object both channels are from. \Hypertarget{structencoder__t_a2701bac254b84dcbeb4128273b924554}\label{structencoder__t_a2701bac254b84dcbeb4128273b924554} 
+\index{encoder\_t@{encoder\_t}!mot\_pos@{mot\_pos}}
+\index{mot\_pos@{mot\_pos}!encoder\_t@{encoder\_t}}
+\doxysubsubsection{\texorpdfstring{mot\_pos}{mot\_pos}}
+{\footnotesize\ttfamily int32\+\_\+t encoder\+\_\+t\+::mot\+\_\+pos}
+
+The motor position. \Hypertarget{structencoder__t_a80437b8ca180c9d92733d46bd57a850b}\label{structencoder__t_a80437b8ca180c9d92733d46bd57a850b} 
+\index{encoder\_t@{encoder\_t}!prev\_count@{prev\_count}}
+\index{prev\_count@{prev\_count}!encoder\_t@{encoder\_t}}
+\doxysubsubsection{\texorpdfstring{prev\_count}{prev\_count}}
+{\footnotesize\ttfamily int32\+\_\+t encoder\+\_\+t\+::prev\+\_\+count}
+
+The previous encoder count. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Core/\+Inc/\mbox{\hyperlink{encoder__reader_8h}{encoder\+\_\+reader.\+h}}\end{DoxyCompactItemize}

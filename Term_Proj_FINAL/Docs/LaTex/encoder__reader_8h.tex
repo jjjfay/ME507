@@ -1,0 +1,97 @@
+\doxysection{Core/\+Inc/encoder\+\_\+reader.h File Reference}
+\hypertarget{encoder__reader_8h}{}\label{encoder__reader_8h}\index{Core/Inc/encoder\_reader.h@{Core/Inc/encoder\_reader.h}}
+
+
+Defines the encoder reader struct and its methods. This file is used to read the position of a motor using the attached motor encoder. This is accomplished by creating an Encoder class with several functions defined to aid in the task of reading the encoder including init, read, zero and loop.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include "{}stm32l4xx\+\_\+hal.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structencoder__t}{encoder\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Represents a encoder object that has a timer with two channels, and an encoder count. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{encoder__reader_8h_a688cfbab28ad9031cc9fb1902362b76b}{init\+\_\+channels}} (\mbox{\hyperlink{structencoder__t}{encoder\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+\_\+enc)
+\begin{DoxyCompactList}\small\item\em A function to initialize the channels for reading the encoder signals. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{encoder__reader_8h_a785de517bc8042529478427baf6cf90d}{deinit\+\_\+channels}} (\mbox{\hyperlink{structencoder__t}{encoder\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+\_\+enc)
+\begin{DoxyCompactList}\small\item\em A function to stop the channels from reading the encoder signals. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{encoder__reader_8h_aa6e65d34f5a90e31cd3e57be6d149d47}{zero}} (\mbox{\hyperlink{structencoder__t}{encoder\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+\_\+enc)
+\begin{DoxyCompactList}\small\item\em A function to zero the encoder count. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{encoder__reader_8h_a7b7828fac2c424b7ab1eaf7e631e77a9}{get\+\_\+pos}} (\mbox{\hyperlink{structencoder__t}{encoder\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+\_\+enc)
+\begin{DoxyCompactList}\small\item\em A function to read and return the encoder count. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Defines the encoder reader struct and its methods. This file is used to read the position of a motor using the attached motor encoder. This is accomplished by creating an Encoder class with several functions defined to aid in the task of reading the encoder including init, read, zero and loop. 
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{encoder__reader_8h_a785de517bc8042529478427baf6cf90d}\label{encoder__reader_8h_a785de517bc8042529478427baf6cf90d} 
+\index{encoder\_reader.h@{encoder\_reader.h}!deinit\_channels@{deinit\_channels}}
+\index{deinit\_channels@{deinit\_channels}!encoder\_reader.h@{encoder\_reader.h}}
+\doxysubsubsection{\texorpdfstring{deinit\_channels()}{deinit\_channels()}}
+{\footnotesize\ttfamily void deinit\+\_\+channels (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structencoder__t}{encoder\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+\_\+enc }\end{DoxyParamCaption})}
+
+
+
+A function to stop the channels from reading the encoder signals. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+\_\+enc} & The encoder object to perform the function on. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{encoder__reader_8h_a7b7828fac2c424b7ab1eaf7e631e77a9}\label{encoder__reader_8h_a7b7828fac2c424b7ab1eaf7e631e77a9} 
+\index{encoder\_reader.h@{encoder\_reader.h}!get\_pos@{get\_pos}}
+\index{get\_pos@{get\_pos}!encoder\_reader.h@{encoder\_reader.h}}
+\doxysubsubsection{\texorpdfstring{get\_pos()}{get\_pos()}}
+{\footnotesize\ttfamily int32\+\_\+t get\+\_\+pos (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structencoder__t}{encoder\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+\_\+enc }\end{DoxyParamCaption})}
+
+
+
+A function to read and return the encoder count. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+\_\+enc} & The encoder object to perform the function on.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+count The encoder count to be returned. 
+\end{DoxyReturn}
+\Hypertarget{encoder__reader_8h_a688cfbab28ad9031cc9fb1902362b76b}\label{encoder__reader_8h_a688cfbab28ad9031cc9fb1902362b76b} 
+\index{encoder\_reader.h@{encoder\_reader.h}!init\_channels@{init\_channels}}
+\index{init\_channels@{init\_channels}!encoder\_reader.h@{encoder\_reader.h}}
+\doxysubsubsection{\texorpdfstring{init\_channels()}{init\_channels()}}
+{\footnotesize\ttfamily void init\+\_\+channels (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structencoder__t}{encoder\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+\_\+enc }\end{DoxyParamCaption})}
+
+
+
+A function to initialize the channels for reading the encoder signals. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+\_\+enc} & The encoder object to perform the function on. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{encoder__reader_8h_aa6e65d34f5a90e31cd3e57be6d149d47}\label{encoder__reader_8h_aa6e65d34f5a90e31cd3e57be6d149d47} 
+\index{encoder\_reader.h@{encoder\_reader.h}!zero@{zero}}
+\index{zero@{zero}!encoder\_reader.h@{encoder\_reader.h}}
+\doxysubsubsection{\texorpdfstring{zero()}{zero()}}
+{\footnotesize\ttfamily void zero (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structencoder__t}{encoder\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+\_\+enc }\end{DoxyParamCaption})}
+
+
+
+A function to zero the encoder count. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+\_\+enc} & The encoder object to perform the function on. \\
+\hline
+\end{DoxyParams}

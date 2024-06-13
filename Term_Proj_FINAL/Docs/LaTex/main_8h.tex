@@ -1,0 +1,121 @@
+\doxysection{Core/\+Inc/main.h File Reference}
+\hypertarget{main_8h}{}\label{main_8h}\index{Core/Inc/main.h@{Core/Inc/main.h}}
+
+
+\+: Header for \doxylink{main_8c}{main.\+c} file. This file contains the common defines of the application.  
+
+
+{\ttfamily \#include "{}stm32l4xx\+\_\+hal.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{main_8h_a5ec43c54e87756589a57129265eacfcf}\label{main_8h_a5ec43c54e87756589a57129265eacfcf} 
+\#define {\bfseries SMYO\+\_\+\+Pin}~GPIO\+\_\+\+PIN\+\_\+0
+\item 
+\Hypertarget{main_8h_a4a1043799c452d605d6c55fd87576011}\label{main_8h_a4a1043799c452d605d6c55fd87576011} 
+\#define {\bfseries SMYO\+\_\+\+GPIO\+\_\+\+Port}~GPIOC
+\item 
+\Hypertarget{main_8h_acbc6f6a9e5bbf43f77253016cd6a5bdb}\label{main_8h_acbc6f6a9e5bbf43f77253016cd6a5bdb} 
+\#define {\bfseries HMYO\+\_\+\+Pin}~GPIO\+\_\+\+PIN\+\_\+1
+\item 
+\Hypertarget{main_8h_a74c5c3ef81acf1a9be162c60249e9507}\label{main_8h_a74c5c3ef81acf1a9be162c60249e9507} 
+\#define {\bfseries HMYO\+\_\+\+GPIO\+\_\+\+Port}~GPIOC
+\item 
+\Hypertarget{main_8h_acf671a6d2fce947a588daa291475c50b}\label{main_8h_acf671a6d2fce947a588daa291475c50b} 
+\#define {\bfseries SPIN\+\_\+\+PWMA\+\_\+\+Pin}~GPIO\+\_\+\+PIN\+\_\+0
+\item 
+\Hypertarget{main_8h_a5770985770da2bad42a782a3319e5e7e}\label{main_8h_a5770985770da2bad42a782a3319e5e7e} 
+\#define {\bfseries SPIN\+\_\+\+PWMA\+\_\+\+GPIO\+\_\+\+Port}~GPIOA
+\item 
+\Hypertarget{main_8h_a9b79e32f51a45b790a0b71849a4bbcc1}\label{main_8h_a9b79e32f51a45b790a0b71849a4bbcc1} 
+\#define {\bfseries SPIN\+\_\+\+PWMB\+\_\+\+Pin}~GPIO\+\_\+\+PIN\+\_\+1
+\item 
+\Hypertarget{main_8h_a8f8e99b6f68fa73f78f912135f08eb73}\label{main_8h_a8f8e99b6f68fa73f78f912135f08eb73} 
+\#define {\bfseries SPIN\+\_\+\+PWMB\+\_\+\+GPIO\+\_\+\+Port}~GPIOA
+\item 
+\Hypertarget{main_8h_a67f5b74b0c9b16269dcd2a6429020ee6}\label{main_8h_a67f5b74b0c9b16269dcd2a6429020ee6} 
+\#define {\bfseries SPIN\+\_\+\+ENCA\+\_\+\+Pin}~GPIO\+\_\+\+PIN\+\_\+6
+\item 
+\Hypertarget{main_8h_a1ce5452594eeecbcab124c4cc1802fe0}\label{main_8h_a1ce5452594eeecbcab124c4cc1802fe0} 
+\#define {\bfseries SPIN\+\_\+\+ENCA\+\_\+\+GPIO\+\_\+\+Port}~GPIOA
+\item 
+\Hypertarget{main_8h_a01169a074dd30e0ac99c8379384d070b}\label{main_8h_a01169a074dd30e0ac99c8379384d070b} 
+\#define {\bfseries SPIN\+\_\+\+ENCB\+\_\+\+Pin}~GPIO\+\_\+\+PIN\+\_\+7
+\item 
+\Hypertarget{main_8h_adcb2fc020e8188394cfeefabf2425e54}\label{main_8h_adcb2fc020e8188394cfeefabf2425e54} 
+\#define {\bfseries SPIN\+\_\+\+ENCB\+\_\+\+GPIO\+\_\+\+Port}~GPIOA
+\item 
+\Hypertarget{main_8h_ad84309e34315208a54c4e6abd6262ea1}\label{main_8h_ad84309e34315208a54c4e6abd6262ea1} 
+\#define {\bfseries HAND\+\_\+\+PWMA\+\_\+\+Pin}~GPIO\+\_\+\+PIN\+\_\+10
+\item 
+\Hypertarget{main_8h_a045db929bb2200af910349f7405230cb}\label{main_8h_a045db929bb2200af910349f7405230cb} 
+\#define {\bfseries HAND\+\_\+\+PWMA\+\_\+\+GPIO\+\_\+\+Port}~GPIOB
+\item 
+\Hypertarget{main_8h_ac4f55e1cf87dcb9a6d7ffcdd301f943f}\label{main_8h_ac4f55e1cf87dcb9a6d7ffcdd301f943f} 
+\#define {\bfseries HAND\+\_\+\+PWMB\+\_\+\+Pin}~GPIO\+\_\+\+PIN\+\_\+11
+\item 
+\Hypertarget{main_8h_a750579be90e086200a2f7d8c7e14beb0}\label{main_8h_a750579be90e086200a2f7d8c7e14beb0} 
+\#define {\bfseries HAND\+\_\+\+PWMB\+\_\+\+GPIO\+\_\+\+Port}~GPIOB
+\item 
+\Hypertarget{main_8h_a6d29613be5df1c7a9f905e205927bd94}\label{main_8h_a6d29613be5df1c7a9f905e205927bd94} 
+\#define {\bfseries RADIO\+\_\+\+Pin}~GPIO\+\_\+\+PIN\+\_\+8
+\item 
+\Hypertarget{main_8h_afcfe8a5e5d91bd57d73e2fdf9d034959}\label{main_8h_afcfe8a5e5d91bd57d73e2fdf9d034959} 
+\#define {\bfseries RADIO\+\_\+\+GPIO\+\_\+\+Port}~GPIOA
+\item 
+\Hypertarget{main_8h_a26677a1c7c7d8f21132be72f6580858b}\label{main_8h_a26677a1c7c7d8f21132be72f6580858b} 
+\#define {\bfseries HAND\+\_\+\+ENCA\+\_\+\+Pin}~GPIO\+\_\+\+PIN\+\_\+6
+\item 
+\Hypertarget{main_8h_aba369fa52c777377add68f741f87343d}\label{main_8h_aba369fa52c777377add68f741f87343d} 
+\#define {\bfseries HAND\+\_\+\+ENCA\+\_\+\+GPIO\+\_\+\+Port}~GPIOB
+\item 
+\Hypertarget{main_8h_a0ab2ef0cc8ec3159293e394c1c777291}\label{main_8h_a0ab2ef0cc8ec3159293e394c1c777291} 
+\#define {\bfseries HAND\+\_\+\+ENCB\+\_\+\+Pin}~GPIO\+\_\+\+PIN\+\_\+7
+\item 
+\Hypertarget{main_8h_a0d5720ce72eac4fe84061bca3d5ed42a}\label{main_8h_a0d5720ce72eac4fe84061bca3d5ed42a} 
+\#define {\bfseries HAND\+\_\+\+ENCB\+\_\+\+GPIO\+\_\+\+Port}~GPIOB
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{main_8h_ae70bce6c39d0b570a7523b86738cec4b}{HAL\+\_\+\+TIM\+\_\+\+Msp\+Post\+Init}} (TIM\+\_\+\+Handle\+Type\+Def \texorpdfstring{$\ast$}{*}htim)
+\item 
+void \mbox{\hyperlink{main_8h_a1730ffe1e560465665eb47d9264826f9}{Error\+\_\+\+Handler}} (void)
+\begin{DoxyCompactList}\small\item\em This function is executed in case of error occurrence. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\+: Header for \doxylink{main_8c}{main.\+c} file. This file contains the common defines of the application. 
+
+\begin{DoxyAttention}{Attention}
+
+\end{DoxyAttention}
+Copyright (c) 2024 STMicroelectronics. All rights reserved.
+
+This software is licensed under terms that can be found in the LICENSE file in the root directory of this software component. If no LICENSE file comes with this software, it is provided AS-\/\+IS. 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{main_8h_a1730ffe1e560465665eb47d9264826f9}\label{main_8h_a1730ffe1e560465665eb47d9264826f9} 
+\index{main.h@{main.h}!Error\_Handler@{Error\_Handler}}
+\index{Error\_Handler@{Error\_Handler}!main.h@{main.h}}
+\doxysubsubsection{\texorpdfstring{Error\_Handler()}{Error\_Handler()}}
+{\footnotesize\ttfamily void Error\+\_\+\+Handler (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+This function is executed in case of error occurrence. 
+
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{main_8h_ae70bce6c39d0b570a7523b86738cec4b}\label{main_8h_ae70bce6c39d0b570a7523b86738cec4b} 
+\index{main.h@{main.h}!HAL\_TIM\_MspPostInit@{HAL\_TIM\_MspPostInit}}
+\index{HAL\_TIM\_MspPostInit@{HAL\_TIM\_MspPostInit}!main.h@{main.h}}
+\doxysubsubsection{\texorpdfstring{HAL\_TIM\_MspPostInit()}{HAL\_TIM\_MspPostInit()}}
+{\footnotesize\ttfamily void HAL\+\_\+\+TIM\+\_\+\+Msp\+Post\+Init (\begin{DoxyParamCaption}\item[{TIM\+\_\+\+Handle\+Type\+Def \texorpdfstring{$\ast$}{*}}]{htim }\end{DoxyParamCaption})}
+
+TIM2 GPIO Configuration PA0 -\/-\/-\/-\/-\/-\/\texorpdfstring{$>$}{>} TIM2\+\_\+\+CH1 PA1 -\/-\/-\/-\/-\/-\/\texorpdfstring{$>$}{>} TIM2\+\_\+\+CH2 PB10 -\/-\/-\/-\/-\/-\/\texorpdfstring{$>$}{>} TIM2\+\_\+\+CH3 PB11 -\/-\/-\/-\/-\/-\/\texorpdfstring{$>$}{>} TIM2\+\_\+\+CH4
+
+TIM2 GPIO Configuration PA0 -\/-\/-\/-\/-\/-\/\texorpdfstring{$>$}{>} TIM2\+\_\+\+CH1 PA1 -\/-\/-\/-\/-\/-\/\texorpdfstring{$>$}{>} TIM2\+\_\+\+CH2 PB10 -\/-\/-\/-\/-\/-\/\texorpdfstring{$>$}{>} TIM2\+\_\+\+CH3 PB11 -\/-\/-\/-\/-\/-\/\texorpdfstring{$>$}{>} TIM2\+\_\+\+CH4

@@ -1,0 +1,407 @@
+\doxysection{Core/\+Src/main.c File Reference}
+\hypertarget{main_8c}{}\label{main_8c}\index{Core/Src/main.c@{Core/Src/main.c}}
+
+
+\+: Main program body for the ME 507 term project. The main contents of this file is the finite state machine that controls the prosthetic hand operation. This includes the tasks to open and close the hand and spin the hand from left to right. Lastly, there is a task to check for an emergency stop signal from a radio transmitter device.  
+
+
+{\ttfamily \#include "{}main.\+h"{}}\newline
+{\ttfamily \#include "{}encoder\+\_\+reader.\+h"{}}\newline
+{\ttfamily \#include "{}motor\+\_\+driver.\+h"{}}\newline
+{\ttfamily \#include "{}controller.\+h"{}}\newline
+{\ttfamily \#include "{}myo.\+h"{}}\newline
+{\ttfamily \#include "{}calibrate.\+h"{}}\newline
+{\ttfamily \#include "{}radio.\+h"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include "{}stm32l4xx\+\_\+hal.\+h"{}}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$ctype.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{main_8c_a70af21c671abfcc773614a9a4f63d920}{System\+Clock\+\_\+\+Config}} (void)
+\begin{DoxyCompactList}\small\item\em System Clock Configuration. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8c_a336c5acb34a801b2984e602b97ed7b73}{Periph\+Common\+Clock\+\_\+\+Config}} (void)
+\begin{DoxyCompactList}\small\item\em Peripherals Common Clock Configuration. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8c_ab55078d807df0a75af8a2fa8eefdcc41}{task1}} (void)
+\begin{DoxyCompactList}\small\item\em Task 1 -\/ SPIN TASK. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8c_a03bef279de31d91a79b14f31c4530dfc}{task2}} (void)
+\begin{DoxyCompactList}\small\item\em Task 2 -\/ HAND TASK. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8c_a800ed86ba3f4e578d81215c99b2ad914}{task3}} (void)
+\begin{DoxyCompactList}\small\item\em Task 3 -\/ WIRELESS E STOP TASK. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{main_8c_a840291bc02cba5474a4cb46a9b9566fe}{main}} (void)
+\begin{DoxyCompactList}\small\item\em The application entry point. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8c_a77a2401a35ddd9bd0b8fc28331b81381}{HAL\+\_\+\+TIM\+\_\+\+IC\+\_\+\+Capture\+Callback}} (TIM\+\_\+\+Handle\+Type\+Def \texorpdfstring{$\ast$}{*}htim)
+\begin{DoxyCompactList}\small\item\em Input Capture callback in non-\/blocking mode. This callback routine calculates the radio transmitted pulse width in ms. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8c_a1730ffe1e560465665eb47d9264826f9}{Error\+\_\+\+Handler}} (void)
+\begin{DoxyCompactList}\small\item\em This function is executed in case of error occurrence. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{main_8c_a22b804736f5648d52f639b2647d4ed13}\label{main_8c_a22b804736f5648d52f639b2647d4ed13} 
+ADC\+\_\+\+Handle\+Type\+Def {\bfseries hadc1}
+\item 
+\Hypertarget{main_8c_acd9221f1aa19aebfe0b744947f2daf49}\label{main_8c_acd9221f1aa19aebfe0b744947f2daf49} 
+ADC\+\_\+\+Handle\+Type\+Def {\bfseries hadc2}
+\item 
+\Hypertarget{main_8c_a25fc663547539bc49fecc0011bd76ab5}\label{main_8c_a25fc663547539bc49fecc0011bd76ab5} 
+TIM\+\_\+\+Handle\+Type\+Def {\bfseries htim1}
+\item 
+\Hypertarget{main_8c_a2c80fd5510e2990a59a5c90d745c716c}\label{main_8c_a2c80fd5510e2990a59a5c90d745c716c} 
+TIM\+\_\+\+Handle\+Type\+Def {\bfseries htim2}
+\item 
+\Hypertarget{main_8c_aac3d2c59ee0e3bbae1b99529a154eb62}\label{main_8c_aac3d2c59ee0e3bbae1b99529a154eb62} 
+TIM\+\_\+\+Handle\+Type\+Def {\bfseries htim3}
+\item 
+\Hypertarget{main_8c_a85788cec5a97ee377e4ee2e74f026484}\label{main_8c_a85788cec5a97ee377e4ee2e74f026484} 
+TIM\+\_\+\+Handle\+Type\+Def {\bfseries htim4}
+\item 
+\Hypertarget{main_8c_aa9479c261d65eecedd3d9582f7f0f89c}\label{main_8c_aa9479c261d65eecedd3d9582f7f0f89c} 
+UART\+\_\+\+Handle\+Type\+Def {\bfseries huart2}
+\item 
+\mbox{\hyperlink{structencoder__t}{encoder\+\_\+t}} \mbox{\hyperlink{main_8c_ac8f315e2b8ea591f91f6236ab801ab56}{spin\+\_\+enc}}
+\item 
+\mbox{\hyperlink{structmotor__t}{motor\+\_\+t}} \mbox{\hyperlink{main_8c_a2dd72fb07179ec26bba3b18d6a1f77a6}{spin\+\_\+mot}}
+\item 
+\mbox{\hyperlink{structmotor__t}{motor\+\_\+t}} \mbox{\hyperlink{main_8c_ad9323bc854cd629237afd922a56f399c}{hand\+\_\+mot}}
+\item 
+\mbox{\hyperlink{structcontroller__t}{controller\+\_\+t}} \mbox{\hyperlink{main_8c_ac1cc3948ffb1db51a2295506624d3afd}{spin\+\_\+cont}}
+\item 
+\mbox{\hyperlink{structmyo__t}{myo\+\_\+t}} \mbox{\hyperlink{main_8c_a137581b71af645da03f1e971ba998e38}{smyo}}
+\item 
+\mbox{\hyperlink{structmyo__t}{myo\+\_\+t}} \mbox{\hyperlink{main_8c_a717934897b5306ed2b16c8efd2332664}{hmyo}}
+\item 
+\mbox{\hyperlink{structcalibrate__t}{calibrate\+\_\+t}} \mbox{\hyperlink{main_8c_a35dde673e5ada364b6aa25f819141975}{scali}}
+\item 
+\mbox{\hyperlink{structcalibrate__t}{calibrate\+\_\+t}} \mbox{\hyperlink{main_8c_a56cce7878c759f7892ddeb9133aa3db5}{hcali}}
+\item 
+\Hypertarget{main_8c_a8353015c4d672311fe3f5811e9c46759}\label{main_8c_a8353015c4d672311fe3f5811e9c46759} 
+uint32\+\_\+t {\bfseries smyo\+\_\+tst} = 0
+\item 
+\Hypertarget{main_8c_a347b34c5e7253c621db301d92a0a3b49}\label{main_8c_a347b34c5e7253c621db301d92a0a3b49} 
+uint32\+\_\+t {\bfseries hand\+\_\+count\+\_\+tst} = 0
+\item 
+\Hypertarget{main_8c_aca7b0fffcb47330888b69d7cff6489e8}\label{main_8c_aca7b0fffcb47330888b69d7cff6489e8} 
+int32\+\_\+t {\bfseries spos\+\_\+tst} = 0
+\item 
+\Hypertarget{main_8c_a463948bd264aab06eed552a816ece6de}\label{main_8c_a463948bd264aab06eed552a816ece6de} 
+int32\+\_\+t {\bfseries smyo\+\_\+av} = 0
+\item 
+\Hypertarget{main_8c_a6979895345c63ca86fc4c806792b935e}\label{main_8c_a6979895345c63ca86fc4c806792b935e} 
+uint16\+\_\+t {\bfseries ch1\+\_\+val}
+\item 
+\Hypertarget{main_8c_a85a1c2271edad1139d015a12411444d3}\label{main_8c_a85a1c2271edad1139d015a12411444d3} 
+uint16\+\_\+t {\bfseries ch2\+\_\+val}
+\item 
+\Hypertarget{main_8c_acd72a538b2ff33ab4525f47337a93c51}\label{main_8c_acd72a538b2ff33ab4525f47337a93c51} 
+uint16\+\_\+t {\bfseries ch1\+\_\+p}
+\item 
+\Hypertarget{main_8c_ad49b80b3bed33ad663d9f6b2475a5413}\label{main_8c_ad49b80b3bed33ad663d9f6b2475a5413} 
+uint16\+\_\+t {\bfseries ch2\+\_\+p}
+\item 
+\Hypertarget{main_8c_a642ec097d013efc791634719e5a5c9e4}\label{main_8c_a642ec097d013efc791634719e5a5c9e4} 
+uint16\+\_\+t {\bfseries radio\+\_\+pulse} = 1500
+\item 
+\Hypertarget{main_8c_a9710d0833aa418faec4823df2b28e2d8}\label{main_8c_a9710d0833aa418faec4823df2b28e2d8} 
+char {\bfseries tst\+\_\+buff} \mbox{[}150\mbox{]}
+\item 
+\Hypertarget{main_8c_a742204794ea328ba293fe59cec79b990}\label{main_8c_a742204794ea328ba293fe59cec79b990} 
+int {\bfseries m}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\+: Main program body for the ME 507 term project. The main contents of this file is the finite state machine that controls the prosthetic hand operation. This includes the tasks to open and close the hand and spin the hand from left to right. Lastly, there is a task to check for an emergency stop signal from a radio transmitter device. 
+
+\begin{DoxyAuthor}{Authors}
+\+: Julia Fay \& Jack Foxcroft
+\end{DoxyAuthor}
+\begin{DoxyAttention}{Attention}
+
+\end{DoxyAttention}
+Copyright (c) 2024 STMicroelectronics. All rights reserved.
+
+This software is licensed under terms that can be found in the LICENSE file in the root directory of this software component. If no LICENSE file comes with this software, it is provided AS-\/\+IS. 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{main_8c_a1730ffe1e560465665eb47d9264826f9}\label{main_8c_a1730ffe1e560465665eb47d9264826f9} 
+\index{main.c@{main.c}!Error\_Handler@{Error\_Handler}}
+\index{Error\_Handler@{Error\_Handler}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{Error\_Handler()}{Error\_Handler()}}
+{\footnotesize\ttfamily void Error\+\_\+\+Handler (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+This function is executed in case of error occurrence. 
+
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{main_8c_a77a2401a35ddd9bd0b8fc28331b81381}\label{main_8c_a77a2401a35ddd9bd0b8fc28331b81381} 
+\index{main.c@{main.c}!HAL\_TIM\_IC\_CaptureCallback@{HAL\_TIM\_IC\_CaptureCallback}}
+\index{HAL\_TIM\_IC\_CaptureCallback@{HAL\_TIM\_IC\_CaptureCallback}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{HAL\_TIM\_IC\_CaptureCallback()}{HAL\_TIM\_IC\_CaptureCallback()}}
+{\footnotesize\ttfamily void HAL\+\_\+\+TIM\+\_\+\+IC\+\_\+\+Capture\+Callback (\begin{DoxyParamCaption}\item[{TIM\+\_\+\+Handle\+Type\+Def \texorpdfstring{$\ast$}{*}}]{htim }\end{DoxyParamCaption})}
+
+
+
+Input Capture callback in non-\/blocking mode. This callback routine calculates the radio transmitted pulse width in ms. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em htim} & TIM IC handle \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{main_8c_a840291bc02cba5474a4cb46a9b9566fe}\label{main_8c_a840291bc02cba5474a4cb46a9b9566fe} 
+\index{main.c@{main.c}!main@{main}}
+\index{main@{main}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+The application entry point. 
+
+
+\begin{DoxyRetVals}{Return values}
+{\em int} & \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{main_8c_a336c5acb34a801b2984e602b97ed7b73}\label{main_8c_a336c5acb34a801b2984e602b97ed7b73} 
+\index{main.c@{main.c}!PeriphCommonClock\_Config@{PeriphCommonClock\_Config}}
+\index{PeriphCommonClock\_Config@{PeriphCommonClock\_Config}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{PeriphCommonClock\_Config()}{PeriphCommonClock\_Config()}}
+{\footnotesize\ttfamily void Periph\+Common\+Clock\+\_\+\+Config (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Peripherals Common Clock Configuration. 
+
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+Initializes the peripherals clock\Hypertarget{main_8c_a70af21c671abfcc773614a9a4f63d920}\label{main_8c_a70af21c671abfcc773614a9a4f63d920} 
+\index{main.c@{main.c}!SystemClock\_Config@{SystemClock\_Config}}
+\index{SystemClock\_Config@{SystemClock\_Config}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{SystemClock\_Config()}{SystemClock\_Config()}}
+{\footnotesize\ttfamily void System\+Clock\+\_\+\+Config (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+System Clock Configuration. 
+
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+Configure the main internal regulator output voltage
+
+Initializes the RCC Oscillators according to the specified parameters in the RCC\+\_\+\+Osc\+Init\+Type\+Def structure.
+
+Initializes the CPU, AHB and APB buses clocks\Hypertarget{main_8c_ab55078d807df0a75af8a2fa8eefdcc41}\label{main_8c_ab55078d807df0a75af8a2fa8eefdcc41} 
+\index{main.c@{main.c}!task1@{task1}}
+\index{task1@{task1}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{task1()}{task1()}}
+{\footnotesize\ttfamily void task1 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Task 1 -\/ SPIN TASK. 
+
+This function implements a state machine to control a motor based on input from a myoelectric sensor. The state machine has three states\+:
+
+
+\begin{DoxyItemize}
+\item State 0\+: Initialization Initializes the motor driver, PWM channel, encoder channels, and zeroes the encoder value. Also, calibrates the myoelectric sensor to find an average value to be used as a threshold for determining motor direction.
+\item State 1\+: Interpret Myoelectric Sensor Reads the current value from the myoelectric sensor and determines the direction of motor movement based on the sensor\textquotesingle{}s value relative to a predefined threshold. Transitions to State 2 if a significant change in the sensor value is detected.
+\item State 2\+: Move Motor Sets the motor\textquotesingle{}s position based on the interpreted direction from State 1. If the sensor indicates a forward direction, the motor\textquotesingle{}s setpoint is adjusted accordingly, and the motor is moved to the new setpoint. If the sensor indicates a backward direction, the motor is moved in the opposite direction. Once the motor reaches the setpoint, the state machine transitions back to State 1. 
+\end{DoxyItemize}\Hypertarget{main_8c_a03bef279de31d91a79b14f31c4530dfc}\label{main_8c_a03bef279de31d91a79b14f31c4530dfc} 
+\index{main.c@{main.c}!task2@{task2}}
+\index{task2@{task2}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{task2()}{task2()}}
+{\footnotesize\ttfamily void task2 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Task 2 -\/ HAND TASK. 
+
+This function implements a state machine to control a hand motor based on input from a myoelectric sensor. The state machine has three states\+:
+
+
+\begin{DoxyItemize}
+\item State 0\+: Initialization
+\begin{DoxyItemize}
+\item Initializes the motor driver PWM channel.
+\item Sets the motor to be at rest.
+\item Calibrates the myoelectric sensor by finding an average value to use as a threshold.
+\end{DoxyItemize}
+\item State 1\+: Interpret Myoelectric Sensor
+\begin{DoxyItemize}
+\item Reads the current value from the myoelectric sensor.
+\item Determines the direction of hand movement (open or close) based on the sensor\textquotesingle{}s value relative to predefined thresholds.
+\item Transitions to State 2 if a significant change in the sensor value is detected.
+\end{DoxyItemize}
+\item State 2\+: Move Hand
+\begin{DoxyItemize}
+\item Moves the hand to the open or closed position based on the interpreted direction from State 1.
+\item If the sensor indicates to open the hand and the hand is currently closed, the hand is gradually opened by setting a positive duty cycle to the motor. The hand position is updated, and a counter ensures the hand moves incrementally.
+\item If the sensor indicates to close the hand and the hand is currently open, the hand is gradually closed by setting a negative duty cycle to the motor. The hand position is updated, and a counter ensures the hand moves incrementally.
+\item Once the hand reaches the desired position (fully open or fully closed), the state machine transitions back to State 1. 
+\end{DoxyItemize}
+\end{DoxyItemize}\Hypertarget{main_8c_a800ed86ba3f4e578d81215c99b2ad914}\label{main_8c_a800ed86ba3f4e578d81215c99b2ad914} 
+\index{main.c@{main.c}!task3@{task3}}
+\index{task3@{task3}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{task3()}{task3()}}
+{\footnotesize\ttfamily void task3 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Task 3 -\/ WIRELESS E STOP TASK. 
+
+This function implements a state machine to handle a wireless emergency stop (E-\/stop) signal. The state machine has three states\+:
+
+
+\begin{DoxyItemize}
+\item State 0\+: Initialization
+\begin{DoxyItemize}
+\item Starts the timer input capture interrupt for channels 1 and 2.
+\item Transitions to State 1 to wait for the E-\/stop signal.
+\end{DoxyItemize}
+\item State 1\+: Wait for Signal
+\begin{DoxyItemize}
+\item Continuously monitors for an E-\/stop signal by checking the radio pulse.
+\item If a valid E-\/stop signal is detected, it transitions to State 2 to perform the emergency stop.
+\end{DoxyItemize}
+\item State 2\+: Emergency Stop
+\begin{DoxyItemize}
+\item Outputs an emergency stop message.
+\item Stops the motors by setting their duty cycles to zero.
+\item Deinitializes the motor controller and stops the PWM signals.
+\item Remains in this state after performing the emergency stop. 
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{main_8c_ad9323bc854cd629237afd922a56f399c}\label{main_8c_ad9323bc854cd629237afd922a56f399c} 
+\index{main.c@{main.c}!hand\_mot@{hand\_mot}}
+\index{hand\_mot@{hand\_mot}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{hand\_mot}{hand\_mot}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structmotor__t}{motor\+\_\+t}} hand\+\_\+mot}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{.pwm\_val\ =\ 0,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .channel1\ =\ TIM\_CHANNEL\_3,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .channel2\ =\ TIM\_CHANNEL\_4,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .hal\_tim\ =\ \&htim2}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+
+\end{DoxyCode}
+\Hypertarget{main_8c_a56cce7878c759f7892ddeb9133aa3db5}\label{main_8c_a56cce7878c759f7892ddeb9133aa3db5} 
+\index{main.c@{main.c}!hcali@{hcali}}
+\index{hcali@{hcali}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{hcali}{hcali}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structcalibrate__t}{calibrate\+\_\+t}} hcali}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{.data\_pts\ =\ 1000000,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .p\_myo\ =\ \&hmyo}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+
+\end{DoxyCode}
+\Hypertarget{main_8c_a717934897b5306ed2b16c8efd2332664}\label{main_8c_a717934897b5306ed2b16c8efd2332664} 
+\index{main.c@{main.c}!hmyo@{hmyo}}
+\index{hmyo@{hmyo}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{hmyo}{hmyo}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structmyo__t}{myo\+\_\+t}} hmyo}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{.hal\_adc\ =\ \&hadc2,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .current\_value\ =\ 0\}}
+
+\end{DoxyCode}
+\Hypertarget{main_8c_a35dde673e5ada364b6aa25f819141975}\label{main_8c_a35dde673e5ada364b6aa25f819141975} 
+\index{main.c@{main.c}!scali@{scali}}
+\index{scali@{scali}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{scali}{scali}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structcalibrate__t}{calibrate\+\_\+t}} scali}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{.data\_pts\ =\ 1000000,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .p\_myo\ =\ \&smyo}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+
+\end{DoxyCode}
+\Hypertarget{main_8c_a137581b71af645da03f1e971ba998e38}\label{main_8c_a137581b71af645da03f1e971ba998e38} 
+\index{main.c@{main.c}!smyo@{smyo}}
+\index{smyo@{smyo}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{smyo}{smyo}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structmyo__t}{myo\+\_\+t}} smyo}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{.hal\_adc\ =\ \&hadc1,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .current\_value\ =\ 0\}}
+
+\end{DoxyCode}
+\Hypertarget{main_8c_ac1cc3948ffb1db51a2295506624d3afd}\label{main_8c_ac1cc3948ffb1db51a2295506624d3afd} 
+\index{main.c@{main.c}!spin\_cont@{spin\_cont}}
+\index{spin\_cont@{spin\_cont}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{spin\_cont}{spin\_cont}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structcontroller__t}{controller\+\_\+t}} spin\+\_\+cont}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{.p\_mot\ =\ \&spin\_mot,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .p\_enc\ =\ \&spin\_enc,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .gain\ =\ 300,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .setpoint\ =\ 0\}}
+
+\end{DoxyCode}
+\Hypertarget{main_8c_ac8f315e2b8ea591f91f6236ab801ab56}\label{main_8c_ac8f315e2b8ea591f91f6236ab801ab56} 
+\index{main.c@{main.c}!spin\_enc@{spin\_enc}}
+\index{spin\_enc@{spin\_enc}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{spin\_enc}{spin\_enc}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structencoder__t}{encoder\+\_\+t}} spin\+\_\+enc}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{.channel1\ =\ TIM\_CHANNEL\_1,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .channel2\ =\ TIM\_CHANNEL\_2,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .hal\_tim\ =\ \&htim3,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .mot\_pos\ =\ 0,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .curr\_count\ =\ 0,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .prev\_count\ =\ 0,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .delta\ =\ 0\}}
+
+\end{DoxyCode}
+\Hypertarget{main_8c_a2dd72fb07179ec26bba3b18d6a1f77a6}\label{main_8c_a2dd72fb07179ec26bba3b18d6a1f77a6} 
+\index{main.c@{main.c}!spin\_mot@{spin\_mot}}
+\index{spin\_mot@{spin\_mot}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{spin\_mot}{spin\_mot}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structmotor__t}{motor\+\_\+t}} spin\+\_\+mot}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{.pwm\_val\ =\ 0,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .channel1\ =\ TIM\_CHANNEL\_1,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .channel2\ =\ TIM\_CHANNEL\_2,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .hal\_tim\ =\ \&htim2}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+
+\end{DoxyCode}

@@ -1,5 +1,5 @@
 /**
- * @file calibrate.h
+ * @class calibrate.h
  * @brief Defines a function to calibrate the myoelectric sensor values by calculating an average from
  * 		  a specified number of data points.
  */

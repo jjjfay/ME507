@@ -1,0 +1,41 @@
+\doxysection{motor\+\_\+driver.\+h}
+\hypertarget{motor__driver_8h_source}{}\label{motor__driver_8h_source}\index{Core/Inc/motor\_driver.h@{Core/Inc/motor\_driver.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *@file\ \ \ \ \ \ \ \ \ \ \ :\ \ motor\_driver.h}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *@brief\ \ \ \ \ \ \ \ \ \ :\ This\ is\ the\ motor\ driver\ library\ used\ to\ control\ the\ PWM\ signals\ going\ to\ the\ motors\ to\ control\ direction\ and\ speed.}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Functions\ include\ starting\ and\ stopping\ the\ PWM\ timer\ channels,\ and\ updating\ the\ duty\ cycle\ for\ the\ motor.}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ \ Created\ on:\ Apr\ 18,\ 2024}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *\ \ \ \ \ \ Author:\ Julia\ Fay}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#ifndef\ INC\_MOTOR\_DRIVER\_H\_}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#define\ INC\_MOTOR\_DRIVER\_H\_}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}stm32l4xx\_hal.h"{}}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ int32\_t\ \ \mbox{\hyperlink{structmotor__t_aed894f1be1963c09bc08843912c8c5ce}{pwm\_val}};}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{comment}{//two\ channels\ for\ each\ motor}}
+\DoxyCodeLine{00025\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structmotor__t_a55ec37615f63c051df2af7bacbae5fd8}{channel1}};}
+\DoxyCodeLine{00026\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structmotor__t_a61eafafcd9e791ded679cc36e0fcda9e}{channel2}};}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{comment}{//The\ handle\ to\ the\ HAL\ timer\ object\ used\ for\ PWM\ generation.\ Include\ *\ so\ its\ a\ pointer\ to\ the\ object}}
+\DoxyCodeLine{00029\ \ \ \ \ TIM\_HandleTypeDef*\ \mbox{\hyperlink{structmotor__t_a4925f8bb8c93d8ca1efb32c75cfa9ed7}{hal\_tim}};}
+\DoxyCodeLine{00031\ \}\ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{structmotor__t}{motor\_t}};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00040\ \textcolor{keywordtype}{void}\ start\_PWM(\mbox{\hyperlink{structmotor__t}{motor\_t}}*\ p\_mot);}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00048\ \textcolor{keywordtype}{void}\ stop\_PWM(\mbox{\hyperlink{structmotor__t}{motor\_t}}*\ p\_mot);}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00056\ \textcolor{keywordtype}{void}\ set\_duty(\mbox{\hyperlink{structmotor__t}{motor\_t}}*\ p\_mot,\ int32\_t\ duty);}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ INC\_MOTOR\_DRIVER\_H\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

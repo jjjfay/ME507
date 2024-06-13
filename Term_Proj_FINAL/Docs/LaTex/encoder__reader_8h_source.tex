@@ -1,0 +1,33 @@
+\doxysection{encoder\+\_\+reader.\+h}
+\hypertarget{encoder__reader_8h_source}{}\label{encoder__reader_8h_source}\index{Core/Inc/encoder\_reader.h@{Core/Inc/encoder\_reader.h}}
+\mbox{\hyperlink{encoder__reader_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#ifndef\ INC\_ENCODER\_READER\_H\_}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#define\ INC\_ENCODER\_READER\_H\_}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}stm32l4xx\_hal.h"{}}}
+\DoxyCodeLine{00017\ \textcolor{keyword}{struct}\{}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structencoder__t_ad4abc97ed65346a0a1f828738381fd78}{channel1}};\ }
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structencoder__t_ac6dd8e3f0da72855803135938579a78d}{channel2}};\ }
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ TIM\_HandleTypeDef*\ \mbox{\hyperlink{structencoder__t_ad1e2e0a8a96eaf41b52503f31f91f5bd}{hal\_tim}};\ }
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ int32\_t\ \mbox{\hyperlink{structencoder__t_a2701bac254b84dcbeb4128273b924554}{mot\_pos}};\ }
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ int32\_t\ \mbox{\hyperlink{structencoder__t_aabd6773a68bf2558fb18f5798909f54c}{curr\_count}};\ }
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ int32\_t\ \mbox{\hyperlink{structencoder__t_a80437b8ca180c9d92733d46bd57a850b}{prev\_count}};\ }
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ int32\_t\ \mbox{\hyperlink{structencoder__t_a37a06f353c448694f29b00ce0126d4fb}{delta}};\ }
+\DoxyCodeLine{00032\ \}\ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{structencoder__t}{encoder\_t}};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00039\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{encoder__reader_8h_a688cfbab28ad9031cc9fb1902362b76b}{init\_channels}}(\mbox{\hyperlink{structencoder__t}{encoder\_t}}\ *p\_enc);}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00046\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{encoder__reader_8h_a785de517bc8042529478427baf6cf90d}{deinit\_channels}}(\mbox{\hyperlink{structencoder__t}{encoder\_t}}\ *p\_enc);}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00054\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{encoder__reader_8h_aa6e65d34f5a90e31cd3e57be6d149d47}{zero}}(\mbox{\hyperlink{structencoder__t}{encoder\_t}}*\ p\_enc);}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00064\ int32\_t\ \mbox{\hyperlink{encoder__reader_8h_a7b7828fac2c424b7ab1eaf7e631e77a9}{get\_pos}}(\mbox{\hyperlink{structencoder__t}{encoder\_t}}\ *p\_enc);}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ INC\_ENCODER\_READER\_H\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

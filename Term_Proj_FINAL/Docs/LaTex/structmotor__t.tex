@@ -1,0 +1,57 @@
+\doxysection{motor\+\_\+t Struct Reference}
+\hypertarget{structmotor__t}{}\label{structmotor__t}\index{motor\_t@{motor\_t}}
+
+
+Represents a motor objects with two PWM channels in a timer and a duty cycle.  
+
+
+
+
+{\ttfamily \#include $<$motor\+\_\+driver.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int32\+\_\+t \mbox{\hyperlink{structmotor__t_aed894f1be1963c09bc08843912c8c5ce}{pwm\+\_\+val}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{structmotor__t_a55ec37615f63c051df2af7bacbae5fd8}{channel1}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{structmotor__t_a61eafafcd9e791ded679cc36e0fcda9e}{channel2}}
+\item 
+TIM\+\_\+\+Handle\+Type\+Def \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structmotor__t_a4925f8bb8c93d8ca1efb32c75cfa9ed7}{hal\+\_\+tim}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a motor objects with two PWM channels in a timer and a duty cycle. 
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structmotor__t_a55ec37615f63c051df2af7bacbae5fd8}\label{structmotor__t_a55ec37615f63c051df2af7bacbae5fd8} 
+\index{motor\_t@{motor\_t}!channel1@{channel1}}
+\index{channel1@{channel1}!motor\_t@{motor\_t}}
+\doxysubsubsection{\texorpdfstring{channel1}{channel1}}
+{\footnotesize\ttfamily uint32\+\_\+t motor\+\_\+t\+::channel1}
+
+Timer channel 1 used to generate a PWM signal that is sent to the motor driver. \Hypertarget{structmotor__t_a61eafafcd9e791ded679cc36e0fcda9e}\label{structmotor__t_a61eafafcd9e791ded679cc36e0fcda9e} 
+\index{motor\_t@{motor\_t}!channel2@{channel2}}
+\index{channel2@{channel2}!motor\_t@{motor\_t}}
+\doxysubsubsection{\texorpdfstring{channel2}{channel2}}
+{\footnotesize\ttfamily uint32\+\_\+t motor\+\_\+t\+::channel2}
+
+Timer channel 2 used to generate a PWM signal that is sent to the motor driver. \Hypertarget{structmotor__t_a4925f8bb8c93d8ca1efb32c75cfa9ed7}\label{structmotor__t_a4925f8bb8c93d8ca1efb32c75cfa9ed7} 
+\index{motor\_t@{motor\_t}!hal\_tim@{hal\_tim}}
+\index{hal\_tim@{hal\_tim}!motor\_t@{motor\_t}}
+\doxysubsubsection{\texorpdfstring{hal\_tim}{hal\_tim}}
+{\footnotesize\ttfamily TIM\+\_\+\+Handle\+Type\+Def\texorpdfstring{$\ast$}{*} motor\+\_\+t\+::hal\+\_\+tim}
+
+The handle to the HAL timer object used for PWM generation. \Hypertarget{structmotor__t_aed894f1be1963c09bc08843912c8c5ce}\label{structmotor__t_aed894f1be1963c09bc08843912c8c5ce} 
+\index{motor\_t@{motor\_t}!pwm\_val@{pwm\_val}}
+\index{pwm\_val@{pwm\_val}!motor\_t@{motor\_t}}
+\doxysubsubsection{\texorpdfstring{pwm\_val}{pwm\_val}}
+{\footnotesize\ttfamily int32\+\_\+t motor\+\_\+t\+::pwm\+\_\+val}
+
+The CCR pwm value used to set the duty cycle of the motor. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Core/\+Inc/motor\+\_\+driver.\+h\end{DoxyCompactItemize}
