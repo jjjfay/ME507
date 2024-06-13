@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['setpoint_0',['setpoint',['../structcontroller__t.html#afad9b2a7de51d07966f868d056ea2fab',1,'controller_t']]]
+  ['mot_5fpos_0',['mot_pos',['../structencoder__t.html#a7c0ec11166d5d58a52b47c443232dc72',1,'encoder_t']]]
 ];

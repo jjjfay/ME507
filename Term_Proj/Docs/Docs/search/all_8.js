@@ -12,5 +12,6 @@ var searchData=
   ['controller_5fdeinit_9',['controller_deinit',['../controller_8h.html#accf18394da04147c4bbc9e72bca82ffc',1,'controller.c']]],
   ['controller_5finit_10',['controller_init',['../controller_8h.html#aed817e3246b564f3bb4ceb39e895ad8b',1,'controller.c']]],
   ['controller_5ft_11',['controller_t',['../structcontroller__t.html',1,'']]],
-  ['count_12',['count',['../structencoder__t.html#adfb9b54f2c17d657f9ae45df037f198f',1,'encoder_t']]]
+  ['curr_5fcount_12',['curr_count',['../structencoder__t.html#a472521fd9858858b89688d3ce3636909',1,'encoder_t']]],
+  ['current_5fvalue_13',['current_value',['../structmyo__t.html#a27061ef3658b4ef3ad58e21395498961',1,'myo_t']]]
 ];

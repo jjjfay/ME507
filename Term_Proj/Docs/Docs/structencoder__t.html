@@ -92,8 +92,14 @@ Public Attributes</h2></td></tr>
 <tr class="separator:ac6dd8e3f0da72855803135938579a78d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad1e2e0a8a96eaf41b52503f31f91f5bd" id="r_ad1e2e0a8a96eaf41b52503f31f91f5bd"><td class="memItemLeft" align="right" valign="top">TIM_HandleTypeDef *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad1e2e0a8a96eaf41b52503f31f91f5bd">hal_tim</a></td></tr>
 <tr class="separator:ad1e2e0a8a96eaf41b52503f31f91f5bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adfb9b54f2c17d657f9ae45df037f198f" id="r_adfb9b54f2c17d657f9ae45df037f198f"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adfb9b54f2c17d657f9ae45df037f198f">count</a></td></tr>
-<tr class="separator:adfb9b54f2c17d657f9ae45df037f198f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c0ec11166d5d58a52b47c443232dc72" id="r_a7c0ec11166d5d58a52b47c443232dc72"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7c0ec11166d5d58a52b47c443232dc72">mot_pos</a></td></tr>
+<tr class="separator:a7c0ec11166d5d58a52b47c443232dc72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a472521fd9858858b89688d3ce3636909" id="r_a472521fd9858858b89688d3ce3636909"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a472521fd9858858b89688d3ce3636909">curr_count</a></td></tr>
+<tr class="separator:a472521fd9858858b89688d3ce3636909"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0830c5a542e7cdb1842072a24126e78" id="r_af0830c5a542e7cdb1842072a24126e78"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af0830c5a542e7cdb1842072a24126e78">prev_count</a></td></tr>
+<tr class="separator:af0830c5a542e7cdb1842072a24126e78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7467152dd004b49988210dd343d9d2c0" id="r_a7467152dd004b49988210dd343d9d2c0"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7467152dd004b49988210dd343d9d2c0">delta</a></td></tr>
+<tr class="separator:a7467152dd004b49988210dd343d9d2c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a encoder object that has a timer with two channels, and an encoder count. </p>
@@ -128,14 +134,29 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="adfb9b54f2c17d657f9ae45df037f198f" name="adfb9b54f2c17d657f9ae45df037f198f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adfb9b54f2c17d657f9ae45df037f198f">&#9670;&#160;</a></span>count</h2>
+<a id="a472521fd9858858b89688d3ce3636909" name="a472521fd9858858b89688d3ce3636909"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a472521fd9858858b89688d3ce3636909">&#9670;&#160;</a></span>curr_count</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint16_t encoder_t::count</td>
+          <td class="memname">int16_t encoder_t::curr_count</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The encoder count. </p>
+
+</div>
+</div>
+<a id="a7467152dd004b49988210dd343d9d2c0" name="a7467152dd004b49988210dd343d9d2c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7467152dd004b49988210dd343d9d2c0">&#9670;&#160;</a></span>delta</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int16_t encoder_t::delta</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -155,6 +176,36 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>The timer object both channels are from. </p>
+
+</div>
+</div>
+<a id="a7c0ec11166d5d58a52b47c443232dc72" name="a7c0ec11166d5d58a52b47c443232dc72"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c0ec11166d5d58a52b47c443232dc72">&#9670;&#160;</a></span>mot_pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int16_t encoder_t::mot_pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The encoder count. </p>
+
+</div>
+</div>
+<a id="af0830c5a542e7cdb1842072a24126e78" name="af0830c5a542e7cdb1842072a24126e78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0830c5a542e7cdb1842072a24126e78">&#9670;&#160;</a></span>prev_count</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int16_t encoder_t::prev_count</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The encoder count. </p>
 
 </div>
 </div>

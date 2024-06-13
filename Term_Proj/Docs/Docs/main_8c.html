@@ -87,24 +87,45 @@ $(function() {
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="main_8h_source.html">main.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="controller_8h_source.html">controller.h</a>&quot;</code><br />
-<code>#include &lt;stdint.h&gt;</code><br />
+<code>#include &quot;radio.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="myo_8h_source.html">myo.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="encoder__reader_8h_source.html">encoder_reader.h</a>&quot;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &quot;stm32l4xx_hal.h&quot;</code><br />
+<code>#include &lt;stdint.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;ctype.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a70af21c671abfcc773614a9a4f63d920" id="r_a70af21c671abfcc773614a9a4f63d920"><td class="memItemLeft" align="right" valign="top"><a id="a70af21c671abfcc773614a9a4f63d920" name="a70af21c671abfcc773614a9a4f63d920"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SystemClock_Config</b> (void)</td></tr>
+<tr class="memitem:a70af21c671abfcc773614a9a4f63d920" id="r_a70af21c671abfcc773614a9a4f63d920"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a70af21c671abfcc773614a9a4f63d920">SystemClock_Config</a> (void)</td></tr>
+<tr class="memdesc:a70af21c671abfcc773614a9a4f63d920"><td class="mdescLeft">&#160;</td><td class="mdescRight">System Clock Configuration.  <br /></td></tr>
 <tr class="separator:a70af21c671abfcc773614a9a4f63d920"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a336c5acb34a801b2984e602b97ed7b73" id="r_a336c5acb34a801b2984e602b97ed7b73"><td class="memItemLeft" align="right" valign="top"><a id="a336c5acb34a801b2984e602b97ed7b73" name="a336c5acb34a801b2984e602b97ed7b73"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>PeriphCommonClock_Config</b> (void)</td></tr>
+<tr class="memitem:a336c5acb34a801b2984e602b97ed7b73" id="r_a336c5acb34a801b2984e602b97ed7b73"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a336c5acb34a801b2984e602b97ed7b73">PeriphCommonClock_Config</a> (void)</td></tr>
+<tr class="memdesc:a336c5acb34a801b2984e602b97ed7b73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Peripherals Common Clock Configuration.  <br /></td></tr>
 <tr class="separator:a336c5acb34a801b2984e602b97ed7b73"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab55078d807df0a75af8a2fa8eefdcc41" id="r_ab55078d807df0a75af8a2fa8eefdcc41"><td class="memItemLeft" align="right" valign="top"><a id="ab55078d807df0a75af8a2fa8eefdcc41" name="ab55078d807df0a75af8a2fa8eefdcc41"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>task1</b> (void)</td></tr>
-<tr class="memdesc:ab55078d807df0a75af8a2fa8eefdcc41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Task 1, the hand task, is responsible for moving the prosthetic hand fingers based on the set point determined by the myoelectric sensor and feedback given from the pressure sensor. <br /></td></tr>
+<tr class="memdesc:ab55078d807df0a75af8a2fa8eefdcc41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Task 1, the hand task, is responsible for moving the prosthetic hand fingers based on the set point determined by the myoelectric sensor. <br /></td></tr>
 <tr class="separator:ab55078d807df0a75af8a2fa8eefdcc41"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a03bef279de31d91a79b14f31c4530dfc" id="r_a03bef279de31d91a79b14f31c4530dfc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a03bef279de31d91a79b14f31c4530dfc">task2</a> (void)</td></tr>
-<tr class="memdesc:a03bef279de31d91a79b14f31c4530dfc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Task 2, the motor task, is responsible for rotating the prosthetic hand based on the set point determined by the myoelectric sensor alone.  <br /></td></tr>
+<tr class="memitem:a03bef279de31d91a79b14f31c4530dfc" id="r_a03bef279de31d91a79b14f31c4530dfc"><td class="memItemLeft" align="right" valign="top"><a id="a03bef279de31d91a79b14f31c4530dfc" name="a03bef279de31d91a79b14f31c4530dfc"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>task2</b> (void)</td></tr>
+<tr class="memdesc:a03bef279de31d91a79b14f31c4530dfc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Task 2, the spin motor task, is responsible for rotating the prosthetic hand based on the set point determined by the myoelectric sensor alone. <br /></td></tr>
 <tr class="separator:a03bef279de31d91a79b14f31c4530dfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a800ed86ba3f4e578d81215c99b2ad914" id="r_a800ed86ba3f4e578d81215c99b2ad914"><td class="memItemLeft" align="right" valign="top"><a id="a800ed86ba3f4e578d81215c99b2ad914" name="a800ed86ba3f4e578d81215c99b2ad914"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>task3</b> (void)</td></tr>
+<tr class="memdesc:a800ed86ba3f4e578d81215c99b2ad914"><td class="mdescLeft">&#160;</td><td class="mdescRight">Task 3, the wireless emergency stop task, is responsible for monitoring for a change in the PWM signal from a radio transmitter. If a change is detected, this task will end the program. <br /></td></tr>
+<tr class="separator:a800ed86ba3f4e578d81215c99b2ad914"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a840291bc02cba5474a4cb46a9b9566fe" id="r_a840291bc02cba5474a4cb46a9b9566fe"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a840291bc02cba5474a4cb46a9b9566fe">main</a> (void)</td></tr>
+<tr class="memdesc:a840291bc02cba5474a4cb46a9b9566fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">The application entry point.  <br /></td></tr>
+<tr class="separator:a840291bc02cba5474a4cb46a9b9566fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77a2401a35ddd9bd0b8fc28331b81381" id="r_a77a2401a35ddd9bd0b8fc28331b81381"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a77a2401a35ddd9bd0b8fc28331b81381">HAL_TIM_IC_CaptureCallback</a> (TIM_HandleTypeDef *htim)</td></tr>
+<tr class="memdesc:a77a2401a35ddd9bd0b8fc28331b81381"><td class="mdescLeft">&#160;</td><td class="mdescRight">Input Capture callback in non-blocking mode.  <br /></td></tr>
+<tr class="separator:a77a2401a35ddd9bd0b8fc28331b81381"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1730ffe1e560465665eb47d9264826f9" id="r_a1730ffe1e560465665eb47d9264826f9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1730ffe1e560465665eb47d9264826f9">Error_Handler</a> (void)</td></tr>
+<tr class="memdesc:a1730ffe1e560465665eb47d9264826f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is executed in case of error occurrence.  <br /></td></tr>
+<tr class="separator:a1730ffe1e560465665eb47d9264826f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
@@ -123,12 +144,76 @@ TIM_HandleTypeDef&#160;</td><td class="memItemRight" valign="bottom"><b>htim1</b
 <tr class="memitem:a2c80fd5510e2990a59a5c90d745c716c" id="r_a2c80fd5510e2990a59a5c90d745c716c"><td class="memItemLeft" align="right" valign="top"><a id="a2c80fd5510e2990a59a5c90d745c716c" name="a2c80fd5510e2990a59a5c90d745c716c"></a>
 TIM_HandleTypeDef&#160;</td><td class="memItemRight" valign="bottom"><b>htim2</b></td></tr>
 <tr class="separator:a2c80fd5510e2990a59a5c90d745c716c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aac3d2c59ee0e3bbae1b99529a154eb62" id="r_aac3d2c59ee0e3bbae1b99529a154eb62"><td class="memItemLeft" align="right" valign="top"><a id="aac3d2c59ee0e3bbae1b99529a154eb62" name="aac3d2c59ee0e3bbae1b99529a154eb62"></a>
-TIM_HandleTypeDef&#160;</td><td class="memItemRight" valign="bottom"><b>htim3</b></td></tr>
-<tr class="separator:aac3d2c59ee0e3bbae1b99529a154eb62"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a85788cec5a97ee377e4ee2e74f026484" id="r_a85788cec5a97ee377e4ee2e74f026484"><td class="memItemLeft" align="right" valign="top"><a id="a85788cec5a97ee377e4ee2e74f026484" name="a85788cec5a97ee377e4ee2e74f026484"></a>
 TIM_HandleTypeDef&#160;</td><td class="memItemRight" valign="bottom"><b>htim4</b></td></tr>
 <tr class="separator:a85788cec5a97ee377e4ee2e74f026484"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae273feb3e0dc44e38892650faa58fced" id="r_ae273feb3e0dc44e38892650faa58fced"><td class="memItemLeft" align="right" valign="top"><a id="ae273feb3e0dc44e38892650faa58fced" name="ae273feb3e0dc44e38892650faa58fced"></a>
+UART_HandleTypeDef&#160;</td><td class="memItemRight" valign="bottom"><b>huart4</b></td></tr>
+<tr class="separator:ae273feb3e0dc44e38892650faa58fced"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9323bc854cd629237afd922a56f399c" id="r_ad9323bc854cd629237afd922a56f399c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structmotor__t.html">motor_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad9323bc854cd629237afd922a56f399c">hand_mot</a></td></tr>
+<tr class="separator:ad9323bc854cd629237afd922a56f399c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2dd72fb07179ec26bba3b18d6a1f77a6" id="r_a2dd72fb07179ec26bba3b18d6a1f77a6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structmotor__t.html">motor_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2dd72fb07179ec26bba3b18d6a1f77a6">spin_mot</a></td></tr>
+<tr class="separator:a2dd72fb07179ec26bba3b18d6a1f77a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89561a6edf61ea11dc9462ace2d80f1a" id="r_a89561a6edf61ea11dc9462ace2d80f1a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structencoder__t.html">encoder_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a89561a6edf61ea11dc9462ace2d80f1a">hand_enc</a></td></tr>
+<tr class="separator:a89561a6edf61ea11dc9462ace2d80f1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8f315e2b8ea591f91f6236ab801ab56" id="r_ac8f315e2b8ea591f91f6236ab801ab56"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structencoder__t.html">encoder_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac8f315e2b8ea591f91f6236ab801ab56">spin_enc</a></td></tr>
+<tr class="separator:ac8f315e2b8ea591f91f6236ab801ab56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ba399d1a905a035e46bb9cc79ed1071" id="r_a4ba399d1a905a035e46bb9cc79ed1071"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcontroller__t.html">controller_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4ba399d1a905a035e46bb9cc79ed1071">hand_cont</a></td></tr>
+<tr class="separator:a4ba399d1a905a035e46bb9cc79ed1071"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1cc3948ffb1db51a2295506624d3afd" id="r_ac1cc3948ffb1db51a2295506624d3afd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcontroller__t.html">controller_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac1cc3948ffb1db51a2295506624d3afd">spin_cont</a></td></tr>
+<tr class="separator:ac1cc3948ffb1db51a2295506624d3afd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a717934897b5306ed2b16c8efd2332664" id="r_a717934897b5306ed2b16c8efd2332664"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structmyo__t.html">myo_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a717934897b5306ed2b16c8efd2332664">hmyo</a></td></tr>
+<tr class="separator:a717934897b5306ed2b16c8efd2332664"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a137581b71af645da03f1e971ba998e38" id="r_a137581b71af645da03f1e971ba998e38"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structmyo__t.html">myo_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a137581b71af645da03f1e971ba998e38">smyo</a></td></tr>
+<tr class="separator:a137581b71af645da03f1e971ba998e38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6979895345c63ca86fc4c806792b935e" id="r_a6979895345c63ca86fc4c806792b935e"><td class="memItemLeft" align="right" valign="top"><a id="a6979895345c63ca86fc4c806792b935e" name="a6979895345c63ca86fc4c806792b935e"></a>
+uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>ch1_val</b></td></tr>
+<tr class="separator:a6979895345c63ca86fc4c806792b935e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85a1c2271edad1139d015a12411444d3" id="r_a85a1c2271edad1139d015a12411444d3"><td class="memItemLeft" align="right" valign="top"><a id="a85a1c2271edad1139d015a12411444d3" name="a85a1c2271edad1139d015a12411444d3"></a>
+uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>ch2_val</b></td></tr>
+<tr class="separator:a85a1c2271edad1139d015a12411444d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd72a538b2ff33ab4525f47337a93c51" id="r_acd72a538b2ff33ab4525f47337a93c51"><td class="memItemLeft" align="right" valign="top"><a id="acd72a538b2ff33ab4525f47337a93c51" name="acd72a538b2ff33ab4525f47337a93c51"></a>
+uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>ch1_p</b></td></tr>
+<tr class="separator:acd72a538b2ff33ab4525f47337a93c51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad49b80b3bed33ad663d9f6b2475a5413" id="r_ad49b80b3bed33ad663d9f6b2475a5413"><td class="memItemLeft" align="right" valign="top"><a id="ad49b80b3bed33ad663d9f6b2475a5413" name="ad49b80b3bed33ad663d9f6b2475a5413"></a>
+uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>ch2_p</b></td></tr>
+<tr class="separator:ad49b80b3bed33ad663d9f6b2475a5413"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a642ec097d013efc791634719e5a5c9e4" id="r_a642ec097d013efc791634719e5a5c9e4"><td class="memItemLeft" align="right" valign="top"><a id="a642ec097d013efc791634719e5a5c9e4" name="a642ec097d013efc791634719e5a5c9e4"></a>
+uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>radio_pulse</b></td></tr>
+<tr class="separator:a642ec097d013efc791634719e5a5c9e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fb54b0932be39748e4c037c9324b64f" id="r_a9fb54b0932be39748e4c037c9324b64f"><td class="memItemLeft" align="right" valign="top"><a id="a9fb54b0932be39748e4c037c9324b64f" name="a9fb54b0932be39748e4c037c9324b64f"></a>
+uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>m2_d</b></td></tr>
+<tr class="separator:a9fb54b0932be39748e4c037c9324b64f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3162da6c4ec349f9c8c90dbd578379dc" id="r_a3162da6c4ec349f9c8c90dbd578379dc"><td class="memItemLeft" align="right" valign="top"><a id="a3162da6c4ec349f9c8c90dbd578379dc" name="a3162da6c4ec349f9c8c90dbd578379dc"></a>
+int16_t&#160;</td><td class="memItemRight" valign="bottom"><b>hand_mot_pos</b> = 0</td></tr>
+<tr class="separator:a3162da6c4ec349f9c8c90dbd578379dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d39ff8c797fcf261aabddea8ad71aad" id="r_a8d39ff8c797fcf261aabddea8ad71aad"><td class="memItemLeft" align="right" valign="top"><a id="a8d39ff8c797fcf261aabddea8ad71aad" name="a8d39ff8c797fcf261aabddea8ad71aad"></a>
+int16_t&#160;</td><td class="memItemRight" valign="bottom"><b>spin_mot_pos</b> = 0</td></tr>
+<tr class="separator:a8d39ff8c797fcf261aabddea8ad71aad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f34f98f3e2c2fc6284c4f74443d0c5d" id="r_a3f34f98f3e2c2fc6284c4f74443d0c5d"><td class="memItemLeft" align="right" valign="top"><a id="a3f34f98f3e2c2fc6284c4f74443d0c5d" name="a3f34f98f3e2c2fc6284c4f74443d0c5d"></a>
+uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>hmyo_curr</b> = 0</td></tr>
+<tr class="separator:a3f34f98f3e2c2fc6284c4f74443d0c5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa701bcf435942a097be4b75578b56a94" id="r_aa701bcf435942a097be4b75578b56a94"><td class="memItemLeft" align="right" valign="top"><a id="aa701bcf435942a097be4b75578b56a94" name="aa701bcf435942a097be4b75578b56a94"></a>
+uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>hmyo_prev</b> = 0</td></tr>
+<tr class="separator:aa701bcf435942a097be4b75578b56a94"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5b7c86fede678b55f07d045f8191424" id="r_af5b7c86fede678b55f07d045f8191424"><td class="memItemLeft" align="right" valign="top"><a id="af5b7c86fede678b55f07d045f8191424" name="af5b7c86fede678b55f07d045f8191424"></a>
+uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>smyo_curr</b> = 0</td></tr>
+<tr class="separator:af5b7c86fede678b55f07d045f8191424"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a825074aabd9d4670dfd1416d3bd3127b" id="r_a825074aabd9d4670dfd1416d3bd3127b"><td class="memItemLeft" align="right" valign="top"><a id="a825074aabd9d4670dfd1416d3bd3127b" name="a825074aabd9d4670dfd1416d3bd3127b"></a>
+uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>smyo_prev</b> = 0</td></tr>
+<tr class="separator:a825074aabd9d4670dfd1416d3bd3127b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd5254c4ebf9cbf6b6048dea585293b9" id="r_acd5254c4ebf9cbf6b6048dea585293b9"><td class="memItemLeft" align="right" valign="top"><a id="acd5254c4ebf9cbf6b6048dea585293b9" name="acd5254c4ebf9cbf6b6048dea585293b9"></a>
+uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>hmyo_delta</b> = 0</td></tr>
+<tr class="separator:acd5254c4ebf9cbf6b6048dea585293b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87474044ec4b9ed96fe29e08b814f8ef" id="r_a87474044ec4b9ed96fe29e08b814f8ef"><td class="memItemLeft" align="right" valign="top"><a id="a87474044ec4b9ed96fe29e08b814f8ef" name="a87474044ec4b9ed96fe29e08b814f8ef"></a>
+uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>smyo_delta</b> = 0</td></tr>
+<tr class="separator:a87474044ec4b9ed96fe29e08b814f8ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9710d0833aa418faec4823df2b28e2d8" id="r_a9710d0833aa418faec4823df2b28e2d8"><td class="memItemLeft" align="right" valign="top"><a id="a9710d0833aa418faec4823df2b28e2d8" name="a9710d0833aa418faec4823df2b28e2d8"></a>
+char&#160;</td><td class="memItemRight" valign="bottom"><b>tst_buff</b> [150]</td></tr>
+<tr class="separator:a9710d0833aa418faec4823df2b28e2d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a742204794ea328ba293fe59cec79b990" id="r_a742204794ea328ba293fe59cec79b990"><td class="memItemLeft" align="right" valign="top"><a id="a742204794ea328ba293fe59cec79b990" name="a742204794ea328ba293fe59cec79b990"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>m</b></td></tr>
+<tr class="separator:a742204794ea328ba293fe59cec79b990"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>: Main program body for the ME 507 term project. The main contents of this file is the finite state machine that controls the prosthetic hand operation. This includes the tasks to open and close the hand, spin the hand, and gather an interpret data from the myoelectric and pressure sensors. Lastly, there is a task to check for an emergency stop signal from a radio transmitter device. </p>
@@ -136,14 +221,14 @@ TIM_HandleTypeDef&#160;</td><td class="memItemRight" valign="bottom"><b>htim4</b
 <p>Copyright (c) 2024 STMicroelectronics. All rights reserved.</p>
 <p>This software is licensed under terms that can be found in the LICENSE file in the root directory of this software component. If no LICENSE file comes with this software, it is provided AS-IS. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a03bef279de31d91a79b14f31c4530dfc" name="a03bef279de31d91a79b14f31c4530dfc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a03bef279de31d91a79b14f31c4530dfc">&#9670;&#160;</a></span>task2()</h2>
+<a id="a1730ffe1e560465665eb47d9264826f9" name="a1730ffe1e560465665eb47d9264826f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1730ffe1e560465665eb47d9264826f9">&#9670;&#160;</a></span>Error_Handler()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void task2 </td>
+          <td class="memname">void Error_Handler </td>
           <td>(</td>
           <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"></span></td><td>)</td>
           <td></td>
@@ -151,18 +236,115 @@ TIM_HandleTypeDef&#160;</td><td class="memItemRight" valign="bottom"><b>htim4</b
       </table>
 </div><div class="memdoc">
 
-<p>Task 2, the motor task, is responsible for rotating the prosthetic hand based on the set point determined by the myoelectric sensor alone. </p>
-<p>Task 6, the wireless emergency stop task, is responsible for monitoring for a change in the PWM signal from a radio transmitter. If a change is detected, this task will end the program.</p>
-<p>Task 5, the reset button task, is responsible for continuously monitoring for a button push. When a button is pushed, this task will reset the MCU.</p>
-<p>Task 4, the pressure sensor task, is responsible for gathering, interpreting, and sharing the output of the pressure sensor signals to the hand rotation motor.</p>
-<p>Task 3, the myo task, is responsible for gathering, interpreting, and sharing the output of the myoelectric sensor signals to both motors. </p>
-<p>The application entry point. </p><dl class="retval"><dt>Return values</dt><dd>
+<p>This function is executed in case of error occurrence. </p>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">None</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a77a2401a35ddd9bd0b8fc28331b81381" name="a77a2401a35ddd9bd0b8fc28331b81381"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77a2401a35ddd9bd0b8fc28331b81381">&#9670;&#160;</a></span>HAL_TIM_IC_CaptureCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void HAL_TIM_IC_CaptureCallback </td>
+          <td>(</td>
+          <td class="paramtype">TIM_HandleTypeDef *</td>          <td class="paramname"><span class="paramname"><em>htim</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Input Capture callback in non-blocking mode. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">htim</td><td>TIM IC handle </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">None</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a840291bc02cba5474a4cb46a9b9566fe" name="a840291bc02cba5474a4cb46a9b9566fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a840291bc02cba5474a4cb46a9b9566fe">&#9670;&#160;</a></span>main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The application entry point. </p>
+<dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
     <tr><td class="paramname">int</td><td></td></tr>
   </table>
   </dd>
 </dl>
-<p>System Clock Configuration </p><dl class="retval"><dt>Return values</dt><dd>
+
+</div>
+</div>
+<a id="a336c5acb34a801b2984e602b97ed7b73" name="a336c5acb34a801b2984e602b97ed7b73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a336c5acb34a801b2984e602b97ed7b73">&#9670;&#160;</a></span>PeriphCommonClock_Config()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PeriphCommonClock_Config </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Peripherals Common Clock Configuration. </p>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">None</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Initializes the peripherals clock</p>
+
+</div>
+</div>
+<a id="a70af21c671abfcc773614a9a4f63d920" name="a70af21c671abfcc773614a9a4f63d920"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70af21c671abfcc773614a9a4f63d920">&#9670;&#160;</a></span>SystemClock_Config()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SystemClock_Config </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>System Clock Configuration. </p>
+<dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
     <tr><td class="paramname">None</td><td></td></tr>
   </table>
@@ -171,123 +353,166 @@ TIM_HandleTypeDef&#160;</td><td class="memItemRight" valign="bottom"><b>htim4</b
 <p>Configure the main internal regulator output voltage</p>
 <p>Initializes the RCC Oscillators according to the specified parameters in the RCC_OscInitTypeDef structure.</p>
 <p>Initializes the CPU, AHB and APB buses clocks</p>
-<p>Peripherals Common Clock Configuration </p><dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">None</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<p>Initializes the peripherals clock</p>
-<p>ADC1 Initialization Function </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">None</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">None</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<p>Common config</p>
-<p>Configure the ADC multi-mode</p>
-<p>Configure Regular Channel</p>
-<p>ADC2 Initialization Function </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">None</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">None</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<p>Common config</p>
-<p>Configure Regular Channel</p>
-<p>ADC3 Initialization Function </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">None</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">None</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<p>Common config</p>
-<p>Configure Regular Channel</p>
-<p>TIM1 Initialization Function </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">None</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">None</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<p>TIM2 Initialization Function </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">None</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">None</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<p>TIM3 Initialization Function </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">None</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">None</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<p>TIM4 Initialization Function </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">None</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">None</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<p>GPIO Initialization Function </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">None</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">None</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<p>This function is executed in case of error occurrence. </p><dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">None</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
 
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a4ba399d1a905a035e46bb9cc79ed1071" name="a4ba399d1a905a035e46bb9cc79ed1071"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ba399d1a905a035e46bb9cc79ed1071">&#9670;&#160;</a></span>hand_cont</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcontroller__t.html">controller_t</a> hand_cont</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {.p_mot = &amp;hand_mot,</div>
+<div class="line">                          .p_enc = &amp;hand_enc,</div>
+<div class="line">                          .gain = 1,</div>
+<div class="line">                          .setpoint = 0}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a89561a6edf61ea11dc9462ace2d80f1a" name="a89561a6edf61ea11dc9462ace2d80f1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89561a6edf61ea11dc9462ace2d80f1a">&#9670;&#160;</a></span>hand_enc</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structencoder__t.html">encoder_t</a> hand_enc</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {.channel1 = TIM_CHANNEL_1,</div>
+<div class="line">                      .channel2 = TIM_CHANNEL_2,</div>
+<div class="line">                      .hal_tim = &amp;htim1,</div>
+<div class="line">                      .mot_pos = 0,</div>
+<div class="line">                      .curr_count = 0,</div>
+<div class="line">                      .prev_count = 0,</div>
+<div class="line">                      .delta = 0}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ad9323bc854cd629237afd922a56f399c" name="ad9323bc854cd629237afd922a56f399c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9323bc854cd629237afd922a56f399c">&#9670;&#160;</a></span>hand_mot</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structmotor__t.html">motor_t</a> hand_mot</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {.pwm_val    = 0,</div>
+<div class="line">            .pwm_channel = TIM_CHANNEL_1,</div>
+<div class="line">            .hal_tim = &amp;htim2,</div>
+<div class="line">            .in_pin_1 = AIN1_Pin,</div>
+<div class="line">            .in_pin_2 = AIN2_Pin,</div>
+<div class="line">            .stby_pin = STBY_Pin,</div>
+<div class="line">            .port_in_1 = GPIOA,</div>
+<div class="line">            .port_in_2 = GPIOC,</div>
+<div class="line">            .port_stby_pin = GPIOA}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a717934897b5306ed2b16c8efd2332664" name="a717934897b5306ed2b16c8efd2332664"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a717934897b5306ed2b16c8efd2332664">&#9670;&#160;</a></span>hmyo</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structmyo__t.html">myo_t</a> hmyo</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {.hal_adc = &amp;hadc1,</div>
+<div class="line">              .prev_value = 0,</div>
+<div class="line">              .current_value = 0}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a137581b71af645da03f1e971ba998e38" name="a137581b71af645da03f1e971ba998e38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a137581b71af645da03f1e971ba998e38">&#9670;&#160;</a></span>smyo</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structmyo__t.html">myo_t</a> smyo</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {.hal_adc = &amp;hadc2,</div>
+<div class="line">              .prev_value = 0,</div>
+<div class="line">              .current_value = 0}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ac1cc3948ffb1db51a2295506624d3afd" name="ac1cc3948ffb1db51a2295506624d3afd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1cc3948ffb1db51a2295506624d3afd">&#9670;&#160;</a></span>spin_cont</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcontroller__t.html">controller_t</a> spin_cont</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {.p_mot = &amp;spin_mot,</div>
+<div class="line">                          .p_enc = &amp;spin_enc,</div>
+<div class="line">                          .gain = 1,</div>
+<div class="line">                          .setpoint = 0}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ac8f315e2b8ea591f91f6236ab801ab56" name="ac8f315e2b8ea591f91f6236ab801ab56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8f315e2b8ea591f91f6236ab801ab56">&#9670;&#160;</a></span>spin_enc</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structencoder__t.html">encoder_t</a> spin_enc</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {.channel1 = TIM_CHANNEL_1,</div>
+<div class="line">                      .channel2 = TIM_CHANNEL_2,</div>
+<div class="line">                      .hal_tim = &amp;htim4,</div>
+<div class="line">                      .mot_pos = 0,</div>
+<div class="line">                      .curr_count = 0,</div>
+<div class="line">                      .prev_count = 0,</div>
+<div class="line">                      .delta = 0}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a2dd72fb07179ec26bba3b18d6a1f77a6" name="a2dd72fb07179ec26bba3b18d6a1f77a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2dd72fb07179ec26bba3b18d6a1f77a6">&#9670;&#160;</a></span>spin_mot</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structmotor__t.html">motor_t</a> spin_mot</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {.pwm_val    = 0,</div>
+<div class="line">                .pwm_channel = TIM_CHANNEL_3,</div>
+<div class="line">                .hal_tim = &amp;htim2,</div>
+<div class="line">                .in_pin_1 = BIN1_Pin,</div>
+<div class="line">                .in_pin_2 = BIN2_Pin,</div>
+<div class="line">                .stby_pin = STBY_Pin,</div>
+<div class="line">                .port_in_1 = GPIOC,</div>
+<div class="line">                .port_in_2 = BIN2_GPIO_Port,</div>
+<div class="line">                .port_stby_pin = GPIOA}</div>
+</div><!-- fragment -->
 </div>
 </div>
 </div><!-- contents -->

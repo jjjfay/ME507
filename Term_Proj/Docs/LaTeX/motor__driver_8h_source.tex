@@ -21,33 +21,39 @@
 \DoxyCodeLine{00020\ \textcolor{keyword}{struct\ }\{}
 \DoxyCodeLine{00021\ }
 \DoxyCodeLine{00022\ \ \ \ \ \textcolor{comment}{//These\ are\ all\ the\ things\ you\ have\ to\ define\ when\ you\ create\ a\ motor\ object}}
-\DoxyCodeLine{00023\ \ \ \ \ int32\_t\ \ duty;}
+\DoxyCodeLine{00023\ \ \ \ \ int32\_t\ \ pwm\_val;}
 \DoxyCodeLine{00024\ }
-\DoxyCodeLine{00025\ \ \ \ \ \textcolor{comment}{//two\ channels\ for\ each\ motor}}
-\DoxyCodeLine{00026\ \ \ \ \ uint32\_t\ channel1;}
-\DoxyCodeLine{00027\ \ \ \ \ uint32\_t\ channel2;}
-\DoxyCodeLine{00028\ }
-\DoxyCodeLine{00029\ \ \ \ \ \textcolor{comment}{//The\ handle\ to\ the\ HAL\ timer\ object\ used\ for\ PWM\ generation.\ Include\ *\ so\ its\ a\ pointer\ to\ the\ object}}
-\DoxyCodeLine{00030\ \ \ \ \ TIM\_HandleTypeDef*\ hal\_tim;}
-\DoxyCodeLine{00031\ }
-\DoxyCodeLine{00032\ \ \ \ \ \textcolor{comment}{//pin\ data\ typ\ is\ int32\_t}}
-\DoxyCodeLine{00033\ \ \ \ \ \textcolor{comment}{//int32\_t\ pwm\_pin\_1;}}
-\DoxyCodeLine{00034\ \ \ \ \ \textcolor{comment}{//int32\_t\ pwm\_pin\_2;}}
-\DoxyCodeLine{00035\ }
-\DoxyCodeLine{00036\ \ \ \ \ \textcolor{comment}{//port\ data\ type\ is\ GPIO\_TypeDef.\ Include\ *\ so\ its\ a\ pointer\ to\ the\ object.}}
-\DoxyCodeLine{00037\ \ \ \ \ \textcolor{comment}{//don't\ really\ see\ why\ I\ need\ this\ right\ now}}
-\DoxyCodeLine{00038\ \ \ \ \ \textcolor{comment}{//port\ stores\ the\ pin\ behavior\ information}}
-\DoxyCodeLine{00039\ \ \ \ \ \textcolor{comment}{//GPIO\_TypeDef*\ port}}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{comment}{//one\ channels\ for\ each\ motor}}
+\DoxyCodeLine{00026\ \ \ \ \ uint32\_t\ pwm\_channel;}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{comment}{//The\ handle\ to\ the\ HAL\ timer\ object\ used\ for\ PWM\ generation.\ Include\ *\ so\ its\ a\ pointer\ to\ the\ object}}
+\DoxyCodeLine{00029\ \ \ \ \ TIM\_HandleTypeDef*\ hal\_tim;}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{comment}{//pin\ data\ typ\ is\ int32\_t}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ uint32\_t\ in\_pin\_1;}
+\DoxyCodeLine{00034\ \ \ \ \ uint32\_t\ in\_pin\_2;}
+\DoxyCodeLine{00035\ \ \ \ \ uint32\_t\ stby\_pin;}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{comment}{//port\ data\ type\ is\ GPIO\_TypeDef.\ Include\ *\ so\ its\ a\ pointer\ to\ the\ object.}}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{comment}{//don't\ really\ see\ why\ I\ need\ this\ right\ now}}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{comment}{//port\ stores\ the\ pin\ behavior\ information}}
 \DoxyCodeLine{00040\ }
-\DoxyCodeLine{00041\ \}\ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{structmotor__t}{motor\_t}};}
-\DoxyCodeLine{00042\ }
-\DoxyCodeLine{00043\ }
-\DoxyCodeLine{00051\ \textcolor{keywordtype}{void}\ start\_PWM(\mbox{\hyperlink{structmotor__t}{motor\_t}}*\ p\_mot,\ uint32\_t\ channel);}
-\DoxyCodeLine{00052\ }
-\DoxyCodeLine{00060\ \textcolor{keywordtype}{void}\ stop\_PWM(\mbox{\hyperlink{structmotor__t}{motor\_t}}*\ p\_mot,\ uint32\_t\ channel);}
-\DoxyCodeLine{00061\ }
-\DoxyCodeLine{00068\ \textcolor{keywordtype}{void}\ set\_duty(\mbox{\hyperlink{structmotor__t}{motor\_t}}*\ p\_mot,\ int32\_t\ duty);}
-\DoxyCodeLine{00069\ }
-\DoxyCodeLine{00070\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ INC\_MOTOR\_DRIVER\_H\_\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00041\ \ \ \ \ GPIO\_TypeDef*\ port\_in\_1;}
+\DoxyCodeLine{00042\ \ \ \ \ GPIO\_TypeDef*\ port\_in\_2;}
+\DoxyCodeLine{00043\ \ \ \ \ GPIO\_TypeDef*\ port\_stby\_pin;}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \}\ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{structmotor__t}{motor\_t}};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00055\ \textcolor{keywordtype}{void}\ start\_PWM(\mbox{\hyperlink{structmotor__t}{motor\_t}}*\ p\_mot);}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00064\ \textcolor{keywordtype}{void}\ stop\_PWM(\mbox{\hyperlink{structmotor__t}{motor\_t}}*\ p\_mot);}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00072\ \textcolor{keywordtype}{void}\ set\_duty(\mbox{\hyperlink{structmotor__t}{motor\_t}}*\ p\_mot,\ int32\_t\ duty);}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00080\ \textcolor{keywordtype}{void}\ set\_stby(\mbox{\hyperlink{structmotor__t}{motor\_t}}*\ p\_mot,\ int32\_t\ stby\_val);}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ INC\_MOTOR\_DRIVER\_H\_\ */}\textcolor{preprocessor}{}}
 
 \end{DoxyCode}

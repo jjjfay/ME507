@@ -3,8 +3,8 @@ var indexSectionsWithContent =
   0: "12478_abcdefghilmnprstuvz",
   1: "cem",
   2: "cems",
-  3: "_bcdhimnprstuz",
-  4: "cghps",
+  3: "_bcdehimnprstuz",
+  4: "cdghmps",
   5: "aehlmtuv",
   6: "cs",
   7: "achmpst"

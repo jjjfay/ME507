@@ -2,7 +2,7 @@ var searchData=
 [
   ['sdio_20and_20rng_20clock_0',['SDIO and RNG clock                     |',['../system__stm32l4xx_8c.html#autotoc_md18',1,'']]],
   ['sensors_1',['Prosthetic Hand Control through Myoelectric and Pressure Sensors',['../index.html',1,'']]],
-  ['set_5fk_2',['set_K',['../controller_8h.html#a8b372be42e6f793749cf779010087c00',1,'controller.h']]],
+  ['set_5fk_2',['set_K',['../controller_8h.html#a8b372be42e6f793749cf779010087c00',1,'controller.c']]],
   ['set_5fsetpoint_3',['set_setpoint',['../controller_8h.html#ac82cfad368eac072dab9f623db422cea',1,'controller.c']]],
   ['setpoint_4',['setpoint',['../structcontroller__t.html#afad9b2a7de51d07966f868d056ea2fab',1,'controller_t']]],
   ['source_20msi_5',['System Clock source                    | MSI',['../system__stm32l4xx_8c.html#autotoc_md1',1,'']]],
@@ -25,7 +25,8 @@ var searchData=
   ['system_20clock_20as_20follows_3a_22',['This file configures the system clock as follows:',['../system__stm32l4xx_8c.html#autotoc_md0',1,'']]],
   ['system_20clock_20source_20msi_23',['System Clock source                    | MSI',['../system__stm32l4xx_8c.html#autotoc_md1',1,'']]],
   ['system_5fstm32l4xx_2ec_24',['system_stm32l4xx.c',['../system__stm32l4xx_8c.html',1,'']]],
-  ['systemcoreclockupdate_25',['SystemCoreClockUpdate',['../group___s_t_m32_l4xx___system___private___functions.html#gae0c36a9591fe6e9c45ecb21a794f0f0f',1,'system_stm32l4xx.c']]],
-  ['systeminit_26',['SystemInit',['../group___s_t_m32_l4xx___system___private___functions.html#ga93f514700ccf00d08dbdcff7f1224eb2',1,'system_stm32l4xx.c']]],
-  ['systick_5fhandler_27',['SysTick_Handler',['../stm32l4xx__it_8c.html#ab5e09814056d617c521549e542639b7e',1,'SysTick_Handler(void):&#160;stm32l4xx_it.c'],['../stm32l4xx__it_8h.html#ab5e09814056d617c521549e542639b7e',1,'SysTick_Handler(void):&#160;stm32l4xx_it.c']]]
+  ['systemclock_5fconfig_25',['SystemClock_Config',['../main_8c.html#a70af21c671abfcc773614a9a4f63d920',1,'main.c']]],
+  ['systemcoreclockupdate_26',['SystemCoreClockUpdate',['../group___s_t_m32_l4xx___system___private___functions.html#gae0c36a9591fe6e9c45ecb21a794f0f0f',1,'system_stm32l4xx.c']]],
+  ['systeminit_27',['SystemInit',['../group___s_t_m32_l4xx___system___private___functions.html#ga93f514700ccf00d08dbdcff7f1224eb2',1,'system_stm32l4xx.c']]],
+  ['systick_5fhandler_28',['SysTick_Handler',['../stm32l4xx__it_8c.html#ab5e09814056d617c521549e542639b7e',1,'SysTick_Handler(void):&#160;stm32l4xx_it.c'],['../stm32l4xx__it_8h.html#ab5e09814056d617c521549e542639b7e',1,'SysTick_Handler(void):&#160;stm32l4xx_it.c']]]
 ];

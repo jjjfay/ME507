@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['zero_0',['zero',['../encoder__reader_8h.html#aa6e65d34f5a90e31cd3e57be6d149d47',1,'encoder_reader.c']]]
+  ['usagefault_5fhandler_0',['UsageFault_Handler',['../stm32l4xx__it_8c.html#a1d98923de2ed6b7309b66f9ba2971647',1,'UsageFault_Handler(void):&#160;stm32l4xx_it.c'],['../stm32l4xx__it_8h.html#a1d98923de2ed6b7309b66f9ba2971647',1,'UsageFault_Handler(void):&#160;stm32l4xx_it.c']]]
 ];

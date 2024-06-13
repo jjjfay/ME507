@@ -1,0 +1,43 @@
+\doxysection{Core/\+Inc/myo.h File Reference}
+\hypertarget{myo_8h}{}\label{myo_8h}\index{Core/Inc/myo.h@{Core/Inc/myo.h}}
+
+
+Defines the myoelectric sensor struct and its methods. This file is used to read and interpret the output form the myoelectric sensor to be sent to the controller to determine the desired motor position.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include "{}stm32l4xx\+\_\+hal.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structmyo__t}{myo\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Represents a myoelectric sensor object that has an ADC and a value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{myo_8h_a615011b0f321a62ffb65d36ef6d015a8}{read\+\_\+current}} (\mbox{\hyperlink{structmyo__t}{myo\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+\_\+myo)
+\begin{DoxyCompactList}\small\item\em A function to get the ADC value for the myoelectric sensor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Defines the myoelectric sensor struct and its methods. This file is used to read and interpret the output form the myoelectric sensor to be sent to the controller to determine the desired motor position. 
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{myo_8h_a615011b0f321a62ffb65d36ef6d015a8}\label{myo_8h_a615011b0f321a62ffb65d36ef6d015a8} 
+\index{myo.h@{myo.h}!read\_current@{read\_current}}
+\index{read\_current@{read\_current}!myo.h@{myo.h}}
+\doxysubsubsection{\texorpdfstring{read\_current()}{read\_current()}}
+{\footnotesize\ttfamily uint16\+\_\+t read\+\_\+current (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmyo__t}{myo\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+\_\+myo }\end{DoxyParamCaption})}
+
+
+
+A function to get the ADC value for the myoelectric sensor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+\_\+myo} & The myoelectric sensor object to perform the function on. \\
+\hline
+\end{DoxyParams}

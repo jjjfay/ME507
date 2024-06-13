@@ -18,7 +18,13 @@ uint32\+\_\+t \mbox{\hyperlink{structencoder__t_ac6dd8e3f0da72855803135938579a78
 \item 
 TIM\+\_\+\+Handle\+Type\+Def \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structencoder__t_ad1e2e0a8a96eaf41b52503f31f91f5bd}{hal\+\_\+tim}}
 \item 
-uint16\+\_\+t \mbox{\hyperlink{structencoder__t_adfb9b54f2c17d657f9ae45df037f198f}{count}}
+int16\+\_\+t \mbox{\hyperlink{structencoder__t_a7c0ec11166d5d58a52b47c443232dc72}{mot\+\_\+pos}}
+\item 
+int16\+\_\+t \mbox{\hyperlink{structencoder__t_a472521fd9858858b89688d3ce3636909}{curr\+\_\+count}}
+\item 
+int16\+\_\+t \mbox{\hyperlink{structencoder__t_af0830c5a542e7cdb1842072a24126e78}{prev\+\_\+count}}
+\item 
+int16\+\_\+t \mbox{\hyperlink{structencoder__t_a7467152dd004b49988210dd343d9d2c0}{delta}}
 \end{DoxyCompactItemize}
 
 
@@ -38,11 +44,17 @@ The timer channel for the first encoder output. \Hypertarget{structencoder__t_ac
 \doxysubsubsection{\texorpdfstring{channel2}{channel2}}
 {\footnotesize\ttfamily uint32\+\_\+t encoder\+\_\+t\+::channel2}
 
-The timer channel for the second encoder output. \Hypertarget{structencoder__t_adfb9b54f2c17d657f9ae45df037f198f}\label{structencoder__t_adfb9b54f2c17d657f9ae45df037f198f} 
-\index{encoder\_t@{encoder\_t}!count@{count}}
-\index{count@{count}!encoder\_t@{encoder\_t}}
-\doxysubsubsection{\texorpdfstring{count}{count}}
-{\footnotesize\ttfamily uint16\+\_\+t encoder\+\_\+t\+::count}
+The timer channel for the second encoder output. \Hypertarget{structencoder__t_a472521fd9858858b89688d3ce3636909}\label{structencoder__t_a472521fd9858858b89688d3ce3636909} 
+\index{encoder\_t@{encoder\_t}!curr\_count@{curr\_count}}
+\index{curr\_count@{curr\_count}!encoder\_t@{encoder\_t}}
+\doxysubsubsection{\texorpdfstring{curr\_count}{curr\_count}}
+{\footnotesize\ttfamily int16\+\_\+t encoder\+\_\+t\+::curr\+\_\+count}
+
+The encoder count. \Hypertarget{structencoder__t_a7467152dd004b49988210dd343d9d2c0}\label{structencoder__t_a7467152dd004b49988210dd343d9d2c0} 
+\index{encoder\_t@{encoder\_t}!delta@{delta}}
+\index{delta@{delta}!encoder\_t@{encoder\_t}}
+\doxysubsubsection{\texorpdfstring{delta}{delta}}
+{\footnotesize\ttfamily int16\+\_\+t encoder\+\_\+t\+::delta}
 
 The encoder count. \Hypertarget{structencoder__t_ad1e2e0a8a96eaf41b52503f31f91f5bd}\label{structencoder__t_ad1e2e0a8a96eaf41b52503f31f91f5bd} 
 \index{encoder\_t@{encoder\_t}!hal\_tim@{hal\_tim}}
@@ -50,7 +62,19 @@ The encoder count. \Hypertarget{structencoder__t_ad1e2e0a8a96eaf41b52503f31f91f5
 \doxysubsubsection{\texorpdfstring{hal\_tim}{hal\_tim}}
 {\footnotesize\ttfamily TIM\+\_\+\+Handle\+Type\+Def\texorpdfstring{$\ast$}{*} encoder\+\_\+t\+::hal\+\_\+tim}
 
-The timer object both channels are from. 
+The timer object both channels are from. \Hypertarget{structencoder__t_a7c0ec11166d5d58a52b47c443232dc72}\label{structencoder__t_a7c0ec11166d5d58a52b47c443232dc72} 
+\index{encoder\_t@{encoder\_t}!mot\_pos@{mot\_pos}}
+\index{mot\_pos@{mot\_pos}!encoder\_t@{encoder\_t}}
+\doxysubsubsection{\texorpdfstring{mot\_pos}{mot\_pos}}
+{\footnotesize\ttfamily int16\+\_\+t encoder\+\_\+t\+::mot\+\_\+pos}
+
+The encoder count. \Hypertarget{structencoder__t_af0830c5a542e7cdb1842072a24126e78}\label{structencoder__t_af0830c5a542e7cdb1842072a24126e78} 
+\index{encoder\_t@{encoder\_t}!prev\_count@{prev\_count}}
+\index{prev\_count@{prev\_count}!encoder\_t@{encoder\_t}}
+\doxysubsubsection{\texorpdfstring{prev\_count}{prev\_count}}
+{\footnotesize\ttfamily int16\+\_\+t encoder\+\_\+t\+::prev\+\_\+count}
+
+The encoder count. 
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 

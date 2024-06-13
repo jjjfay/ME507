@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['hal_5ftim_0',['hal_tim',['../structencoder__t.html#ad1e2e0a8a96eaf41b52503f31f91f5bd',1,'encoder_t']]]
+  ['gain_0',['gain',['../structcontroller__t.html#a5fcc2da40851e85080d0048ab51f1e88',1,'controller_t']]]
 ];

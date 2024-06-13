@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['p_5fenc_0',['p_enc',['../structcontroller__t.html#a41e5b595cddc5d4a76aed105d0ee1fa4',1,'controller_t']]],
-  ['p_5fmot_1',['p_mot',['../structcontroller__t.html#a71e1fdca91f8bb344d4542ca1829d51b',1,'controller_t']]]
+  ['hal_5fadc_0',['hal_adc',['../structmyo__t.html#a0c71c5a74798ab0981a8caf2b904cca1',1,'myo_t']]],
+  ['hal_5ftim_1',['hal_tim',['../structencoder__t.html#ad1e2e0a8a96eaf41b52503f31f91f5bd',1,'encoder_t']]]
 ];

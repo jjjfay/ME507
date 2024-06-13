@@ -10,8 +10,8 @@
 \DoxyCodeLine{00010\ }
 \DoxyCodeLine{00014\ \textcolor{keyword}{struct\ }\{}
 \DoxyCodeLine{00015\ }
-\DoxyCodeLine{00016\ \ \ \ \ motor\_driver\ \mbox{\hyperlink{structcontroller__t_a71e1fdca91f8bb344d4542ca1829d51b}{p\_mot}};\ }
-\DoxyCodeLine{00017\ \ \ \ \ encoder\_reader\ \mbox{\hyperlink{structcontroller__t_a41e5b595cddc5d4a76aed105d0ee1fa4}{p\_enc}};\ }
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{structmotor__t}{motor\_t}}*\ \mbox{\hyperlink{structcontroller__t_a41eeb59b62f224a5b1f687a65897e0c3}{p\_mot}};\ }
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{structencoder__t}{encoder\_t}}*\ \mbox{\hyperlink{structcontroller__t_a2108f385ba7b132cd09e79d74df77a66}{p\_enc}};\ }
 \DoxyCodeLine{00019\ \ \ \ \ \textcolor{comment}{//These\ are\ all\ the\ things\ specific\ to\ the\ controller\ class}}
 \DoxyCodeLine{00020\ }
 \DoxyCodeLine{00021\ \ \ \ \ int32\_t\ \mbox{\hyperlink{structcontroller__t_a5fcc2da40851e85080d0048ab51f1e88}{gain}};\ }
@@ -22,7 +22,7 @@
 \DoxyCodeLine{00033\ }
 \DoxyCodeLine{00039\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{controller_8h_accf18394da04147c4bbc9e72bca82ffc}{controller\_deinit}}(\mbox{\hyperlink{structcontroller__t}{controller\_t}}*\ p\_cont);}
 \DoxyCodeLine{00040\ }
-\DoxyCodeLine{00046\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{controller_8h_a64684b662ba85fad26adcc70c0e4469b}{move}}(\mbox{\hyperlink{structcontroller__t}{controller\_t}}*\ p\_cont);}
+\DoxyCodeLine{00046\ int32\_t\ \mbox{\hyperlink{controller_8h_a363ffe8c511d2ed117abee1efcfee815}{move}}(\mbox{\hyperlink{structcontroller__t}{controller\_t}}*\ p\_cont);}
 \DoxyCodeLine{00047\ }
 \DoxyCodeLine{00054\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{controller_8h_ac82cfad368eac072dab9f623db422cea}{set\_setpoint}}(\mbox{\hyperlink{structcontroller__t}{controller\_t}}*\ p\_cont,\ int32\_t\ new\_setpoint);}
 \DoxyCodeLine{00055\ }
