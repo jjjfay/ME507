@@ -85,7 +85,7 @@ $(function() { codefold.init(0); });
   <div class="headertitle"><div class="title">motor_driver.h</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*</span></div>
+<a href="motor__driver_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> *@file           :  motor_driver.h</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> *</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> *@brief          : This is the motor driver library used to control the PWM signals going to the motors to control direction and speed.</span></div>
@@ -114,14 +114,17 @@ $(function() { codefold.init(0); });
 </div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="keywordtype">void</span> start_PWM(<a class="code hl_struct" href="structmotor__t.html">motor_t</a>* p_mot);</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="keywordtype">void</span> <a class="code hl_function" href="motor__driver_8h.html#ae5e52ecf52da8a95ed0085e9d86f555e">start_PWM</a>(<a class="code hl_struct" href="structmotor__t.html">motor_t</a>* p_mot);</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="keywordtype">void</span> stop_PWM(<a class="code hl_struct" href="structmotor__t.html">motor_t</a>* p_mot);</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="keywordtype">void</span> <a class="code hl_function" href="motor__driver_8h.html#af8843419f2df9c01d38ce3cd8810aafc">stop_PWM</a>(<a class="code hl_struct" href="structmotor__t.html">motor_t</a>* p_mot);</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="keywordtype">void</span> set_duty(<a class="code hl_struct" href="structmotor__t.html">motor_t</a>* p_mot, int32_t duty);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="keywordtype">void</span> <a class="code hl_function" href="motor__driver_8h.html#adcde1cd0aa97d50c0b1136c125b5ae10">set_duty</a>(<a class="code hl_struct" href="structmotor__t.html">motor_t</a>* p_mot, int32_t duty);</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="preprocessor">#endif </span><span class="comment">/* INC_MOTOR_DRIVER_H_ */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="amotor__driver_8h_html_adcde1cd0aa97d50c0b1136c125b5ae10"><div class="ttname"><a href="motor__driver_8h.html#adcde1cd0aa97d50c0b1136c125b5ae10">set_duty</a></div><div class="ttdeci">void set_duty(motor_t *p_mot, int32_t duty)</div><div class="ttdoc">A function to set the duty cycle for the motor.</div><div class="ttdef"><b>Definition</b> motor_driver.c:44</div></div>
+<div class="ttc" id="amotor__driver_8h_html_ae5e52ecf52da8a95ed0085e9d86f555e"><div class="ttname"><a href="motor__driver_8h.html#ae5e52ecf52da8a95ed0085e9d86f555e">start_PWM</a></div><div class="ttdeci">void start_PWM(motor_t *p_mot)</div><div class="ttdoc">A function to enable the motor driver channels.</div><div class="ttdef"><b>Definition</b> motor_driver.c:14</div></div>
+<div class="ttc" id="amotor__driver_8h_html_af8843419f2df9c01d38ce3cd8810aafc"><div class="ttname"><a href="motor__driver_8h.html#af8843419f2df9c01d38ce3cd8810aafc">stop_PWM</a></div><div class="ttdeci">void stop_PWM(motor_t *p_mot)</div><div class="ttdoc">A function to disable the motor driver channels.</div><div class="ttdef"><b>Definition</b> motor_driver.c:29</div></div>
 <div class="ttc" id="astructmotor__t_html"><div class="ttname"><a href="structmotor__t.html">motor_t</a></div><div class="ttdoc">Represents a motor objects with two PWM channels in a timer and a duty cycle.</div><div class="ttdef"><b>Definition</b> motor_driver.h:20</div></div>
 <div class="ttc" id="astructmotor__t_html_a4925f8bb8c93d8ca1efb32c75cfa9ed7"><div class="ttname"><a href="structmotor__t.html#a4925f8bb8c93d8ca1efb32c75cfa9ed7">motor_t::hal_tim</a></div><div class="ttdeci">TIM_HandleTypeDef * hal_tim</div><div class="ttdef"><b>Definition</b> motor_driver.h:29</div></div>
 <div class="ttc" id="astructmotor__t_html_a55ec37615f63c051df2af7bacbae5fd8"><div class="ttname"><a href="structmotor__t.html#a55ec37615f63c051df2af7bacbae5fd8">motor_t::channel1</a></div><div class="ttdeci">uint32_t channel1</div><div class="ttdef"><b>Definition</b> motor_driver.h:25</div></div>

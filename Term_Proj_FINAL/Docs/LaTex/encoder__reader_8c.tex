@@ -1,0 +1,80 @@
+\doxysection{Core/\+Src/encoder\+\_\+reader.c File Reference}
+\hypertarget{encoder__reader_8c}{}\label{encoder__reader_8c}\index{Core/Src/encoder\_reader.c@{Core/Src/encoder\_reader.c}}
+{\ttfamily \#include "{}encoder\+\_\+reader.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{encoder__reader_8c_a688cfbab28ad9031cc9fb1902362b76b}{init\+\_\+channels}} (\mbox{\hyperlink{structencoder__t}{encoder\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+\_\+enc)
+\begin{DoxyCompactList}\small\item\em A function to initialize the channels for reading the encoder signals. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{encoder__reader_8c_a785de517bc8042529478427baf6cf90d}{deinit\+\_\+channels}} (\mbox{\hyperlink{structencoder__t}{encoder\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+\_\+enc)
+\begin{DoxyCompactList}\small\item\em A function to stop the channels from reading the encoder signals. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{encoder__reader_8c_aa6e65d34f5a90e31cd3e57be6d149d47}{zero}} (\mbox{\hyperlink{structencoder__t}{encoder\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+\_\+enc)
+\begin{DoxyCompactList}\small\item\em A function to zero the encoder count. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{encoder__reader_8c_a7b7828fac2c424b7ab1eaf7e631e77a9}{get\+\_\+pos}} (\mbox{\hyperlink{structencoder__t}{encoder\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+\_\+enc)
+\begin{DoxyCompactList}\small\item\em A function to read and return the encoder count. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{encoder__reader_8c_a785de517bc8042529478427baf6cf90d}\label{encoder__reader_8c_a785de517bc8042529478427baf6cf90d} 
+\index{encoder\_reader.c@{encoder\_reader.c}!deinit\_channels@{deinit\_channels}}
+\index{deinit\_channels@{deinit\_channels}!encoder\_reader.c@{encoder\_reader.c}}
+\doxysubsubsection{\texorpdfstring{deinit\_channels()}{deinit\_channels()}}
+{\footnotesize\ttfamily void deinit\+\_\+channels (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structencoder__t}{encoder\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+\_\+enc }\end{DoxyParamCaption})}
+
+
+
+A function to stop the channels from reading the encoder signals. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+\_\+enc} & The encoder object to perform the function on. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{encoder__reader_8c_a7b7828fac2c424b7ab1eaf7e631e77a9}\label{encoder__reader_8c_a7b7828fac2c424b7ab1eaf7e631e77a9} 
+\index{encoder\_reader.c@{encoder\_reader.c}!get\_pos@{get\_pos}}
+\index{get\_pos@{get\_pos}!encoder\_reader.c@{encoder\_reader.c}}
+\doxysubsubsection{\texorpdfstring{get\_pos()}{get\_pos()}}
+{\footnotesize\ttfamily int32\+\_\+t get\+\_\+pos (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structencoder__t}{encoder\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+\_\+enc }\end{DoxyParamCaption})}
+
+
+
+A function to read and return the encoder count. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+\_\+enc} & The encoder object to perform the function on.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+count The encoder count to be returned. 
+\end{DoxyReturn}
+\Hypertarget{encoder__reader_8c_a688cfbab28ad9031cc9fb1902362b76b}\label{encoder__reader_8c_a688cfbab28ad9031cc9fb1902362b76b} 
+\index{encoder\_reader.c@{encoder\_reader.c}!init\_channels@{init\_channels}}
+\index{init\_channels@{init\_channels}!encoder\_reader.c@{encoder\_reader.c}}
+\doxysubsubsection{\texorpdfstring{init\_channels()}{init\_channels()}}
+{\footnotesize\ttfamily void init\+\_\+channels (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structencoder__t}{encoder\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+\_\+enc }\end{DoxyParamCaption})}
+
+
+
+A function to initialize the channels for reading the encoder signals. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+\_\+enc} & The encoder object to perform the function on. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{encoder__reader_8c_aa6e65d34f5a90e31cd3e57be6d149d47}\label{encoder__reader_8c_aa6e65d34f5a90e31cd3e57be6d149d47} 
+\index{encoder\_reader.c@{encoder\_reader.c}!zero@{zero}}
+\index{zero@{zero}!encoder\_reader.c@{encoder\_reader.c}}
+\doxysubsubsection{\texorpdfstring{zero()}{zero()}}
+{\footnotesize\ttfamily void zero (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structencoder__t}{encoder\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+\_\+enc }\end{DoxyParamCaption})}
+
+
+
+A function to zero the encoder count. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+\_\+enc} & The encoder object to perform the function on. \\
+\hline
+\end{DoxyParams}

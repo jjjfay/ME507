@@ -25,6 +25,22 @@ void \mbox{\hyperlink{main_8c_a70af21c671abfcc773614a9a4f63d920}{System\+Clock\+
 \begin{DoxyCompactList}\small\item\em System Clock Configuration. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{main_8c_a336c5acb34a801b2984e602b97ed7b73}{Periph\+Common\+Clock\+\_\+\+Config}} (void)
 \begin{DoxyCompactList}\small\item\em Peripherals Common Clock Configuration. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{main_8c_ae89fdd15729ad41a66911190fcbab23a}{MX\+\_\+\+GPIO\+\_\+\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em GPIO Initialization Function. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{main_8c_a1d1beb7da60021ee1adbca294f28ba88}{MX\+\_\+\+TIM1\+\_\+\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em TIM1 Initialization Function. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{main_8c_af952250b2d49718b385e14a76fa7c1b8}{MX\+\_\+\+TIM2\+\_\+\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em TIM2 Initialization Function. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{main_8c_a6db1014d713f6f5c0f52a13299ee0733}{MX\+\_\+\+USART2\+\_\+\+UART\+\_\+\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em USART2 Initialization Function. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{main_8c_aaa163e37853e6fc971474824d9f655ca}{MX\+\_\+\+ADC1\+\_\+\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em ADC1 Initialization Function. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{main_8c_a73ff2ff527606fb2be261e9f85aab83c}{MX\+\_\+\+TIM3\+\_\+\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em TIM3 Initialization Function. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{main_8c_aa33f0698b12657979eb254584682d30d}{MX\+\_\+\+TIM4\+\_\+\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em TIM4 Initialization Function. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{main_8c_a4e987f0fdef6459c1a03ca830bac23f5}{MX\+\_\+\+ADC2\+\_\+\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em ADC2 Initialization Function. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{main_8c_ab55078d807df0a75af8a2fa8eefdcc41}{task1}} (void)
 \begin{DoxyCompactList}\small\item\em Task 1 -\/ SPIN TASK. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{main_8c_a03bef279de31d91a79b14f31c4530dfc}{task2}} (void)
@@ -40,26 +56,19 @@ void \mbox{\hyperlink{main_8c_a1730ffe1e560465665eb47d9264826f9}{Error\+\_\+\+Ha
 \doxysubsubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{main_8c_a22b804736f5648d52f639b2647d4ed13}\label{main_8c_a22b804736f5648d52f639b2647d4ed13} 
-ADC\+\_\+\+Handle\+Type\+Def {\bfseries hadc1}
+ADC\+\_\+\+Handle\+Type\+Def \mbox{\hyperlink{main_8c_a22b804736f5648d52f639b2647d4ed13}{hadc1}}
 \item 
-\Hypertarget{main_8c_acd9221f1aa19aebfe0b744947f2daf49}\label{main_8c_acd9221f1aa19aebfe0b744947f2daf49} 
-ADC\+\_\+\+Handle\+Type\+Def {\bfseries hadc2}
+ADC\+\_\+\+Handle\+Type\+Def \mbox{\hyperlink{main_8c_acd9221f1aa19aebfe0b744947f2daf49}{hadc2}}
 \item 
-\Hypertarget{main_8c_a25fc663547539bc49fecc0011bd76ab5}\label{main_8c_a25fc663547539bc49fecc0011bd76ab5} 
-TIM\+\_\+\+Handle\+Type\+Def {\bfseries htim1}
+TIM\+\_\+\+Handle\+Type\+Def \mbox{\hyperlink{main_8c_a25fc663547539bc49fecc0011bd76ab5}{htim1}}
 \item 
-\Hypertarget{main_8c_a2c80fd5510e2990a59a5c90d745c716c}\label{main_8c_a2c80fd5510e2990a59a5c90d745c716c} 
-TIM\+\_\+\+Handle\+Type\+Def {\bfseries htim2}
+TIM\+\_\+\+Handle\+Type\+Def \mbox{\hyperlink{main_8c_a2c80fd5510e2990a59a5c90d745c716c}{htim2}}
 \item 
-\Hypertarget{main_8c_aac3d2c59ee0e3bbae1b99529a154eb62}\label{main_8c_aac3d2c59ee0e3bbae1b99529a154eb62} 
-TIM\+\_\+\+Handle\+Type\+Def {\bfseries htim3}
+TIM\+\_\+\+Handle\+Type\+Def \mbox{\hyperlink{main_8c_aac3d2c59ee0e3bbae1b99529a154eb62}{htim3}}
 \item 
-\Hypertarget{main_8c_a85788cec5a97ee377e4ee2e74f026484}\label{main_8c_a85788cec5a97ee377e4ee2e74f026484} 
-TIM\+\_\+\+Handle\+Type\+Def {\bfseries htim4}
+TIM\+\_\+\+Handle\+Type\+Def \mbox{\hyperlink{main_8c_a85788cec5a97ee377e4ee2e74f026484}{htim4}}
 \item 
-\Hypertarget{main_8c_aa9479c261d65eecedd3d9582f7f0f89c}\label{main_8c_aa9479c261d65eecedd3d9582f7f0f89c} 
-UART\+\_\+\+Handle\+Type\+Def {\bfseries huart2}
+UART\+\_\+\+Handle\+Type\+Def \mbox{\hyperlink{main_8c_aa9479c261d65eecedd3d9582f7f0f89c}{huart2}}
 \item 
 \mbox{\hyperlink{structencoder__t}{encoder\+\_\+t}} \mbox{\hyperlink{main_8c_ac8f315e2b8ea591f91f6236ab801ab56}{spin\+\_\+enc}}
 \item 
@@ -77,38 +86,27 @@ UART\+\_\+\+Handle\+Type\+Def {\bfseries huart2}
 \item 
 \mbox{\hyperlink{structcalibrate__t}{calibrate\+\_\+t}} \mbox{\hyperlink{main_8c_a56cce7878c759f7892ddeb9133aa3db5}{hcali}}
 \item 
-\Hypertarget{main_8c_a8353015c4d672311fe3f5811e9c46759}\label{main_8c_a8353015c4d672311fe3f5811e9c46759} 
-uint32\+\_\+t {\bfseries smyo\+\_\+tst} = 0
+uint32\+\_\+t \mbox{\hyperlink{main_8c_a8353015c4d672311fe3f5811e9c46759}{smyo\+\_\+tst}} = 0
 \item 
-\Hypertarget{main_8c_a347b34c5e7253c621db301d92a0a3b49}\label{main_8c_a347b34c5e7253c621db301d92a0a3b49} 
-uint32\+\_\+t {\bfseries hand\+\_\+count\+\_\+tst} = 0
+uint32\+\_\+t \mbox{\hyperlink{main_8c_a347b34c5e7253c621db301d92a0a3b49}{hand\+\_\+count\+\_\+tst}} = 0
 \item 
-\Hypertarget{main_8c_aca7b0fffcb47330888b69d7cff6489e8}\label{main_8c_aca7b0fffcb47330888b69d7cff6489e8} 
-int32\+\_\+t {\bfseries spos\+\_\+tst} = 0
+int32\+\_\+t \mbox{\hyperlink{main_8c_aca7b0fffcb47330888b69d7cff6489e8}{spos\+\_\+tst}} = 0
 \item 
-\Hypertarget{main_8c_a463948bd264aab06eed552a816ece6de}\label{main_8c_a463948bd264aab06eed552a816ece6de} 
-int32\+\_\+t {\bfseries smyo\+\_\+av} = 0
+int32\+\_\+t \mbox{\hyperlink{main_8c_a463948bd264aab06eed552a816ece6de}{smyo\+\_\+av}} = 0
 \item 
-\Hypertarget{main_8c_a6979895345c63ca86fc4c806792b935e}\label{main_8c_a6979895345c63ca86fc4c806792b935e} 
-uint16\+\_\+t {\bfseries ch1\+\_\+val}
+uint16\+\_\+t \mbox{\hyperlink{main_8c_a6979895345c63ca86fc4c806792b935e}{ch1\+\_\+val}}
 \item 
-\Hypertarget{main_8c_a85a1c2271edad1139d015a12411444d3}\label{main_8c_a85a1c2271edad1139d015a12411444d3} 
-uint16\+\_\+t {\bfseries ch2\+\_\+val}
+uint16\+\_\+t \mbox{\hyperlink{main_8c_a85a1c2271edad1139d015a12411444d3}{ch2\+\_\+val}}
 \item 
-\Hypertarget{main_8c_acd72a538b2ff33ab4525f47337a93c51}\label{main_8c_acd72a538b2ff33ab4525f47337a93c51} 
-uint16\+\_\+t {\bfseries ch1\+\_\+p}
+uint16\+\_\+t \mbox{\hyperlink{main_8c_acd72a538b2ff33ab4525f47337a93c51}{ch1\+\_\+p}}
 \item 
-\Hypertarget{main_8c_ad49b80b3bed33ad663d9f6b2475a5413}\label{main_8c_ad49b80b3bed33ad663d9f6b2475a5413} 
-uint16\+\_\+t {\bfseries ch2\+\_\+p}
+uint16\+\_\+t \mbox{\hyperlink{main_8c_ad49b80b3bed33ad663d9f6b2475a5413}{ch2\+\_\+p}}
 \item 
-\Hypertarget{main_8c_a642ec097d013efc791634719e5a5c9e4}\label{main_8c_a642ec097d013efc791634719e5a5c9e4} 
-uint16\+\_\+t {\bfseries radio\+\_\+pulse} = 1500
+uint16\+\_\+t \mbox{\hyperlink{main_8c_a642ec097d013efc791634719e5a5c9e4}{radio\+\_\+pulse}} = 1500
 \item 
-\Hypertarget{main_8c_a9710d0833aa418faec4823df2b28e2d8}\label{main_8c_a9710d0833aa418faec4823df2b28e2d8} 
-char {\bfseries tst\+\_\+buff} \mbox{[}150\mbox{]}
+char \mbox{\hyperlink{main_8c_a9710d0833aa418faec4823df2b28e2d8}{tst\+\_\+buff}} \mbox{[}150\mbox{]}
 \item 
-\Hypertarget{main_8c_a742204794ea328ba293fe59cec79b990}\label{main_8c_a742204794ea328ba293fe59cec79b990} 
-int {\bfseries m}
+int \mbox{\hyperlink{main_8c_a742204794ea328ba293fe59cec79b990}{m}}
 \end{DoxyCompactItemize}
 
 
@@ -174,6 +172,172 @@ The application entry point.
 
 \begin{DoxyRetVals}{Return values}
 {\em int} & \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{main_8c_aaa163e37853e6fc971474824d9f655ca}\label{main_8c_aaa163e37853e6fc971474824d9f655ca} 
+\index{main.c@{main.c}!MX\_ADC1\_Init@{MX\_ADC1\_Init}}
+\index{MX\_ADC1\_Init@{MX\_ADC1\_Init}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{MX\_ADC1\_Init()}{MX\_ADC1\_Init()}}
+{\footnotesize\ttfamily static void MX\+\_\+\+ADC1\+\_\+\+Init (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+ADC1 Initialization Function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+Common config
+
+Configure the ADC multi-\/mode
+
+Configure Regular Channel\Hypertarget{main_8c_a4e987f0fdef6459c1a03ca830bac23f5}\label{main_8c_a4e987f0fdef6459c1a03ca830bac23f5} 
+\index{main.c@{main.c}!MX\_ADC2\_Init@{MX\_ADC2\_Init}}
+\index{MX\_ADC2\_Init@{MX\_ADC2\_Init}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{MX\_ADC2\_Init()}{MX\_ADC2\_Init()}}
+{\footnotesize\ttfamily static void MX\+\_\+\+ADC2\+\_\+\+Init (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+ADC2 Initialization Function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+Common config
+
+Configure Regular Channel\Hypertarget{main_8c_ae89fdd15729ad41a66911190fcbab23a}\label{main_8c_ae89fdd15729ad41a66911190fcbab23a} 
+\index{main.c@{main.c}!MX\_GPIO\_Init@{MX\_GPIO\_Init}}
+\index{MX\_GPIO\_Init@{MX\_GPIO\_Init}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{MX\_GPIO\_Init()}{MX\_GPIO\_Init()}}
+{\footnotesize\ttfamily static void MX\+\_\+\+GPIO\+\_\+\+Init (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+GPIO Initialization Function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{main_8c_a1d1beb7da60021ee1adbca294f28ba88}\label{main_8c_a1d1beb7da60021ee1adbca294f28ba88} 
+\index{main.c@{main.c}!MX\_TIM1\_Init@{MX\_TIM1\_Init}}
+\index{MX\_TIM1\_Init@{MX\_TIM1\_Init}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{MX\_TIM1\_Init()}{MX\_TIM1\_Init()}}
+{\footnotesize\ttfamily static void MX\+\_\+\+TIM1\+\_\+\+Init (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+TIM1 Initialization Function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{main_8c_af952250b2d49718b385e14a76fa7c1b8}\label{main_8c_af952250b2d49718b385e14a76fa7c1b8} 
+\index{main.c@{main.c}!MX\_TIM2\_Init@{MX\_TIM2\_Init}}
+\index{MX\_TIM2\_Init@{MX\_TIM2\_Init}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{MX\_TIM2\_Init()}{MX\_TIM2\_Init()}}
+{\footnotesize\ttfamily static void MX\+\_\+\+TIM2\+\_\+\+Init (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+TIM2 Initialization Function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{main_8c_a73ff2ff527606fb2be261e9f85aab83c}\label{main_8c_a73ff2ff527606fb2be261e9f85aab83c} 
+\index{main.c@{main.c}!MX\_TIM3\_Init@{MX\_TIM3\_Init}}
+\index{MX\_TIM3\_Init@{MX\_TIM3\_Init}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{MX\_TIM3\_Init()}{MX\_TIM3\_Init()}}
+{\footnotesize\ttfamily static void MX\+\_\+\+TIM3\+\_\+\+Init (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+TIM3 Initialization Function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{main_8c_aa33f0698b12657979eb254584682d30d}\label{main_8c_aa33f0698b12657979eb254584682d30d} 
+\index{main.c@{main.c}!MX\_TIM4\_Init@{MX\_TIM4\_Init}}
+\index{MX\_TIM4\_Init@{MX\_TIM4\_Init}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{MX\_TIM4\_Init()}{MX\_TIM4\_Init()}}
+{\footnotesize\ttfamily static void MX\+\_\+\+TIM4\+\_\+\+Init (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+TIM4 Initialization Function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{main_8c_a6db1014d713f6f5c0f52a13299ee0733}\label{main_8c_a6db1014d713f6f5c0f52a13299ee0733} 
+\index{main.c@{main.c}!MX\_USART2\_UART\_Init@{MX\_USART2\_UART\_Init}}
+\index{MX\_USART2\_UART\_Init@{MX\_USART2\_UART\_Init}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{MX\_USART2\_UART\_Init()}{MX\_USART2\_UART\_Init()}}
+{\footnotesize\ttfamily static void MX\+\_\+\+USART2\+\_\+\+UART\+\_\+\+Init (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+USART2 Initialization Function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
 \hline
 \end{DoxyRetVals}
 \Hypertarget{main_8c_a336c5acb34a801b2984e602b97ed7b73}\label{main_8c_a336c5acb34a801b2984e602b97ed7b73} 
@@ -294,6 +458,48 @@ This function implements a state machine to handle a wireless emergency stop (E-
 \end{DoxyItemize}
 
 \doxysubsection{Variable Documentation}
+\Hypertarget{main_8c_acd72a538b2ff33ab4525f47337a93c51}\label{main_8c_acd72a538b2ff33ab4525f47337a93c51} 
+\index{main.c@{main.c}!ch1\_p@{ch1\_p}}
+\index{ch1\_p@{ch1\_p}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{ch1\_p}{ch1\_p}}
+{\footnotesize\ttfamily uint16\+\_\+t ch1\+\_\+p}
+
+\Hypertarget{main_8c_a6979895345c63ca86fc4c806792b935e}\label{main_8c_a6979895345c63ca86fc4c806792b935e} 
+\index{main.c@{main.c}!ch1\_val@{ch1\_val}}
+\index{ch1\_val@{ch1\_val}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{ch1\_val}{ch1\_val}}
+{\footnotesize\ttfamily uint16\+\_\+t ch1\+\_\+val}
+
+\Hypertarget{main_8c_ad49b80b3bed33ad663d9f6b2475a5413}\label{main_8c_ad49b80b3bed33ad663d9f6b2475a5413} 
+\index{main.c@{main.c}!ch2\_p@{ch2\_p}}
+\index{ch2\_p@{ch2\_p}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{ch2\_p}{ch2\_p}}
+{\footnotesize\ttfamily uint16\+\_\+t ch2\+\_\+p}
+
+\Hypertarget{main_8c_a85a1c2271edad1139d015a12411444d3}\label{main_8c_a85a1c2271edad1139d015a12411444d3} 
+\index{main.c@{main.c}!ch2\_val@{ch2\_val}}
+\index{ch2\_val@{ch2\_val}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{ch2\_val}{ch2\_val}}
+{\footnotesize\ttfamily uint16\+\_\+t ch2\+\_\+val}
+
+\Hypertarget{main_8c_a22b804736f5648d52f639b2647d4ed13}\label{main_8c_a22b804736f5648d52f639b2647d4ed13} 
+\index{main.c@{main.c}!hadc1@{hadc1}}
+\index{hadc1@{hadc1}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{hadc1}{hadc1}}
+{\footnotesize\ttfamily ADC\+\_\+\+Handle\+Type\+Def hadc1}
+
+\Hypertarget{main_8c_acd9221f1aa19aebfe0b744947f2daf49}\label{main_8c_acd9221f1aa19aebfe0b744947f2daf49} 
+\index{main.c@{main.c}!hadc2@{hadc2}}
+\index{hadc2@{hadc2}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{hadc2}{hadc2}}
+{\footnotesize\ttfamily ADC\+\_\+\+Handle\+Type\+Def hadc2}
+
+\Hypertarget{main_8c_a347b34c5e7253c621db301d92a0a3b49}\label{main_8c_a347b34c5e7253c621db301d92a0a3b49} 
+\index{main.c@{main.c}!hand\_count\_tst@{hand\_count\_tst}}
+\index{hand\_count\_tst@{hand\_count\_tst}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{hand\_count\_tst}{hand\_count\_tst}}
+{\footnotesize\ttfamily uint32\+\_\+t hand\+\_\+count\+\_\+tst = 0}
+
 \Hypertarget{main_8c_ad9323bc854cd629237afd922a56f399c}\label{main_8c_ad9323bc854cd629237afd922a56f399c} 
 \index{main.c@{main.c}!hand\_mot@{hand\_mot}}
 \index{hand\_mot@{hand\_mot}!main.c@{main.c}}
@@ -305,7 +511,7 @@ This function implements a state machine to handle a wireless emergency stop (E-
 \DoxyCodeLine{=\ \{.pwm\_val\ =\ 0,}
 \DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .channel1\ =\ TIM\_CHANNEL\_3,}
 \DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .channel2\ =\ TIM\_CHANNEL\_4,}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .hal\_tim\ =\ \&htim2}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .hal\_tim\ =\ \&\mbox{\hyperlink{main_8c_a2c80fd5510e2990a59a5c90d745c716c}{htim2}}}
 \DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
 
 \end{DoxyCode}
@@ -318,7 +524,7 @@ This function implements a state machine to handle a wireless emergency stop (E-
 {\bfseries Initial value\+:}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{=\ \{.data\_pts\ =\ 1000000,}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .p\_myo\ =\ \&hmyo}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .p\_myo\ =\ \&\mbox{\hyperlink{main_8c_a717934897b5306ed2b16c8efd2332664}{hmyo}}}
 \DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
 
 \end{DoxyCode}
@@ -330,10 +536,52 @@ This function implements a state machine to handle a wireless emergency stop (E-
 
 {\bfseries Initial value\+:}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{=\ \{.hal\_adc\ =\ \&hadc2,}
+\DoxyCodeLine{=\ \{.hal\_adc\ =\ \&\mbox{\hyperlink{main_8c_acd9221f1aa19aebfe0b744947f2daf49}{hadc2}},}
 \DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .current\_value\ =\ 0\}}
 
 \end{DoxyCode}
+\Hypertarget{main_8c_a25fc663547539bc49fecc0011bd76ab5}\label{main_8c_a25fc663547539bc49fecc0011bd76ab5} 
+\index{main.c@{main.c}!htim1@{htim1}}
+\index{htim1@{htim1}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{htim1}{htim1}}
+{\footnotesize\ttfamily TIM\+\_\+\+Handle\+Type\+Def htim1}
+
+\Hypertarget{main_8c_a2c80fd5510e2990a59a5c90d745c716c}\label{main_8c_a2c80fd5510e2990a59a5c90d745c716c} 
+\index{main.c@{main.c}!htim2@{htim2}}
+\index{htim2@{htim2}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{htim2}{htim2}}
+{\footnotesize\ttfamily TIM\+\_\+\+Handle\+Type\+Def htim2}
+
+\Hypertarget{main_8c_aac3d2c59ee0e3bbae1b99529a154eb62}\label{main_8c_aac3d2c59ee0e3bbae1b99529a154eb62} 
+\index{main.c@{main.c}!htim3@{htim3}}
+\index{htim3@{htim3}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{htim3}{htim3}}
+{\footnotesize\ttfamily TIM\+\_\+\+Handle\+Type\+Def htim3}
+
+\Hypertarget{main_8c_a85788cec5a97ee377e4ee2e74f026484}\label{main_8c_a85788cec5a97ee377e4ee2e74f026484} 
+\index{main.c@{main.c}!htim4@{htim4}}
+\index{htim4@{htim4}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{htim4}{htim4}}
+{\footnotesize\ttfamily TIM\+\_\+\+Handle\+Type\+Def htim4}
+
+\Hypertarget{main_8c_aa9479c261d65eecedd3d9582f7f0f89c}\label{main_8c_aa9479c261d65eecedd3d9582f7f0f89c} 
+\index{main.c@{main.c}!huart2@{huart2}}
+\index{huart2@{huart2}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{huart2}{huart2}}
+{\footnotesize\ttfamily UART\+\_\+\+Handle\+Type\+Def huart2}
+
+\Hypertarget{main_8c_a742204794ea328ba293fe59cec79b990}\label{main_8c_a742204794ea328ba293fe59cec79b990} 
+\index{main.c@{main.c}!m@{m}}
+\index{m@{m}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{m}{m}}
+{\footnotesize\ttfamily int m}
+
+\Hypertarget{main_8c_a642ec097d013efc791634719e5a5c9e4}\label{main_8c_a642ec097d013efc791634719e5a5c9e4} 
+\index{main.c@{main.c}!radio\_pulse@{radio\_pulse}}
+\index{radio\_pulse@{radio\_pulse}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{radio\_pulse}{radio\_pulse}}
+{\footnotesize\ttfamily uint16\+\_\+t radio\+\_\+pulse = 1500}
+
 \Hypertarget{main_8c_a35dde673e5ada364b6aa25f819141975}\label{main_8c_a35dde673e5ada364b6aa25f819141975} 
 \index{main.c@{main.c}!scali@{scali}}
 \index{scali@{scali}!main.c@{main.c}}
@@ -343,7 +591,7 @@ This function implements a state machine to handle a wireless emergency stop (E-
 {\bfseries Initial value\+:}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{=\ \{.data\_pts\ =\ 1000000,}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .p\_myo\ =\ \&smyo}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .p\_myo\ =\ \&\mbox{\hyperlink{main_8c_a137581b71af645da03f1e971ba998e38}{smyo}}}
 \DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
 
 \end{DoxyCode}
@@ -355,10 +603,22 @@ This function implements a state machine to handle a wireless emergency stop (E-
 
 {\bfseries Initial value\+:}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{=\ \{.hal\_adc\ =\ \&hadc1,}
+\DoxyCodeLine{=\ \{.hal\_adc\ =\ \&\mbox{\hyperlink{main_8c_a22b804736f5648d52f639b2647d4ed13}{hadc1}},}
 \DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .current\_value\ =\ 0\}}
 
 \end{DoxyCode}
+\Hypertarget{main_8c_a463948bd264aab06eed552a816ece6de}\label{main_8c_a463948bd264aab06eed552a816ece6de} 
+\index{main.c@{main.c}!smyo\_av@{smyo\_av}}
+\index{smyo\_av@{smyo\_av}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{smyo\_av}{smyo\_av}}
+{\footnotesize\ttfamily int32\+\_\+t smyo\+\_\+av = 0}
+
+\Hypertarget{main_8c_a8353015c4d672311fe3f5811e9c46759}\label{main_8c_a8353015c4d672311fe3f5811e9c46759} 
+\index{main.c@{main.c}!smyo\_tst@{smyo\_tst}}
+\index{smyo\_tst@{smyo\_tst}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{smyo\_tst}{smyo\_tst}}
+{\footnotesize\ttfamily uint32\+\_\+t smyo\+\_\+tst = 0}
+
 \Hypertarget{main_8c_ac1cc3948ffb1db51a2295506624d3afd}\label{main_8c_ac1cc3948ffb1db51a2295506624d3afd} 
 \index{main.c@{main.c}!spin\_cont@{spin\_cont}}
 \index{spin\_cont@{spin\_cont}!main.c@{main.c}}
@@ -367,8 +627,8 @@ This function implements a state machine to handle a wireless emergency stop (E-
 
 {\bfseries Initial value\+:}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{=\ \{.p\_mot\ =\ \&spin\_mot,}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .p\_enc\ =\ \&spin\_enc,}
+\DoxyCodeLine{=\ \{.p\_mot\ =\ \&\mbox{\hyperlink{main_8c_a2dd72fb07179ec26bba3b18d6a1f77a6}{spin\_mot}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .p\_enc\ =\ \&\mbox{\hyperlink{main_8c_ac8f315e2b8ea591f91f6236ab801ab56}{spin\_enc}},}
 \DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .gain\ =\ 300,}
 \DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .setpoint\ =\ 0\}}
 
@@ -383,7 +643,7 @@ This function implements a state machine to handle a wireless emergency stop (E-
 \begin{DoxyCode}{0}
 \DoxyCodeLine{=\ \{.channel1\ =\ TIM\_CHANNEL\_1,}
 \DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .channel2\ =\ TIM\_CHANNEL\_2,}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .hal\_tim\ =\ \&htim3,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .hal\_tim\ =\ \&\mbox{\hyperlink{main_8c_aac3d2c59ee0e3bbae1b99529a154eb62}{htim3}},}
 \DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .mot\_pos\ =\ 0,}
 \DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .curr\_count\ =\ 0,}
 \DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .prev\_count\ =\ 0,}
@@ -401,7 +661,19 @@ This function implements a state machine to handle a wireless emergency stop (E-
 \DoxyCodeLine{=\ \{.pwm\_val\ =\ 0,}
 \DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .channel1\ =\ TIM\_CHANNEL\_1,}
 \DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .channel2\ =\ TIM\_CHANNEL\_2,}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .hal\_tim\ =\ \&htim2}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .hal\_tim\ =\ \&\mbox{\hyperlink{main_8c_a2c80fd5510e2990a59a5c90d745c716c}{htim2}}}
 \DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
 
 \end{DoxyCode}
+\Hypertarget{main_8c_aca7b0fffcb47330888b69d7cff6489e8}\label{main_8c_aca7b0fffcb47330888b69d7cff6489e8} 
+\index{main.c@{main.c}!spos\_tst@{spos\_tst}}
+\index{spos\_tst@{spos\_tst}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{spos\_tst}{spos\_tst}}
+{\footnotesize\ttfamily int32\+\_\+t spos\+\_\+tst = 0}
+
+\Hypertarget{main_8c_a9710d0833aa418faec4823df2b28e2d8}\label{main_8c_a9710d0833aa418faec4823df2b28e2d8} 
+\index{main.c@{main.c}!tst\_buff@{tst\_buff}}
+\index{tst\_buff@{tst\_buff}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{tst\_buff}{tst\_buff}}
+{\footnotesize\ttfamily char tst\+\_\+buff\mbox{[}150\mbox{]}}
+

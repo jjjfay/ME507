@@ -1,0 +1,30 @@
+\doxysection{Core/\+Inc/radio.h File Reference}
+\hypertarget{radio_8h}{}\label{radio_8h}\index{Core/Inc/radio.h@{Core/Inc/radio.h}}
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{radio_8h_a80c83fc0889704b13422e5108c2a8451}{check\+\_\+delta}} (int16\+\_\+t pulse\+\_\+width)
+\begin{DoxyCompactList}\small\item\em Checks the pulse width value from the radio transmitter and returns a 1 if the signal is larger or smaller than 1.\+5 ms. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{radio_8h_a80c83fc0889704b13422e5108c2a8451}\label{radio_8h_a80c83fc0889704b13422e5108c2a8451} 
+\index{radio.h@{radio.h}!check\_delta@{check\_delta}}
+\index{check\_delta@{check\_delta}!radio.h@{radio.h}}
+\doxysubsubsection{\texorpdfstring{check\_delta()}{check\_delta()}}
+{\footnotesize\ttfamily int check\+\_\+delta (\begin{DoxyParamCaption}\item[{int16\+\_\+t}]{pulse\+\_\+width }\end{DoxyParamCaption})}
+
+
+
+Checks the pulse width value from the radio transmitter and returns a 1 if the signal is larger or smaller than 1.\+5 ms. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pulse\+\_\+width} & The pusle width value in ms calculated in the interrupt callback function to be interpreted by the check\+\_\+delta function.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+valid Returns either a 0 or 1 based on whether the signal is at the expected value of 1.\+5 ms, in which case a 0 is returned, or a 1 ,when the signal deviates from 1.\+5 ms in either direction. 
+\end{DoxyReturn}

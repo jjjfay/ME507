@@ -16,10 +16,11 @@ var searchData=
   ['pllsai2_5fp_20na_13',['PLLSAI2_P                              | NA',['../system__stm32l4xx_8c.html#autotoc_md15',1,'']]],
   ['pllsai2_5fq_20na_14',['PLLSAI2_Q                              | NA',['../system__stm32l4xx_8c.html#autotoc_md16',1,'']]],
   ['pllsai2_5fr_20na_15',['PLLSAI2_R                              | NA',['../system__stm32l4xx_8c.html#autotoc_md17',1,'']]],
-  ['prescaler_201_16',['Prescaler 1',['../system__stm32l4xx_8c.html#autotoc_md4',1,'AHB Prescaler                          | 1'],['../system__stm32l4xx_8c.html#autotoc_md5',1,'APB1 Prescaler                         | 1'],['../system__stm32l4xx_8c.html#autotoc_md6',1,'APB2 Prescaler                         | 1']]],
-  ['pressure_20sensors_17',['Prosthetic Hand Control through Myoelectric and Pressure Sensors',['../index.html',1,'']]],
-  ['prev_5fcount_18',['prev_count',['../structencoder__t.html#a80437b8ca180c9d92733d46bd57a850b',1,'encoder_t']]],
-  ['project_20description_19',['Project Description',['../index.html#description',1,'']]],
-  ['prosthetic_20hand_20control_20through_20myoelectric_20and_20pressure_20sensors_20',['Prosthetic Hand Control through Myoelectric and Pressure Sensors',['../index.html',1,'']]],
-  ['pwm_5fval_21',['pwm_val',['../structmotor__t.html#aed894f1be1963c09bc08843912c8c5ce',1,'motor_t']]]
+  ['prefetch_5fenable_16',['PREFETCH_ENABLE',['../stm32l4xx__hal__conf_8h.html#a13fc0d5e7bb925385c0cc0772ba6a391',1,'stm32l4xx_hal_conf.h']]],
+  ['prescaler_201_17',['Prescaler 1',['../system__stm32l4xx_8c.html#autotoc_md4',1,'AHB Prescaler                          | 1'],['../system__stm32l4xx_8c.html#autotoc_md5',1,'APB1 Prescaler                         | 1'],['../system__stm32l4xx_8c.html#autotoc_md6',1,'APB2 Prescaler                         | 1']]],
+  ['pressure_20sensors_18',['Prosthetic Hand Control through Myoelectric and Pressure Sensors',['../index.html',1,'']]],
+  ['prev_5fcount_19',['prev_count',['../structencoder__t.html#a80437b8ca180c9d92733d46bd57a850b',1,'encoder_t']]],
+  ['project_20description_20',['Project Description',['../index.html#description',1,'']]],
+  ['prosthetic_20hand_20control_20through_20myoelectric_20and_20pressure_20sensors_21',['Prosthetic Hand Control through Myoelectric and Pressure Sensors',['../index.html',1,'']]],
+  ['pwm_5fval_22',['pwm_val',['../structmotor__t.html#aed894f1be1963c09bc08843912c8c5ce',1,'motor_t']]]
 ];

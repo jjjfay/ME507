@@ -1,0 +1,69 @@
+\doxysection{Core/\+Inc/motor\+\_\+driver.h File Reference}
+\hypertarget{motor__driver_8h}{}\label{motor__driver_8h}\index{Core/Inc/motor\_driver.h@{Core/Inc/motor\_driver.h}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include "{}stm32l4xx\+\_\+hal.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structmotor__t}{motor\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Represents a motor objects with two PWM channels in a timer and a duty cycle. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{motor__driver_8h_ae5e52ecf52da8a95ed0085e9d86f555e}{start\+\_\+\+PWM}} (\mbox{\hyperlink{structmotor__t}{motor\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+\_\+mot)
+\begin{DoxyCompactList}\small\item\em A function to enable the motor driver channels. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{motor__driver_8h_af8843419f2df9c01d38ce3cd8810aafc}{stop\+\_\+\+PWM}} (\mbox{\hyperlink{structmotor__t}{motor\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+\_\+mot)
+\begin{DoxyCompactList}\small\item\em A function to disable the motor driver channels. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{motor__driver_8h_adcde1cd0aa97d50c0b1136c125b5ae10}{set\+\_\+duty}} (\mbox{\hyperlink{structmotor__t}{motor\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+\_\+mot, int32\+\_\+t duty)
+\begin{DoxyCompactList}\small\item\em A function to set the duty cycle for the motor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{motor__driver_8h_adcde1cd0aa97d50c0b1136c125b5ae10}\label{motor__driver_8h_adcde1cd0aa97d50c0b1136c125b5ae10} 
+\index{motor\_driver.h@{motor\_driver.h}!set\_duty@{set\_duty}}
+\index{set\_duty@{set\_duty}!motor\_driver.h@{motor\_driver.h}}
+\doxysubsubsection{\texorpdfstring{set\_duty()}{set\_duty()}}
+{\footnotesize\ttfamily void set\+\_\+duty (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmotor__t}{motor\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+\_\+mot,  }\item[{int32\+\_\+t}]{duty }\end{DoxyParamCaption})}
+
+
+
+A function to set the duty cycle for the motor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+\_\+mot} & The motor object to perform the function on. \\
+\hline
+{\em duty} & The CCR value used to set the duty cycle of the motor. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{motor__driver_8h_ae5e52ecf52da8a95ed0085e9d86f555e}\label{motor__driver_8h_ae5e52ecf52da8a95ed0085e9d86f555e} 
+\index{motor\_driver.h@{motor\_driver.h}!start\_PWM@{start\_PWM}}
+\index{start\_PWM@{start\_PWM}!motor\_driver.h@{motor\_driver.h}}
+\doxysubsubsection{\texorpdfstring{start\_PWM()}{start\_PWM()}}
+{\footnotesize\ttfamily void start\+\_\+\+PWM (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmotor__t}{motor\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+\_\+mot }\end{DoxyParamCaption})}
+
+
+
+A function to enable the motor driver channels. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+\_\+mot} & The motor object to perform the function on. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{motor__driver_8h_af8843419f2df9c01d38ce3cd8810aafc}\label{motor__driver_8h_af8843419f2df9c01d38ce3cd8810aafc} 
+\index{motor\_driver.h@{motor\_driver.h}!stop\_PWM@{stop\_PWM}}
+\index{stop\_PWM@{stop\_PWM}!motor\_driver.h@{motor\_driver.h}}
+\doxysubsubsection{\texorpdfstring{stop\_PWM()}{stop\_PWM()}}
+{\footnotesize\ttfamily void stop\+\_\+\+PWM (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmotor__t}{motor\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+\_\+mot }\end{DoxyParamCaption})}
+
+
+
+A function to disable the motor driver channels. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+\_\+mot} & The motor object to perform the function on. \\
+\hline
+\end{DoxyParams}
