@@ -53,6 +53,7 @@
 
 /* Private variables ---------------------------------------------------------*/
 ADC_HandleTypeDef hadc1;
+ADC_HandleTypeDef hadc2;
 
 TIM_HandleTypeDef htim1;
 TIM_HandleTypeDef htim2;
@@ -81,6 +82,13 @@ UART_HandleTypeDef huart2;
 				.hal_tim = &htim2
 				};
 
+	motor_t hand_mot = {.pwm_val = 0,
+					.channel1 = TIM_CHANNEL_3,
+					.channel2 = TIM_CHANNEL_4,
+					.hal_tim = &htim2
+					};
+
+
 	//create controller object
 	controller_t spin_cont = {.p_mot = &spin_mot,
 							  .p_enc = &spin_enc,
@@ -92,20 +100,31 @@ UART_HandleTypeDef huart2;
 		  	  	  .prev_value = 0,
 				  .current_value = 0};
 
+
+	myo_t hmyo = {.hal_adc = &hadc2,
+			  	  	  .prev_value = 0,
+					  .current_value = 0};
+
 	//create calibration object
-	calibrate_t scali = {.length = 1000000,
-						 .median_length = 100,
+	calibrate_t scali = {.arr_length = 1000000,
 			  	  	  	 .p_myo = &smyo
 					  };
 
+	calibrate_t hcali = {.arr_length = 1000000,
+				  	  	  	 .p_myo = &hmyo
+						  };
+
 //initialize variables
-uint32_t smyo_av = 0;
-uint32_t smyo_med = 0;
+uint32_t smyo_tst = 0;
+uint32_t hand_count_tst = 0;
+int32_t spos_tst = 0;
+int32_t smyo_av = 0;
 uint16_t ch1_val;
 uint16_t ch2_val;
 uint16_t ch1_p;
 uint16_t ch2_p;
 uint16_t radio_pulse = 1500;
+
 
 char tst_buff[150];
 int m;
@@ -114,6 +133,7 @@ int m;
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
+void PeriphCommonClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_TIM1_Init(void);
 static void MX_TIM2_Init(void);
@@ -121,6 +141,7 @@ static void MX_USART2_UART_Init(void);
 static void MX_ADC1_Init(void);
 static void MX_TIM3_Init(void);
 static void MX_TIM4_Init(void);
+static void MX_ADC2_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -134,12 +155,12 @@ void task1(void) {
 	static char print_buff[150];
 	static int n;
 
-	static int16_t smyo_curr = 0;
-	static int16_t smyo_dir = 0;
-	static int16_t spin_sp = 0;
-	static int16_t spin_pos = 0;
-	static int16_t spin_pwm = 0;
-	static uint32_t smyo_av = 0;
+	static int32_t smyo_curr = 0;
+	static int32_t smyo_dir = 0;
+	static int32_t spin_sp = 0;
+	static int32_t spin_pos = 0;
+	static int32_t spin_pwm = 0;
+	static int32_t smyo_av = 0;
 
 	// State 0 - INIT_________________________________________________________________________________________
 	if (currentState == 0) {
@@ -156,7 +177,7 @@ void task1(void) {
 
 		//calibrate the myo sensor by finding average value to use later as
 		//threshold
-		smyo_av = find_average(&scali);
+		//smyo_av = find_average(&scali);
 
 		currentState = 1;}
 
@@ -169,16 +190,27 @@ void task1(void) {
 		smyo_curr = read_current(&smyo);
 
 
-		if(smyo_curr > 3000){
+//		if(smyo_curr > smyo_av+200){
+//
+//			smyo_dir = 1;
+//			currentState = 2;
+//
+//		}
+//		else if(smyo_curr < smyo_av-200){
+//
+//			smyo_dir = 0;
+//			currentState = 2;
 
-			smyo_dir = 1;
-			currentState = 2;
+			if(smyo_curr > 3000){
 
-		}
-		else if(smyo_curr < 300){
+				smyo_dir = 1;
+				currentState = 2;
 
-			smyo_dir = 0;
-			currentState = 2;
+			}
+			else if(smyo_curr < 1000){
+
+				smyo_dir = 0;
+				currentState = 2;
 
 		}
 
@@ -187,8 +219,8 @@ void task1(void) {
 	//State 2 - MOVE MYO__________________________________________________________________________________________
 	else if (currentState == 2) {
 
-		n = sprintf(print_buff,"\n\rTask 1, State 2\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
+		//n = sprintf(print_buff,"\n\rTask 1, State 2\n");
+		//HAL_UART_Transmit(&huart2,print_buff,n,400);
 
 		spin_pos = get_pos(&spin_enc);
 
@@ -198,17 +230,24 @@ void task1(void) {
 
 		if(smyo_dir == 1){
 
-			spin_sp = 465;
+			n = sprintf(print_buff,"\n\rThe setpoint is 465");
+			HAL_UART_Transmit(&huart2,print_buff,n,400);
 
-			if(abs(spin_pos-spin_sp)<100){
+			spin_sp = 200;
+
+			if(abs(spin_pos-spin_sp)<10){
 
 				currentState = 1;
 				set_duty(&spin_mot,0);
-				spin_pos = 465;
+				spin_pos = 200;
 			}
 			else{
 				 set_setpoint(&spin_cont, spin_sp);
-				 spin_pwm = move(&spin_cont);
+				 spin_pwm = move(&spin_cont,1);
+
+
+				 n = sprintf(print_buff,"\n\rThe motor pwm value is: %d\n", spin_pwm);
+				 HAL_UART_Transmit(&huart2,print_buff,n,400);
 
 				}
 		}
@@ -216,14 +255,23 @@ void task1(void) {
 
 			spin_sp = 0;
 
-			if(abs(spin_pos-spin_sp)<100){
+			n = sprintf(print_buff,"\n\rThe setpoint is 0");
+			HAL_UART_Transmit(&huart2,print_buff,n,400);
+
+
+			if(abs(spin_pos-spin_sp)<10){
 				currentState = 1;
 				set_duty(&spin_mot,0);
 				spin_pos = 0;
 			}
 			else{
 				set_setpoint(&spin_cont, spin_sp);
-				spin_pwm = move(&spin_cont);
+
+				spin_pwm = move(&spin_cont,1);
+
+				n = sprintf(print_buff,"\n\rThe motor pwm value is: %d\n", spin_pwm);
+				HAL_UART_Transmit(&huart2,print_buff,n,400);
+
 			}
 		}
 	}
@@ -237,6 +285,119 @@ void task1(void) {
 	//_____________________________________________________________________________________________________________
 }
 
+// Task 2 - HAND TASK
+void task2(void) {
+	static int currentState = 0;
+	static char print_buff[150];
+	static int n;
+
+	static int32_t hmyo_curr = 0;
+	static int32_t hmyo_dir = 0;
+	static int32_t hand_sp = 0;
+	static int32_t hand_pos = 0;
+	static int32_t hmyo_av = 0;
+	static int32_t hand_count = 0;
+
+	// State 0 - INIT
+	if (currentState == 0) {
+
+		n = sprintf(print_buff,"\n\rTask 2, State 0\n");
+		HAL_UART_Transmit(&huart2,print_buff,n,400);
+
+		//init the motor driver PWM channels
+		start_PWM(&hand_mot);
+
+		//initialize the motor to be at rest
+		set_duty(&hand_mot,0);
+
+		//calibrate the myo values?
+
+		currentState = 1;}
+
+	//State 1 - INTERPRET MYO
+	else if (currentState == 1) {
+
+		n = sprintf(print_buff,"\n\rTask 2, State 1\n");
+		HAL_UART_Transmit(&huart2,print_buff,n,400);
+
+		hmyo_curr = read_current(&hmyo);
+		n = sprintf(print_buff,"\n\rThe myo value is : %d\n", hmyo_curr);
+		HAL_UART_Transmit(&huart2,print_buff,n,400);
+
+		if(hmyo_curr > 3000){
+
+						hmyo_dir = 1;
+						currentState = 2;
+
+					}
+					else if(hmyo_curr < 1000){
+
+						hmyo_dir = 0;
+						currentState = 2;
+
+				}
+
+	}
+
+	//State 2 - MOVE MYO
+	else if (currentState == 2) {
+
+		n = sprintf(print_buff,"\n\rTask 2, State 2\n");
+		HAL_UART_Transmit(&huart2,print_buff,n,400);
+
+
+		if(hmyo_dir == 1 && hand_pos == 0){
+
+
+			n = sprintf(print_buff,"\n\rOpen Hand");
+			HAL_UART_Transmit(&huart2,print_buff,n,400);
+
+			if(hand_count > 15){
+
+				currentState = 1;
+				set_duty(&hand_mot,0);
+				hand_pos = 1000;
+				hand_count = 0;
+
+			}
+			else{
+
+				set_duty(&hand_mot,1);
+				hand_count++;
+			}
+
+
+				}
+		else if(hmyo_dir ==0 && hand_pos == 1000){
+
+			n = sprintf(print_buff,"\n\rClose Hand");
+			HAL_UART_Transmit(&huart2,print_buff,n,400);
+
+			if(hand_count > 20){
+
+					currentState = 1;
+					set_duty(&hand_mot,0);
+					hand_pos = 0;
+					hand_count = 0;
+
+						}
+			else{
+					set_duty(&hand_mot,-3);
+					hand_count++;
+				}
+				}
+
+
+		currentState = 1;
+
+	}
+
+	else {
+		n = sprintf(print_buff,"\n\rTask 1, Invalid State. Reset to State 1\n");
+		HAL_UART_Transmit(&huart2,print_buff,n,400);
+
+		currentState = 1;}
+}
 
 // Task 3 - WIRELESS E STOP TASK___________________________________________________________________________________
 void task3(void) {
@@ -247,8 +408,8 @@ void task3(void) {
 	// State 0 - INIT__________________________________________________________________
 	if (currentState == 0) {
 
-		n = sprintf(print_buff,"\n\rTask 3, State 0\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
+		//n = sprintf(print_buff,"\n\rTask 3, State 0\n");
+		//HAL_UART_Transmit(&huart2,print_buff,n,400);
 
 		HAL_TIM_IC_Start_IT (&htim1, TIM_CHANNEL_1);
 		HAL_TIM_IC_Start_IT (&htim1, TIM_CHANNEL_2);
@@ -259,11 +420,11 @@ void task3(void) {
 	//State 1 - WAIT FOR SIG_________________________________________________________
 	else if (currentState == 1) {
 
-		n = sprintf(print_buff,"\n\rTask 3, State 1\n");
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
+		//n = sprintf(print_buff,"\n\rTask 3, State 1\n");
+		//HAL_UART_Transmit(&huart2,print_buff,n,400);
 
-		n = sprintf(print_buff,"\n\rThe radio pulse is: %d\n",radio_pulse);
-		HAL_UART_Transmit(&huart2,print_buff,n,400);
+		//n = sprintf(print_buff,"\n\rThe radio pulse is: %d\n",radio_pulse);
+		//HAL_UART_Transmit(&huart2,print_buff,n,400);
 
 		if(check_delta(radio_pulse) == 1)
 			  {
@@ -278,10 +439,11 @@ void task3(void) {
 		HAL_UART_Transmit(&huart2,print_buff,n,400);
 
 		//call deinit commands
-		//controller_deinit(&hand_cont);
 		set_duty(&spin_mot,0);
 		controller_deinit(&spin_cont);
 
+		set_duty(&hand_mot,0);
+		stop_PWM(&hand_mot);
 
 		}
 
@@ -318,6 +480,9 @@ int main(void)
   /* Configure the system clock */
   SystemClock_Config();
 
+/* Configure the peripherals common clocks */
+  PeriphCommonClock_Config();
+
   /* USER CODE BEGIN SysInit */
 
   /* USER CODE END SysInit */
@@ -330,12 +495,16 @@ int main(void)
   MX_ADC1_Init();
   MX_TIM3_Init();
   MX_TIM4_Init();
+  MX_ADC2_Init();
   /* USER CODE BEGIN 2 */
 
-  start_PWM(&spin_mot);
+  //start_PWM(&spin_mot);
 
-  set_duty(&spin_mot,799999);
+  //set_duty(&spin_mot,1);
 
+  //init_channels(&spin_enc);
+
+  //smyo_av = find_average(&scali);
 
   /* USER CODE END 2 */
 
@@ -344,8 +513,22 @@ int main(void)
   while (1)
   {
 
-	 //task1();
-	  task3();
+//	  smyo_tst = read_current(&smyo);
+//	  m = sprintf(tst_buff,"\n\rThe myo output is %d\n",smyo_tst);
+//	  HAL_UART_Transmit(&huart2,tst_buff,m,400);
+//
+//	  spos_tst = get_pos(&spin_enc);
+//	  m = sprintf(tst_buff,"\n\rThe spin motor position is %d\n",spos_tst);
+//	  HAL_UART_Transmit(&huart2,tst_buff,m,400);
+
+	  //hand_count++;
+
+	  //m = sprintf(tst_buff,"\n\rThe hand count is %d\n",hand_count_tst);
+	  //HAL_UART_Transmit(&huart2,tst_buff,m,400);
+
+	 task1();
+	 task2();
+	 task3();
 
     /* USER CODE END WHILE */
 
@@ -398,6 +581,31 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_4) != HAL_OK)
+  {
+    Error_Handler();
+  }
+}
+
+/**
+  * @brief Peripherals Common Clock Configuration
+  * @retval None
+  */
+void PeriphCommonClock_Config(void)
+{
+  RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
+
+  /** Initializes the peripherals clock
+  */
+  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_ADC;
+  PeriphClkInit.AdcClockSelection = RCC_ADCCLKSOURCE_PLLSAI1;
+  PeriphClkInit.PLLSAI1.PLLSAI1Source = RCC_PLLSOURCE_HSI;
+  PeriphClkInit.PLLSAI1.PLLSAI1M = 1;
+  PeriphClkInit.PLLSAI1.PLLSAI1N = 8;
+  PeriphClkInit.PLLSAI1.PLLSAI1P = RCC_PLLP_DIV7;
+  PeriphClkInit.PLLSAI1.PLLSAI1Q = RCC_PLLQ_DIV2;
+  PeriphClkInit.PLLSAI1.PLLSAI1R = RCC_PLLR_DIV2;
+  PeriphClkInit.PLLSAI1.PLLSAI1ClockOut = RCC_PLLSAI1_ADC1CLK;
+  if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
   {
     Error_Handler();
   }
@@ -467,6 +675,64 @@ static void MX_ADC1_Init(void)
   /* USER CODE BEGIN ADC1_Init 2 */
 
   /* USER CODE END ADC1_Init 2 */
+
+}
+
+/**
+  * @brief ADC2 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_ADC2_Init(void)
+{
+
+  /* USER CODE BEGIN ADC2_Init 0 */
+
+  /* USER CODE END ADC2_Init 0 */
+
+  ADC_ChannelConfTypeDef sConfig = {0};
+
+  /* USER CODE BEGIN ADC2_Init 1 */
+
+  /* USER CODE END ADC2_Init 1 */
+
+  /** Common config
+  */
+  hadc2.Instance = ADC2;
+  hadc2.Init.ClockPrescaler = ADC_CLOCK_ASYNC_DIV1;
+  hadc2.Init.Resolution = ADC_RESOLUTION_12B;
+  hadc2.Init.DataAlign = ADC_DATAALIGN_RIGHT;
+  hadc2.Init.ScanConvMode = ADC_SCAN_DISABLE;
+  hadc2.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
+  hadc2.Init.LowPowerAutoWait = DISABLE;
+  hadc2.Init.ContinuousConvMode = DISABLE;
+  hadc2.Init.NbrOfConversion = 1;
+  hadc2.Init.DiscontinuousConvMode = DISABLE;
+  hadc2.Init.ExternalTrigConv = ADC_SOFTWARE_START;
+  hadc2.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
+  hadc2.Init.DMAContinuousRequests = DISABLE;
+  hadc2.Init.Overrun = ADC_OVR_DATA_PRESERVED;
+  hadc2.Init.OversamplingMode = DISABLE;
+  if (HAL_ADC_Init(&hadc2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Regular Channel
+  */
+  sConfig.Channel = ADC_CHANNEL_2;
+  sConfig.Rank = ADC_REGULAR_RANK_1;
+  sConfig.SamplingTime = ADC_SAMPLETIME_2CYCLES_5;
+  sConfig.SingleDiff = ADC_SINGLE_ENDED;
+  sConfig.OffsetNumber = ADC_OFFSET_NONE;
+  sConfig.Offset = 0;
+  if (HAL_ADC_ConfigChannel(&hadc2, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN ADC2_Init 2 */
+
+  /* USER CODE END ADC2_Init 2 */
 
 }
 
@@ -547,7 +813,7 @@ static void MX_TIM2_Init(void)
   htim2.Instance = TIM2;
   htim2.Init.Prescaler = 0;
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim2.Init.Period = 799999;
+  htim2.Init.Period = 3999;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_PWM_Init(&htim2) != HAL_OK)

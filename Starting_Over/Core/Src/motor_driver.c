@@ -50,9 +50,6 @@ void set_duty(motor_t* p_mot, int32_t pwm_sig)
 	 * @param duty The desired duty cycle for the motor.
 	 */
 
-	// Print to the console so we can see what's happening
-	    printf("Setting Motor Duty Cycle to %ld", pwm_sig);
-
 	    // Assign the duty cycle to a field in the structure
 	    p_mot->pwm_val = pwm_sig;
 
@@ -65,8 +62,8 @@ void set_duty(motor_t* p_mot, int32_t pwm_sig)
 	    if (pwm_sig > 0) {
 
 	    	//forwards
-	    	__HAL_TIM_SET_COMPARE(p_mot->hal_tim, p_mot->channel1,pwm_sig);
-	    	__HAL_TIM_SET_COMPARE(p_mot->hal_tim, p_mot->channel2,0);
+	    	__HAL_TIM_SET_COMPARE(p_mot->hal_tim, p_mot->channel1,0);
+	    	__HAL_TIM_SET_COMPARE(p_mot->hal_tim, p_mot->channel2,-pwm_sig);
 
 	      }
 	    else if(pwm_sig == 0){
@@ -79,8 +76,8 @@ void set_duty(motor_t* p_mot, int32_t pwm_sig)
 	    else {
 
 	    	//backwards
-	    	__HAL_TIM_SET_COMPARE(p_mot->hal_tim, p_mot->channel1,0);
-	    	__HAL_TIM_SET_COMPARE(p_mot->hal_tim, p_mot->channel2,-pwm_sig);
+	    	__HAL_TIM_SET_COMPARE(p_mot->hal_tim, p_mot->channel1,pwm_sig);
+	    	__HAL_TIM_SET_COMPARE(p_mot->hal_tim, p_mot->channel2,0);
 	      }
 
 

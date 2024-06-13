@@ -43,7 +43,7 @@ void controller_deinit(controller_t* p_cont);
  *
  * @param p_cont The controller object to perform the function on.
  */
-int32_t move(controller_t* p_cont);
+int32_t move(controller_t* p_cont, int32_t gain);
 
 /**
  * @brief A function to set the new controller set point.

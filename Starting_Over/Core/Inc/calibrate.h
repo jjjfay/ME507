@@ -22,8 +22,7 @@
 struct{
 
 
-		uint32_t length; /**< The length of the array to be created . */
-		uint32_t median_length; /**< The length of the array to be created . */
+		uint32_t arr_length; /**< The length of the array to be created . */
 	    myo_t* p_myo; /**< The the myo electric sensor to read from. */
 
 

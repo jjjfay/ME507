@@ -60,28 +60,44 @@ void controller_deinit(controller_t* p_cont){
  *
  * @param p_cont The controller object to perform the function on.
  */
-int32_t move(controller_t* p_cont){
+
+int32_t move(controller_t* p_cont, int32_t gain){
 
 
 	//The pwm value should range from 0 to 799,999
 	//calculate the desired PWM value using the gain and setpoint.
 
-	int curr_pos = get_pos(p_cont->p_enc);
+	int32_t curr_pos = get_pos(p_cont->p_enc);
 
-	p_cont->p_mot->pwm_val = (p_cont->gain)*(p_cont->setpoint - curr_pos);
+	p_cont->p_mot->pwm_val = gain*(p_cont->setpoint - curr_pos);
 
 	//saturation
-	if(p_cont->p_mot->pwm_val > 799999)
-	{
-		p_cont->p_mot->pwm_val = 799999;
-	}
-	else if(p_cont->p_mot->pwm_val < -799999){
 
-		p_cont->p_mot->pwm_val = -799999;
-	}
+	if(p_cont->p_mot->pwm_val < 0){
 
-	//might also want to add in some sort of sensitivity like if its below a certain
-	//threshold we make it zero
+		if(p_cont->p_mot->pwm_val < -3999)
+			{
+				p_cont->p_mot->pwm_val = -3999;
+			}
+		else if(p_cont->p_mot->pwm_val > gain*-10){
+
+				p_cont->p_mot->pwm_val = 0;
+
+				}
+	}
+	else{
+
+		if(p_cont->p_mot->pwm_val > 3999)
+			{
+				p_cont->p_mot->pwm_val = 3999;
+			}
+		else if(p_cont->p_mot->pwm_val < gain*10){
+
+				p_cont->p_mot->pwm_val = 0;
+
+			}
+
+	}
 
 	//set the duty cycle of the motor
 	set_duty(p_cont->p_mot, p_cont->p_mot->pwm_val);

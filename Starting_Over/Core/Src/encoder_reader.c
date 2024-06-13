@@ -14,9 +14,6 @@
  */
 void init_channels(encoder_t* p_enc){
 
-	//probably some sort of HAL thing
-	//HAL_TIM_Encoder_Start(p_enc->hal_tim,  TIM_CHANNEL_ALL);
-	//HAL_TIM_Encoder_Start(p_enc->hal_tim,  p_enc->channel2);
 	HAL_TIM_Encoder_Start(p_enc->hal_tim,  TIM_CHANNEL_1);
 	HAL_TIM_Encoder_Start(p_enc->hal_tim,  TIM_CHANNEL_2);
 }
@@ -28,9 +25,9 @@ void init_channels(encoder_t* p_enc){
  */
 void deinit_channels(encoder_t* p_enc){
 
-	//probably some sort of HAL thing
-	HAL_TIM_Encoder_Stop(p_enc->hal_tim,  TIM_CHANNEL_ALL);
-	//HAL_TIM_Encoder_Stop(p_enc->hal_tim,  p_enc->channel2);
+	HAL_TIM_Encoder_Stop(p_enc->hal_tim,  TIM_CHANNEL_1);
+	HAL_TIM_Encoder_Stop(p_enc->hal_tim,  TIM_CHANNEL_2);
+
 }
 
 /**
@@ -51,10 +48,10 @@ void zero(encoder_t* p_enc){
  * @return count The encoder count to be returned.
  */
 
-uint16_t get_pos(encoder_t* p_enc){
+int32_t get_pos(encoder_t* p_enc){
 
 	p_enc->prev_count = p_enc->curr_count;
-	p_enc->curr_count = __HAL_TIM_GET_COUNTER(p_enc->hal_tim);
+	p_enc->curr_count = (int32_t)(__HAL_TIM_GET_COUNTER(p_enc->hal_tim));
 
 	p_enc->delta = p_enc->curr_count - p_enc->prev_count;
 
