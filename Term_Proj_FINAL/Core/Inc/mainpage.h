@@ -31,6 +31,7 @@
  * controllability of the hand movement. An image of the final design is shown below.
  *
  * \image html images/Final_Design.png "Final Myoelectric Control System Design Used for Project Demonstration"
+ * \image latex images/Final_Design.png "Final Myoelectric Control System Design Used for Project Demonstration"
  *
  *
  * The pressure sensor we selected is a simple and cost-effective part from amazon. It is a thin film

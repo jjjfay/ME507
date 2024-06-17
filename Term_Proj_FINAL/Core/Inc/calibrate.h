@@ -33,7 +33,7 @@ struct{
  *
  * @param p_cali The calibration object to perform the function on.
  */
-uint32_t find_average(calibrate_t*p_cali);
+uint32_t find_average(calibrate_t* p_cali);
 
 
 
